@@ -28,7 +28,7 @@ namespace PacMan.ViewModels
                 if (_currentView != value)
                 {
                     _currentView = value;
-                    OnPropertyChanged(nameof(CurrentView));
+                    //OnPropertyChanged(nameof(CurrentView));
                 }
             }
         }
