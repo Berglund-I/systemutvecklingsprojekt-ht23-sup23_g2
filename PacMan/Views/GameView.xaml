@@ -8,6 +8,7 @@
              xmlns:components="clr-namespace:PacMan.Views.Components"
              d:DataContext="{d:DesignInstance vm:GameViewModel}"
              mc:Ignorable="d" Height="550" Width="784">
+    
     <Border
         Background="White"
         BorderBrush="Black"
@@ -17,7 +18,7 @@
             <ItemsControl Width="auto" Height="auto" ItemsSource ="{Binding GameMap}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="20" Rows="20" MinHeight="500" MinWidth="500"/>
+                        <UniformGrid  MinHeight="500" MinWidth="500"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
