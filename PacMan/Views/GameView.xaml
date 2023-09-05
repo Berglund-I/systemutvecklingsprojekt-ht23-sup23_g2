@@ -4,26 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacMan.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:vm ="clr-namespace:PacMan.ViewModels"
+             xmlns:components="clr-namespace:PacMan.Views.Components"
+             d:DataContext="{d:DesignInstance vm:GameViewModel}"
+             mc:Ignorable="d" Height="550" Width="784">
+    
     <Border
-        Background="LightSeaGreen"
-        BorderBrush="Aqua"
-        BorderThickness="6"
-        CornerRadius="10"
-        >
+        Background="White"
+        BorderBrush="Black"
+        BorderThickness="3"
+        CornerRadius="5">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <ItemsControl Width="auto" Height="auto" ItemsSource ="{Binding GameMap}" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid  MinHeight="500" MinWidth="500"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </Grid>
-
     </Border>
+
 </UserControl>

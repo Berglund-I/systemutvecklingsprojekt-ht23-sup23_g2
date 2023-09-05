@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacMan.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +26,7 @@ namespace PacMan
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new GameViewModel(); // Creating an instance of GameViewModel and set as DataContext
-
+            DataContext = new MainViewModel();
         }
     }
 }

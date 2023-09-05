@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PacMan.Views.Components;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,14 @@ namespace PacMan.ViewModels
 {
     internal class GameViewModel : BaseViewModel
     {
+        public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
+
+        private const int _mapSize = 50;
+        
+        public GameViewModel()
+        {
+            CreateGameMap();
+        }
         private UserControl _currentView;
 
         public UserControl CurrentView
@@ -61,5 +71,18 @@ namespace PacMan.ViewModels
        
 
 
+        private void CreateGameMap()
+        {
+            GameMap = new ObservableCollection<GameMapPiece>();
+            for (int x = 0; x < _mapSize; x++)
+            {
+                for (int y = 0; y < _mapSize; y++)
+                {
+                    var piece = new GameMapPiece();
+                    GameMap.Add(piece);
+                }
+            }
+
+        }
     }
 }
