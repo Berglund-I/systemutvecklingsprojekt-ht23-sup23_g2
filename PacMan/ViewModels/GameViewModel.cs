@@ -12,7 +12,7 @@ namespace PacMan.ViewModels
     {
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
 
-        private const int _mapSize = 50;
+        private const int _mapSize = 20;
         
         public GameViewModel()
         {
