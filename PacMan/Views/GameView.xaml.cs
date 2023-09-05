@@ -24,6 +24,7 @@ namespace PacMan.Views
         public GameView()
         {
             InitializeComponent();
+            DataContext = new GameViewModel();
         }
 
 

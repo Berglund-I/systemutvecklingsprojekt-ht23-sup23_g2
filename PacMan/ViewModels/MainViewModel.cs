@@ -12,7 +12,7 @@ namespace PacMan.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
-        public BaseViewModel CurrentViewModel { get; set; } = new GameViewModel();
+        //public BaseViewModel CurrentViewModel { get; set; } = new GameViewModel(); Probably isnt needed
         private UserControl _currentView;
 
         public MainViewModel()

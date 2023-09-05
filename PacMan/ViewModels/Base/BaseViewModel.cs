@@ -10,13 +10,8 @@ using System.Threading.Tasks;
 namespace PacMan.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    internal class BaseViewModel//: INotifyPropertyChanged
+    internal class BaseViewModel
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
     }
 }
