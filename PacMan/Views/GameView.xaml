@@ -6,7 +6,42 @@
              xmlns:local="clr-namespace:PacMan.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Border
+        Background="WhiteSmoke"
+        BorderBrush="Gray"
+        BorderThickness="3"
+        CornerRadius="5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Canvas Grid.Column="1" Grid.Row="1" Name="ocean" Width="505" Height="505">
+                <Canvas.Background>
+                    <DrawingBrush TileMode="Tile"
+                                  Viewport="0,0,50,50" ViewportUnits="Absolute"
+                                  Viewbox="0,0,50,50" ViewboxUnits="Absolute">
+                        <DrawingBrush.Drawing>
+                            <GeometryDrawing Geometry="M0,0 L50,0 M0,0 L0, 50">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="DarkGray" Thickness="1" DashCap="Flat">
+                                        <Pen.DashStyle>
+                                            <DashStyle Dashes="5,3"/>
+                                        </Pen.DashStyle>
+                                    </Pen>
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Canvas.Background>
+            </Canvas>
+        </Grid>
+    </Border>
+           
 </UserControl>
