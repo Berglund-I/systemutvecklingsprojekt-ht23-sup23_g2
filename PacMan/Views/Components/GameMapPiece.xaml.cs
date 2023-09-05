@@ -23,15 +23,15 @@ namespace PacMan.Views.Components
         
 
 
-        public SolidColorBrush MapColor
-        {
-            get { return (SolidColorBrush)GetValue(MapColorProperty); }
-            set { SetValue(MapColorProperty, value); }
-        }
+        //public SolidColorBrush MapColor
+        //{
+        //    get { return (SolidColorBrush)GetValue(MapColorProperty); }
+        //    set { SetValue(MapColorProperty, value); }
+        //}
 
-        // Using a DependencyProperty as the backing store for MapColor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MapColorProperty =
-            DependencyProperty.Register("MapColor", typeof(SolidColorBrush), typeof(GameMapPiece), new PropertyMetadata(Brushes.Gray));
+        //// Using a DependencyProperty as the backing store for MapColor.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty MapColorProperty =
+        //    DependencyProperty.Register("MapColor", typeof(SolidColorBrush), typeof(GameMapPiece), new PropertyMetadata(Brushes.Gray));
 
 
         public GameMapPiece()
