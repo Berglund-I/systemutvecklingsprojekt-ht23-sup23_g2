@@ -31,7 +31,7 @@ namespace PacMan.Views.Components
 
         // Using a DependencyProperty as the backing store for MapColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MapColorProperty =
-            DependencyProperty.Register("MapColor", typeof(SolidColorBrush), typeof(GameMapPiece), new PropertyMetadata(Brushes.LightGray));
+            DependencyProperty.Register("MapColor", typeof(SolidColorBrush), typeof(GameMapPiece), new PropertyMetadata(Brushes.White));
 
 
         public GameMapPiece()
