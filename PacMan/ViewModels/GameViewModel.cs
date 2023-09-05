@@ -41,7 +41,7 @@ namespace PacMan.ViewModels
             string playerName = parameter as string;
 
 
-            // Skapa en ny instans av din GameView eller GameControl UserControl
+            // Creating a new instance of din GameView eller GameControl UserControl
             GameView gameView = new GameView(); // Om du använder GameView
                                                 // ELLER
                                                 // GameControl gameControl = new GameControl(); // Om du använder GameControl
