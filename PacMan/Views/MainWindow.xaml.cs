@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacMan.ViewModels; // Importing namespace for GameViewModel
 
 namespace PacMan
 {
@@ -20,9 +21,12 @@ namespace PacMan
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new GameViewModel(); // Creating an instance of GameViewModel and set as DataContext
+
         }
     }
 }

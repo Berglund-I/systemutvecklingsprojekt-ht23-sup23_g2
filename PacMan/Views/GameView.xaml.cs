@@ -24,5 +24,10 @@ namespace PacMan.Views
         {
             InitializeComponent();
         }
+
+        internal void Show()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
