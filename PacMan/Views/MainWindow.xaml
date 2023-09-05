@@ -30,27 +30,19 @@
             <TextBlock FontSize="50" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="BacMan" VerticalAlignment="Top" Height="73" Width="222"/>
             <TextBlock HorizontalAlignment="Left" Margin="361,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="39"/>
             <TextBox HorizontalAlignment="Left" Margin="405,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86"/>
-        <Button Content="Start Game" HorizontalAlignment="Left" Margin="361,289,0,0" VerticalAlignment="Top">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <TextBlock FontSize="50" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="BacMan" VerticalAlignment="Top" Height="73" Width="222"/>
-        <TextBlock HorizontalAlignment="Left" Margin="361,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="39"/>
-        <TextBox HorizontalAlignment="Left" Margin="405,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86"/>
-        <ContentControl 
-            Content="{Binding CurrentViewModel}"
-            Grid.Row="1"
-            Grid.Column="1"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            />
+            <Button Content="Start Game" HorizontalAlignment="Left" Margin="361,289,0,0" VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock FontSize="50" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="BacMan" VerticalAlignment="Top" Height="73" Width="222"/>
+            <TextBlock HorizontalAlignment="Left" Margin="361,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="39"/>
+            <TextBox HorizontalAlignment="Left" Margin="405,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86"/>
+
 
         </Grid>
-    </Grid>
-</Window>
         <ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding GameViewModel}" />
 
         <Button Content="Start Game"  

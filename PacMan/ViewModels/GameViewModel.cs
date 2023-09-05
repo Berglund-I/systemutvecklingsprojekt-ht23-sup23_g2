@@ -21,6 +21,7 @@ namespace PacMan.ViewModels
         public GameViewModel()
         {
             CreateGameMap();
+            StartGameCommand = new RelayCommand(StartGame);
         }
         private UserControl _currentView;
 
@@ -41,10 +42,6 @@ namespace PacMan.ViewModels
 
         public RelayCommand StartGameCommand { get; private set; }
 
-        public GameViewModel()
-        {
-            StartGameCommand = new RelayCommand(StartGame);
-        }
 
         private void StartGame(object parameter)
         {
