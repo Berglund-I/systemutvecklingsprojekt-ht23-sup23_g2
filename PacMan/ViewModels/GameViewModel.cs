@@ -9,11 +9,14 @@ using System.Windows;
 using System.Windows.Controls;
 using PacMan.Commands;  // Importing namespace for RelayCommand
 using PacMan.Views;
+using PacMan.ViewModels.Ghosts;
 
 namespace PacMan.ViewModels
 {
     internal class GameViewModel : BaseViewModel
     {
+        public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
+        public GhostBlue GhostBlue { get; set; } = new GhostBlue();
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
 
         private const int _mapSize = 20;
