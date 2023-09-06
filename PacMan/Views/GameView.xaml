@@ -38,8 +38,9 @@
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485" Margin="572,142,186,320" />
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487" Margin="338,452,364,10" />
 
-
-            <ContentControl Content="{Binding GhostBlue}" Height="{Binding GhostSize}" Width="{Binding GhostSize}"/>
+            <Canvas>
+                <ContentControl Content="{Binding GhostBlue}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="0" Canvas.Top="0"/>
+            </Canvas>
         </Grid>
     </Border>
 
