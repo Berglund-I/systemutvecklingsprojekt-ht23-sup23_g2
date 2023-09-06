@@ -12,7 +12,7 @@
 
     <Border
         Background="Black"
-        BorderBrush="Black"
+        BorderBrush="GreenYellow"
         BorderThickness="3"
         CornerRadius="5">
         <Grid>
