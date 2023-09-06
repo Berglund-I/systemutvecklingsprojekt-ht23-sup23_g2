@@ -20,6 +20,9 @@ namespace PacMan.Views.Entities
     /// </summary>
     public partial class GoldCoin : Coin
     {
+        /// <summary>
+        /// Score for normal coins
+        /// </summary>
         public GoldCoin()
         {
             InitializeComponent();

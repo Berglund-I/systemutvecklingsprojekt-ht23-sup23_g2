@@ -20,6 +20,9 @@ namespace PacMan.Views.Entities
     /// </summary>
     public partial class LargeGoldCoin : Coin
     {
+        /// <summary>
+        /// Score for large "special" coins
+        /// </summary>
         public LargeGoldCoin()
         {
             InitializeComponent();
