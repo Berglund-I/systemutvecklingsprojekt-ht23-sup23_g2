@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacMan.Views.Components"
+             xmlns:vm="clr-namespace:PacMan.ViewModels.Ghosts"
+             d:DataContext="{d:DesignInstance vm:GhostViewModel}"
              x:Name="BlueGhost"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="50">

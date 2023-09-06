@@ -8,6 +8,6 @@ namespace PacMan.ViewModels.Ghosts
 {
     class GhostViewModel : BaseViewModel
     {
-
+        public int GhostSize { get; set; } = 50;
     }
 }

@@ -22,8 +22,8 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            
-            <ContentControl Content="{Binding GhostBlue}" Height="50" Width="50"/>
+
+            <ContentControl Content="{Binding GhostBlue}" Height="{Binding GhostSize}" Width="{Binding GhostSize}"/>
         </Grid>
     </Border>
 

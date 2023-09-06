@@ -17,12 +17,14 @@ namespace PacMan.ViewModels
     {
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public GhostBlue GhostBlue { get; set; } = new GhostBlue();
+        public int GhostSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
 
         private const int _mapSize = 20;
-        
+
         public GameViewModel()
-        { 
+        {
+            GhostSize = Ghosts.GhostSize;
             CreateGameMap();
         }
         /// <summary>

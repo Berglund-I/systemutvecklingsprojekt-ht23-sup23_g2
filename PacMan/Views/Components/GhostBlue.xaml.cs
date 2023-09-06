@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacMan.ViewModels.Ghosts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PacMan.Views.Components
         public GhostBlue()
         {
             InitializeComponent();
+            DataContext = new GhostViewModel();
         }
     }
 }
