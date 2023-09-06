@@ -19,11 +19,12 @@ namespace PacMan.ViewModels
         private const int _mapSize = 20;
         
         public GameViewModel()
-        {
-            
+        { 
             CreateGameMap();
         }
-        
+        /// <summary>
+        /// Generates a grid in GameView of _mapSize size
+        /// </summary>
         private void CreateGameMap()
         {
             GameMap = new ObservableCollection<GameMapPiece>();
