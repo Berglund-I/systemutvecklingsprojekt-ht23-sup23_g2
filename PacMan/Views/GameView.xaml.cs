@@ -28,8 +28,6 @@ namespace PacMan.Views
         private static readonly Random _random = new();
         private int movementSpeed = 10;
         Movement RandomMovmentDirection;
-        double CurrentPositionX = 0;
-        double CurrentPositionY = 0;
         int timerSpeed = 100;
 
         public GameView()
@@ -64,7 +62,7 @@ namespace PacMan.Views
         {
             RandomMovmentDirection = GetRandomDirection();
 
-            MoveContentControl(TheBlueGhost, movementSpeed, RandomMovmentDirection);
+            //MoveContentControl(TheBlueGhost, movementSpeed, RandomMovmentDirection); Remove comment to move the Ghost :)
         }
         #endregion
         /// <summary>
