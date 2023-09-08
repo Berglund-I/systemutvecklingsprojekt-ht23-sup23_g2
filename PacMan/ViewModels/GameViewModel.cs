@@ -17,6 +17,7 @@ namespace PacMan.ViewModels
     {
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public GhostBlue GhostBlue { get; set; } = new GhostBlue();
+        public GhostBlue GhostBlue2 { get; set; } = new GhostBlue();
         public int GhostSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
 
