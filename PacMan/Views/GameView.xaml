@@ -15,7 +15,7 @@
         BorderBrush="GreenYellow"
         BorderThickness="3"
         CornerRadius="5">
-        <Canvas x:Name="GameCanvas" ClipToBounds="True">
+        <Canvas x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown">
             
             <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
                 <ItemsControl.ItemsPanel>
@@ -40,7 +40,8 @@
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  /> <!--Margin="338,452,364,10"-->
 
             <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
-            
+            <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
+
         </Canvas>
     </Border>
 

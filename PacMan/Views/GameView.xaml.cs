@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
+using PacMan.Views.Components;
 
 namespace PacMan.Views
 {
@@ -28,17 +29,22 @@ namespace PacMan.Views
         private static readonly Random _random = new();
         private int movementSpeed = 10;
         Movement RandomMovmentDirection;
+        Movement MovementDirection;
+        bool mcMovement = false;
         int timerSpeed = 100;
 
         public GameView()
         {
             InitializeComponent();
+            GameCanvas.Focus();
             DataContext = new GameViewModel();
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
+            timer.Tick += MainCharacterMovementTimer;
             timer.Start();
         }
+
 
         #region "Ghost Code"
         private readonly DispatcherTimer timer = new DispatcherTimer();
@@ -62,9 +68,42 @@ namespace PacMan.Views
         {
             RandomMovmentDirection = GetRandomDirection();
 
-            //MoveContentControl(TheBlueGhost, movementSpeed, RandomMovmentDirection); Remove comment to move the Ghost :)
+            MoveContentControl(TheBlueGhost, movementSpeed, RandomMovmentDirection); /*Remove comment to move the Ghost :)*/
         }
         #endregion
+
+        #region "Main Charachter Code"
+        private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
+        {
+              
+            switch (e.Key)
+            {
+                case Key.Left:
+                    MovementDirection = Movement.Left;
+                    break;
+                case Key.Up:
+                    MovementDirection = Movement.Up;
+                    break;
+                case Key.Right:
+                    MovementDirection = Movement.Right;
+                    break;
+                case Key.Down:
+                    MovementDirection = Movement.Down;
+                    break;
+            }
+            mcMovement = true;
+        }
+        private void MainCharacterMovementTimer(object? sender, EventArgs e)
+        {
+            if (mcMovement == true)
+            {
+               MoveContentControl(TheMainCharacter, movementSpeed, MovementDirection);
+            }
+        }
+
+        #endregion
+
+
         /// <summary>
         /// Takes a content control, a speed intager and a movment direction and moves the content control
         /// the specified amount of pixels in the movment direction specified.
@@ -234,5 +273,6 @@ namespace PacMan.Views
             return false; // If no collision is detected
         }
         #endregion
+
     }
 }
