@@ -59,6 +59,20 @@ namespace PacMan.Views
             return (Movement)magicNumer;
         }
 
+        private Movement GhostBlueAi()
+        {
+            Point McCurrentPosition = new Point(Canvas.GetLeft(TheMainCharacter), Canvas.GetTop(TheMainCharacter));
+            Point GhostCurrentPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
+
+            if (McCurrentPosition.X > GhostCurrentPosition.X)
+            {
+                return Movement.Right;
+            }
+            else
+            {
+                return Movement.Left;
+            }
+        }
         /// <summary>
         /// Makes the ghosts move
         /// </summary>
@@ -66,9 +80,10 @@ namespace PacMan.Views
         /// <param name="e"></param>
         private void GhostMovementTimer(object sender, EventArgs e)
         {
-            RandomMovmentDirection = GetRandomDirection();
+            //RandomMovmentDirection = GetRandomDirection();
+            Movement aiTest = GhostBlueAi();
 
-            MoveContentControl(TheBlueGhost, movementSpeed, RandomMovmentDirection); /*Remove comment to move the Ghost :)*/
+            MoveContentControl(TheBlueGhost, movementSpeed, aiTest); /*Remove comment to move the Ghost :)*/
         }
         #endregion
 
