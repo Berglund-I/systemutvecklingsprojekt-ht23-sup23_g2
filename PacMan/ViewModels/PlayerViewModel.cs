@@ -15,5 +15,7 @@ namespace PacMan.ViewModels
         /// </summary>
         public ObservableCollection<GameScore> TotalScore { get; private set; } = new ObservableCollection<GameScore>();
 
+        public int PlayerLives { get; set; } = 4;
+         
     }
 }
