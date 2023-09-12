@@ -28,5 +28,8 @@ namespace PacMan.Views.Entities
             InitializeComponent();
             Score = 1;
         }
+
+        public int Y { get; internal set; }
+        public int X { get; internal set; }
     }
 }
