@@ -8,17 +8,44 @@
              xmlns:components="clr-namespace:PacMan.Views.Components"
              xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.Views.GameView"
              d:DataContext="{d:DesignInstance {x:Type vm:GameViewModel}}"
-             mc:Ignorable="d" Height="550" Width="784">
+             mc:Ignorable="d" Height="700" Width="848">
 
     <Border
         Background="Black"
         BorderBrush="GreenYellow"
         BorderThickness="3"
         CornerRadius="5">
-        
-        <Canvas x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown">
-            
-            <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="Black" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Rectangle x:Name="Life4" Width="36" Height="30" Margin="5" Visibility="Visible">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle x:Name="Life3" Width="30" Height="30" Margin="5" Visibility="Visible">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle x:Name="Life2" Width="30" Height="30" Margin="5" Visibility="Visible">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Views/Heart.png"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle x:Name="Life1" Width="30" Height="30" Margin="5" Visibility="Visible">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Views/Heart.png"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </StackPanel>
+
+            <Canvas  x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown" Grid.Row="1" HorizontalAlignment="Center" Width="850">
+                <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid  MinHeight="500" MinWidth="500"/>
@@ -26,24 +53,40 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
 
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  /> <!--Margin="100,72,100,452"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" /> <!--Margin="188,142,188,382"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  /> <!--Margin="598,309,56,215"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467"  /> <!--Margin="72,309,582,215"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="467"  /> <!--Margin="147,425,507,99"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="339"  /> <!--Margin="488,425,166,99"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="142" Canvas.Top="155"  /> <!--Margin="72,142,686,215"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="700" Canvas.Top="155"  /> <!--Margin="702,142,56,215"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="613" Canvas.Top="178"  /> <!--Margin="592,425,166,10"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  /> <!-- RenderTransformOrigin="-1.85,0.546" Margin="147,425,611,10"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  /> <!--Margin="189,142,569,320"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  /> <!--Margin="572,142,186,320"-->
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  /> <!--Margin="338,452,364,10"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
+                <!--Margin="100,72,100,452"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
+                <!--Margin="188,142,188,382"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  />
+                <!--Margin="598,309,56,215"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467"  />
+                <!--Margin="72,309,582,215"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="467"  />
+                <!--Margin="147,425,507,99"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="339"  />
+                <!--Margin="488,425,166,99"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="142" Canvas.Top="155"  />
+                <!--Margin="72,142,686,215"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="700" Canvas.Top="155"  />
+                <!--Margin="702,142,56,215"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="613" Canvas.Top="178"  />
+                <!--Margin="592,425,166,10"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  />
+                <!-- RenderTransformOrigin="-1.85,0.546" Margin="147,425,611,10"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  />
+                <!--Margin="189,142,569,320"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  />
+                <!--Margin="572,142,186,320"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />
+                <!--Margin="338,452,364,10"-->
 
-            <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
-            <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
+                <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
+                <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
 
-        </Canvas>
+
+
+            </Canvas>
+        </Grid>
     </Border>
 
 </UserControl>

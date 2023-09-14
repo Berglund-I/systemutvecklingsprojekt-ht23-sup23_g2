@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PacMan.Views.Entities"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Ellipse Width="10" Height="10" Fill="Gold" Stroke="Black" StrokeThickness="0.5"/>
+    <Ellipse Width="20" Height="20" Fill="Gold" Stroke="Black" StrokeThickness="0.5"/>
 
 
 </local:Coin>
