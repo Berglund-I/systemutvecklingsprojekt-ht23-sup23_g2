@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using PacMan.Views.Components;
+using PacMan.ViewModels.Ghosts;
 
 namespace PacMan.Views
 {
@@ -32,6 +33,11 @@ namespace PacMan.Views
         Movement MovementDirection;
         bool mcMovement = false;
         int timerSpeed = 100;
+        ContentControl currentContentControl;
+
+        bool blueGhostCollision = false;
+        Point blueGhostLastPosition;
+        bool blueGhostAlternator = true;
 
         public GameView()
         {
@@ -64,15 +70,55 @@ namespace PacMan.Views
             Point McCurrentPosition = new Point(Canvas.GetLeft(TheMainCharacter), Canvas.GetTop(TheMainCharacter));
             Point GhostCurrentPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
 
-            if (McCurrentPosition.X > GhostCurrentPosition.X)
+            if (GhostCurrentPosition == blueGhostLastPosition) // If the ghost is stuck it will alternate which axis it will chase the player on to unstuck itself
             {
-                return Movement.Right;
+                if (blueGhostAlternator == true) 
+                {
+                    blueGhostAlternator = false;
+                    if (McCurrentPosition.X > GhostCurrentPosition.X)
+                    {
+                        return Movement.Right;
+                    }
+                    else
+                    {
+                        return Movement.Left;
+                    }
+                }
+                else
+                {
+                    blueGhostAlternator = true;
+                    if (McCurrentPosition.Y > GhostCurrentPosition.Y)
+                    {
+                        return Movement.Down;
+                    }
+                    else
+                    {
+                        return Movement.Up;
+                    }
+                }
+            }
+            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > movementSpeed )  { 
+                if (McCurrentPosition.X > GhostCurrentPosition.X)
+                {
+                    return Movement.Right;
+                }
+                else
+                {
+                    return Movement.Left;
+                }
             }
             else
             {
-                return Movement.Left;
+                if (McCurrentPosition.Y > GhostCurrentPosition.Y)
+                {
+                    return Movement.Down;
+                }
+                else
+                {
+                    return Movement.Up;
+                }
             }
-
+            
         }
         /// <summary>
         /// Makes the ghosts move
@@ -84,7 +130,9 @@ namespace PacMan.Views
             //RandomMovmentDirection = GetRandomDirection();
             Movement aiTest = GhostBlueAi();
 
+            blueGhostLastPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
             MoveContentControl(TheBlueGhost, movementSpeed, aiTest); /*Remove comment to move the Ghost :)*/
+            
         }
         #endregion
 
@@ -132,17 +180,21 @@ namespace PacMan.Views
             //Point ContentControlPosition = contentControl.TransformToAncestor(this).Transform(new Point(0, 0));
             double currentPositionX = Canvas.GetLeft(contentControl);
             double currentPositionY = Canvas.GetTop(contentControl);
-
+            if (contentControl.Name == "TheBlueGhost")
+            {
+                blueGhostCollision = true;
+            }
+            //GameViewModel currentGhost = (GhostViewModel)contentControl.Content;
             switch (movementDirection)
             {
                 case Movement.Up:
-                    if  (CollisionUp(currentPositionY, movementSpeed, contentControl)) // If collision is detected with the border of the GameView
+                    if  (BorderColisionUp(currentPositionY, movementSpeed, contentControl)) // If collision is detected with the border of the GameView
                     {
                         Canvas.SetTop(contentControl, 0);
                         
                     }
                     else if (WallCollision(contentControl, movementSpeed, movementDirection)) { }
-                    else { Canvas.SetTop(contentControl, currentPositionY - movementSpeed); }
+                    else { Canvas.SetTop(contentControl, currentPositionY - movementSpeed);if (contentControl.Name == "TheBlueGhost") { blueGhostCollision = false; } }
                     break;
                 case Movement.Down:
                     if (CollisionDown(currentPositionY + contentControl.Height, movementSpeed, contentControl)) // If collision is detected with the border of the GameView
@@ -150,7 +202,7 @@ namespace PacMan.Views
                         Canvas.SetTop(contentControl, this.Height - contentControl.Height);
                     }
                     else if (WallCollision(contentControl, movementSpeed, movementDirection)) { }
-                    else { Canvas.SetTop(contentControl, currentPositionY + movementSpeed); } 
+                    else { Canvas.SetTop(contentControl, currentPositionY + movementSpeed); if (contentControl.Name == "TheBlueGhost") { blueGhostCollision = false; } } 
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX, movementSpeed, contentControl)) // If collision is detected with the border of the GameView
@@ -159,7 +211,7 @@ namespace PacMan.Views
                         
                     }
                     else if (WallCollision(contentControl, movementSpeed, movementDirection)) { }
-                    else { Canvas.SetLeft(contentControl, currentPositionX - movementSpeed); }
+                    else { Canvas.SetLeft(contentControl, currentPositionX - movementSpeed); if (contentControl.Name == "TheBlueGhost") { blueGhostCollision = false; } }
                     break;
 
                 case Movement.Right:
@@ -169,7 +221,7 @@ namespace PacMan.Views
                         
                     }
                     else if (WallCollision(contentControl, movementSpeed, movementDirection)) { }
-                    else { Canvas.SetLeft(contentControl, currentPositionX + movementSpeed); }
+                    else { Canvas.SetLeft(contentControl, currentPositionX + movementSpeed); if (contentControl.Name == "TheBlueGhost") { blueGhostCollision = false; } }
                     break;
 
 
@@ -252,7 +304,7 @@ namespace PacMan.Views
             return false;
         }
 
-        public bool CollisionUp(double currentPositionY, int movementSpeed, ContentControl contentControl)
+        public bool BorderColisionUp(double currentPositionY, int movementSpeed, ContentControl contentControl)
         {
             double newPosition = currentPositionY - movementSpeed;
             if (newPosition < 0) // Checks if the new position would be outside of the GameWindow

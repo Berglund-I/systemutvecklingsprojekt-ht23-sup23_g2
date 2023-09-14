@@ -19,8 +19,8 @@ namespace PacMan.ViewModels
         public MainCharacterViewModel MainCharacterViewModel { get; set; } = new MainCharacterViewModel();
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
+        
         public GhostBlue GhostBlue { get; set; } = new GhostBlue();
-        public GhostBlue GhostBlue2 { get; set; } = new GhostBlue();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
