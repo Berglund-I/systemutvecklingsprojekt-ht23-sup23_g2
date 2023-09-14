@@ -15,6 +15,7 @@
         BorderBrush="GreenYellow"
         BorderThickness="3"
         CornerRadius="5">
+        
         <Canvas x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown">
             
             <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >

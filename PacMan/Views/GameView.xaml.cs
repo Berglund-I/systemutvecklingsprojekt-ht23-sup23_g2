@@ -72,6 +72,7 @@ namespace PacMan.Views
             {
                 return Movement.Left;
             }
+
         }
         /// <summary>
         /// Makes the ghosts move
