@@ -19,6 +19,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using PacMan.Views.Components;
 using PacMan.ViewModels.Ghosts;
+using PacMan.Models;
 
 namespace PacMan.Views
 {
@@ -35,9 +36,8 @@ namespace PacMan.Views
         int timerSpeed = 100;
         ContentControl currentContentControl;
 
-        bool blueGhostCollision = false;
-        Point blueGhostLastPosition;
-        bool blueGhostAlternator = true;
+        bool blueGhostCollision = true;
+
 
         public GameView()
         {
@@ -69,56 +69,13 @@ namespace PacMan.Views
         {
             Point McCurrentPosition = new Point(Canvas.GetLeft(TheMainCharacter), Canvas.GetTop(TheMainCharacter));
             Point GhostCurrentPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
+            AiDirectionPackage aiDirectionPackage = new AiDirectionPackage(GhostCurrentPosition, McCurrentPosition, blueGhostCollision);
 
-            if (GhostCurrentPosition == blueGhostLastPosition) // If the ghost is stuck it will alternate which axis it will chase the player on to unstuck itself
-            {
-                if (blueGhostAlternator == true) 
-                {
-                    blueGhostAlternator = false;
-                    if (McCurrentPosition.X > GhostCurrentPosition.X)
-                    {
-                        return Movement.Right;
-                    }
-                    else
-                    {
-                        return Movement.Left;
-                    }
-                }
-                else
-                {
-                    blueGhostAlternator = true;
-                    if (McCurrentPosition.Y > GhostCurrentPosition.Y)
-                    {
-                        return Movement.Down;
-                    }
-                    else
-                    {
-                        return Movement.Up;
-                    }
-                }
-            }
-            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > movementSpeed )  { 
-                if (McCurrentPosition.X > GhostCurrentPosition.X)
-                {
-                    return Movement.Right;
-                }
-                else
-                {
-                    return Movement.Left;
-                }
-            }
-            else
-            {
-                if (McCurrentPosition.Y > GhostCurrentPosition.Y)
-                {
-                    return Movement.Down;
-                }
-                else
-                {
-                    return Movement.Up;
-                }
-            }
+            var model = (GameViewModel)DataContext;
             
+            model.BlueGhostAiCommand.Execute(aiDirectionPackage);
+
+            return model.GetBlueGhostMovementDirection();
         }
         /// <summary>
         /// Makes the ghosts move
@@ -130,7 +87,7 @@ namespace PacMan.Views
             //RandomMovmentDirection = GetRandomDirection();
             Movement aiTest = GhostBlueAi();
 
-            blueGhostLastPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
+            //blueGhostLastPosition = new Point(Canvas.GetLeft(TheBlueGhost), Canvas.GetTop(TheBlueGhost));
             MoveContentControl(TheBlueGhost, movementSpeed, aiTest); /*Remove comment to move the Ghost :)*/
             
         }

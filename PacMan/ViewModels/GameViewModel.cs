@@ -11,6 +11,9 @@ using PacMan.Commands;  // Importing namespace for RelayCommand
 using PacMan.Views;
 using PacMan.ViewModels.Ghosts;
 using PacMan.ViewModels;
+using System.Windows.Input;
+using PacMan.Models;
+using PacMan.Enums;
 
 namespace PacMan.ViewModels
 {
@@ -19,19 +22,28 @@ namespace PacMan.ViewModels
         public MainCharacterViewModel MainCharacterViewModel { get; set; } = new MainCharacterViewModel();
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
-        
-        public GhostBlue GhostBlue { get; set; } = new GhostBlue();
+        public BlueGhostViewModel BlueGhost { get; set; } = new BlueGhostViewModel();
+        public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
+
+        public ICommand BlueGhostAiCommand { get;}
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
 
         private const int _mapSize = 20;
 
         public GameViewModel()
         {
+            BlueGhost = new BlueGhostViewModel();
             McSize = MainCharacterViewModel.McSize;
             GhostSize = Ghosts.GhostSize;
+            BlueGhostAiCommand = new RelayCommand(execute: x =>  BlueGhost.Ai((AiDirectionPackage)x) );
+
             CreateGameMap();
+        }
+        public Movement GetBlueGhostMovementDirection()
+        {
+            return BlueGhost.MovementDirection;
         }
         /// <summary>
         /// Generates a grid in GameView of _mapSize size
