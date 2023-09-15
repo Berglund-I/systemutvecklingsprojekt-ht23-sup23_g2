@@ -29,8 +29,9 @@ namespace PacMan.Views
     public partial class GameView : UserControl
     {
         private static readonly Random _random = new();
-        private int movementSpeed = 10;
         Movement RandomMovmentDirection;
+
+        private int movementSpeed = 10;
         Movement MovementDirection;
         bool mcMovement = false;
         int timerSpeed = 100;
@@ -148,7 +149,6 @@ namespace PacMan.Views
                     if  (BorderColisionUp(currentPositionY, movementSpeed, contentControl)) // If collision is detected with the border of the GameView
                     {
                         Canvas.SetTop(contentControl, 0);
-                        
                     }
                     else if (WallCollision(contentControl, movementSpeed, movementDirection)) { }
                     else { Canvas.SetTop(contentControl, currentPositionY - movementSpeed);if (contentControl.Name == "TheBlueGhost") { blueGhostCollision = false; } }
