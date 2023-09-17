@@ -30,14 +30,15 @@ namespace PacMan.Views
         private int movementSpeed = 10;
         Movement RandomMovmentDirection;
         Movement MovementDirection;
-        bool mcMovement = false;
         int timerSpeed = 100;
+        GameViewModel gameViewModel = new GameViewModel();
 
         public GameView()
         {
             InitializeComponent();
             GameCanvas.Focus();
             DataContext = new GameViewModel();
+
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
@@ -73,32 +74,33 @@ namespace PacMan.Views
         #endregion
 
         #region "Main Charachter Code"
-        private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
-        {
+        //private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
+        //{
               
-            switch (e.Key)
-            {
-                case Key.Left:
-                    MovementDirection = Movement.Left;
-                    break;
-                case Key.Up:
-                    MovementDirection = Movement.Up;
-                    break;
-                case Key.Right:
-                    MovementDirection = Movement.Right;
-                    break;
-                case Key.Down:
-                    MovementDirection = Movement.Down;
-                    break;
-            }
-            mcMovement = true;
-        }
-        private void MainCharacterMovementTimer(object? sender, EventArgs e)
+        //    switch (e.Key)
+        //    {
+        //        case Key.Left:
+        //            MovementDirection = Movement.Left;
+        //            break;
+        //        case Key.Up:
+        //            MovementDirection = Movement.Up;
+        //            break;
+        //        case Key.Right:
+        //            MovementDirection = Movement.Right;
+        //            break;
+        //        case Key.Down:
+        //            MovementDirection = Movement.Down;
+        //            break;
+        //    }
+        //    mcMovement = true;
+        //}
+        public void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
-            if (mcMovement == true)
-            {
-               MoveContentControl(TheMainCharacter, movementSpeed, MovementDirection);
-            }
+            //if (mcMovement == true)
+            //{
+            //}
+            MovementDirection = gameViewModel.McMovement();
+            MoveContentControl(TheMainCharacter, movementSpeed, MovementDirection);
         }
 
         #endregion
@@ -274,5 +276,9 @@ namespace PacMan.Views
         }
         #endregion
 
+        private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

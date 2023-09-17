@@ -9,9 +9,17 @@
 
   <ItemGroup>
     <Compile Remove="MainViewModels\**" />
+    <Compile Remove="Views\Images2\**" />
+    <Compile Remove="Views\Images\**" />
     <EmbeddedResource Remove="MainViewModels\**" />
+    <EmbeddedResource Remove="Views\Images2\**" />
+    <EmbeddedResource Remove="Views\Images\**" />
     <None Remove="MainViewModels\**" />
+    <None Remove="Views\Images2\**" />
+    <None Remove="Views\Images\**" />
     <Page Remove="MainViewModels\**" />
+    <Page Remove="Views\Images2\**" />
+    <Page Remove="Views\Images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,11 +32,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Images2\" />
-    <Folder Include="Views\Images\" />
   </ItemGroup>
 
   <ItemGroup>

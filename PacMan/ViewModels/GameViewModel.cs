@@ -11,6 +11,8 @@ using PacMan.Commands;  // Importing namespace for RelayCommand
 using PacMan.Views;
 using PacMan.ViewModels.Ghosts;
 using PacMan.ViewModels;
+using PacMan.Enums;
+using System.Windows.Input;
 
 namespace PacMan.ViewModels
 {
@@ -24,30 +26,64 @@ namespace PacMan.ViewModels
         public int GhostSize { get; set; }
         public int McSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
+        public Movement MovementDirection;
+        public ICommand LeftPressedCommand { get; set; }
+        public ICommand RightPressedCommand { get; set; }
+        public ICommand UpPressedCommand { get; set; }
+        public ICommand DownPressedCommand { get; set; }
 
-        private const int _mapSize = 20;
+        //private const int _mapSize = 20;
 
         public GameViewModel()
         {
             McSize = MainCharacterViewModel.McSize;
             GhostSize = Ghosts.GhostSize;
-            CreateGameMap();
+            LeftPressedCommand = new RelayCommand(x => LeftPressed());
+            RightPressedCommand = new RelayCommand(x => RightPressed());
+            UpPressedCommand = new RelayCommand(x => UpPressed());
+            DownPressedCommand = new RelayCommand(x => DownPressed());
+            //CreateGameMap();
         }
+        private void DownPressed()
+        {
+            MovementDirection = Movement.Down;
+        }
+
+        private void UpPressed()
+        {
+            MovementDirection = Movement.Up;
+        }
+
+        private void RightPressed()
+        {
+            MovementDirection = Movement.Right;
+        }
+
+        private void LeftPressed()
+        {
+            MovementDirection = Movement.Left;
+
+        }
+        public Movement McMovement()
+        {
+            return MovementDirection;
+        }
+
         /// <summary>
         /// Generates a grid in GameView of _mapSize size
         /// </summary>
-        private void CreateGameMap()
-        {
-            GameMap = new ObservableCollection<GameMapPiece>();
-            for (int x = 0; x < _mapSize; x++)
-            {
-                for (int y = 0; y < _mapSize; y++)
-                {
-                    var piece = new GameMapPiece();
-                    GameMap.Add(piece);
-                }
-            }
+        //private void CreateGameMap()
+        //{
+        //    GameMap = new ObservableCollection<GameMapPiece>();
+        //    for (int x = 0; x < _mapSize; x++)
+        //    {
+        //        for (int y = 0; y < _mapSize; y++)
+        //        {
+        //            var piece = new GameMapPiece();
+        //            GameMap.Add(piece);
+        //        }
+        //    }
 
-        }
+        //}
     }
 }
