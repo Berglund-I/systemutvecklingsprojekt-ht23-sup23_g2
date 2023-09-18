@@ -11,7 +11,9 @@ namespace PacMan.Views.Entities
     public class Coin : UserControl
     {
 
-
+        /// <summary>
+        /// Score attributed to each coin
+        /// </summary>
         public int Score
         {
             get { return (int)GetValue(ScoreProperty); }
