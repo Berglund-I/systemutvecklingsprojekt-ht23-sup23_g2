@@ -24,7 +24,8 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>-->
-
+           
+            <!--#region Obstacles-->
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  /> <!--Margin="100,72,100,452"-->
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" /> <!--Margin="188,142,188,382"-->
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  /> <!--Margin="598,309,56,215"-->
@@ -38,6 +39,62 @@
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  /> <!--Margin="189,142,569,320"-->
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  /> <!--Margin="572,142,186,320"-->
             <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  /> <!--Margin="338,452,364,10"-->
+            <!--#endregion-->
+            
+            <!--#region Coins-->
+
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="430" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="25" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="25" />
+
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="430" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="125" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="125" />
+
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="430" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="225" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="225" />
+
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="430" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="325" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="325" />
+
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="430" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="425" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="10" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="100" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="210" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="320" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="540" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="650" Canvas.Top="525" />
+            <local:GoldCoin Width="10" Height="10" Canvas.Left="760" Canvas.Top="525" />
+            <!--#endregion-->
 
             <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
             <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>

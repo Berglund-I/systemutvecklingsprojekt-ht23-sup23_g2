@@ -20,6 +20,8 @@ namespace PacMan.Views.Entities
     /// </summary>
     public partial class GoldCoin : Coin
     {
+        public int Y { get; internal set; }
+        public int X { get; internal set; }
         /// <summary>
         /// Score for normal coins
         /// </summary>
@@ -29,7 +31,6 @@ namespace PacMan.Views.Entities
             Score = 1;
         }
 
-        public int Y { get; internal set; }
-        public int X { get; internal set; }
+        
     }
 }
