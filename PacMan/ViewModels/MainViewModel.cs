@@ -56,7 +56,7 @@ namespace PacMan.ViewModels
                                                // mainWindow.Content = gameControl; // Om du använder GameControl
             }
 
-            MessageBox.Show($"Nu börjar spelet {playerName}");
+            //MessageBox.Show($"Nu börjar spelet {playerName}");
         }
     }
 }

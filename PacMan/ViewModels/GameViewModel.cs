@@ -9,30 +9,28 @@ using System.Windows;
 using System.Windows.Controls;
 using PacMan.Commands;  // Importing namespace for RelayCommand
 using PacMan.Views;
-using PacMan.Views.Entities;
-using System.Windows.Media.Media3D;
-using System.Reflection;
-using System.Diagnostics.Metrics;
+using PacMan.ViewModels.Ghosts;
+using PacMan.ViewModels;
 
 namespace PacMan.ViewModels
 {
     internal class GameViewModel : BaseViewModel
     {
+        public MainCharacterViewModel MainCharacterViewModel { get; set; } = new MainCharacterViewModel();
+        public MainCharacter MainCharacter { get; set; } = new MainCharacter();
+        public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
+        public GhostBlue GhostBlue { get; set; } = new GhostBlue();
+        public GhostBlue GhostBlue2 { get; set; } = new GhostBlue();
+        public int GhostSize { get; set; }
+        public int McSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
         private const int _mapSize = 20;
 
-        private ObservableCollection<GoldCoin> _coins = new ObservableCollection<GoldCoin>();
-        public ObservableCollection<GoldCoin> Coins
-        {
-            get { return _coins; }
-            set { _coins = value; }
-        }
-
-        public ObservableCollection<Block> Obstacle { get; private set; }
-
         public GameViewModel()
         {
-           
+            McSize = MainCharacterViewModel.McSize;
+            GhostSize = Ghosts.GhostSize;
+            CreateGameMap();
         }
 
         /// <summary>

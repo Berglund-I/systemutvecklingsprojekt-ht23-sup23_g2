@@ -15,38 +15,34 @@
         BorderBrush="GreenYellow"
         BorderThickness="3"
         CornerRadius="5">
-        <Grid>
-
-            <ItemsControl ItemsSource="{Binding Coins}">
+        <Canvas x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown">
+            
+            <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Rows="10" Columns="10" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:GoldCoin Score="{Binding Score}" Width="20" Height="20" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            </ItemsControl>-->
 
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70" Margin="100,72,100,452" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" Margin="188,142,188,382" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339" Margin="598,309,56,215" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467" Margin="72,309,582,215" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="467" Margin="147,425,507,99" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="339" Margin="488,425,166,99" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="142" Canvas.Top="155" Margin="72,142,686,215" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="700" Canvas.Top="155" Margin="702,142,56,215" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="613" Canvas.Top="178" Margin="592,425,166,10" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178" Margin="147,425,611,10" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485" Margin="189,142,569,320" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485" Margin="572,142,186,320" />
-            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487" Margin="338,452,364,10" />
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  /> <!--Margin="100,72,100,452"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" /> <!--Margin="188,142,188,382"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  /> <!--Margin="598,309,56,215"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467"  /> <!--Margin="72,309,582,215"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="467"  /> <!--Margin="147,425,507,99"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="339"  /> <!--Margin="488,425,166,99"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="142" Canvas.Top="155"  /> <!--Margin="72,142,686,215"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="700" Canvas.Top="155"  /> <!--Margin="702,142,56,215"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="613" Canvas.Top="178"  /> <!--Margin="592,425,166,10"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  /> <!-- RenderTransformOrigin="-1.85,0.546" Margin="147,425,611,10"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  /> <!--Margin="189,142,569,320"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  /> <!--Margin="572,142,186,320"-->
+            <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  /> <!--Margin="338,452,364,10"-->
 
+            <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
+            <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
 
-
-        </Grid>
+        </Canvas>
     </Border>
 
 </UserControl>
