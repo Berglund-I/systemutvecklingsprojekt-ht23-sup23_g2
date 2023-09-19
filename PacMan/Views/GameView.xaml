@@ -52,15 +52,7 @@
                     <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
                     <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
                 </Canvas.InputBindings>
-                <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid  MinHeight="500" MinWidth="500"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>-->
                 
-
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <!--Margin="100,72,100,452"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
@@ -89,7 +81,7 @@
                 <!--Margin="338,452,364,10"-->
 
                 <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlue2}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="190"/>
-                <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
+                <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left ="{Binding Path = MainCharacter.XCoordinate}" Canvas.Top ="{Binding Path = MainCharacter.YCoordinate}"/>
                 
 
 
