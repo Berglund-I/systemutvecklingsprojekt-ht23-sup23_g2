@@ -31,7 +31,7 @@ namespace PacMan.Views
         Movement RandomMovmentDirection;
         Movement MovementDirection;
         int timerSpeed = 100;
-        private GameViewModel? gameViewModel = new();
+        //private GameViewModel? gameViewModel = new();
 
 
         public GameView()
@@ -109,7 +109,7 @@ namespace PacMan.Views
 
         private Movement GetMovementDirection()
         {
-            return gameViewModel.MovementDirection;
+            return MainCharacterViewModel.MovementDirection;
         }
 
         #endregion

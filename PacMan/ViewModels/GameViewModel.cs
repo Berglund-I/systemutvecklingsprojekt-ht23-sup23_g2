@@ -26,11 +26,7 @@ namespace PacMan.ViewModels
         public int GhostSize { get; set; }
         public int McSize { get; set; }
         //public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
-        public Movement MovementDirection { get; set; }
-        public ICommand LeftPressedCommand { get; set; }
-        public ICommand RightPressedCommand { get; set; }
-        public ICommand UpPressedCommand { get; set; }
-        public ICommand DownPressedCommand { get; set; }
+        
         
 
         //private const int _mapSize = 20;
@@ -39,38 +35,9 @@ namespace PacMan.ViewModels
         {
             McSize = MainCharacterViewModel.McSize;
             GhostSize = Ghosts.GhostSize;
-            LeftPressedCommand = new RelayCommand(arg => LeftPressed());
-            RightPressedCommand = new RelayCommand(arg => RightPressed());
-            UpPressedCommand = new RelayCommand(arg => UpPressed());
-            DownPressedCommand = new RelayCommand(arg => DownPressed());
-            MovementDirection = Movement.Down;
+           
         }
-        private void DownPressed()
-        {
-            
-            MovementDirection = Movement.Down;
-            
-        }
-
-        private void UpPressed()
-        {
-            MovementDirection = Movement.Up;
-        }
-
-        private void RightPressed()
-        {
-            MovementDirection = Movement.Right;
-        }
-
-        private void LeftPressed()
-        {
-            MovementDirection = Movement.Left;
-
-        }
-        //public Movement McMovement()
-        //{
-        //    return MovementDirection;
-        //}
+        
 
         /// <summary>
         /// Generates a grid in GameView of _mapSize size
