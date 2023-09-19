@@ -25,7 +25,6 @@ namespace PacMan.ViewModels
     {
         public int GameViewWidth { get; set; } = 848;
         public int GameViewHeight { get; set; } = 700-40;
-        public MainCharacterViewModel MainCharacterViewModel { get; set; } = new MainCharacterViewModel();
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
         public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
@@ -37,10 +36,6 @@ namespace PacMan.ViewModels
         public ICommand RightPressedCommand { get; set; }
         public ICommand UpPressedCommand { get; set; }
         public ICommand DownPressedCommand { get; set; }
-        int timerSpeed = 100;
-        private int movementSpeed = 10;
-        //public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
-        private readonly DispatcherTimer timer = new();
 
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; } 
@@ -58,8 +53,8 @@ namespace PacMan.ViewModels
         public GameViewModel()
         {
             BlueGhostVM = new BlueGhostViewModel();
-            McSize = MainCharacterViewModel.McSize;
             GhostSize = Ghosts.GhostSize;
+
             McSize = MainCharacter.Size;
             LeftPressedCommand = new RelayCommand(x => LeftPressed());
             RightPressedCommand = new RelayCommand(x => RightPressed());
@@ -68,10 +63,11 @@ namespace PacMan.ViewModels
             MovementDirection = Movement.Down;
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            
+            timer.Tick += GhostMovementTimer;
             timer.Tick += MainCharacterMovementTimer;
             timer.Start();
 
+            BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
@@ -109,15 +105,7 @@ namespace PacMan.ViewModels
         {
             MovementDirection = Movement.Right;
         }
-            BlueGhostAiCommand = new RelayCommand(execute: x =>  BlueGhostVM.Ai((AiDirectionPackage)x) );
 
-
-            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            timer.Tick += GhostMovementTimer;
-            //timer.Tick += MainCharacterMovementTimer;
-            timer.Start();
-
-        }
         public Movement GetBlueGhostMovementDirection()
         {
             return BlueGhostVM.MovementDirection;

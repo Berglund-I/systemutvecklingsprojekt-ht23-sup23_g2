@@ -45,19 +45,10 @@
                 </Rectangle>
             </StackPanel>
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
-        BorderThickness="3"
-        CornerRadius="5">
-                <Canvas  x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown" Grid.Row="1" HorizontalAlignment="Center" Width="850">
-                <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid  MinHeight="500" MinWidth="500"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>-->
+            BorderThickness="3"
+            CornerRadius="5">
 
-
-            <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
+                <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                 <Canvas.InputBindings>
                     <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
                     <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
