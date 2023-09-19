@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacMan.Views.Components"
              xmlns:vm="clr-namespace:PacMan.ViewModels"
-             d:DataContext="{d:DesignInstance vm:MainCharacterViewModel}"
              mc:Ignorable="d" 
              x:Name="PlayableCharacter"
              d:DesignHeight="50" d:DesignWidth="50">
     <Grid>
-        <Ellipse Fill="Yellow"/>
+        <Ellipse Fill="Yellow" Height="30" Width="30"/>
         <Ellipse HorizontalAlignment="Left" Height="10" Width="10" Margin="30,10,0,0" Fill="Black" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.066,0.612"/>
     </Grid>
 
