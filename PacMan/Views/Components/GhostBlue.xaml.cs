@@ -24,7 +24,7 @@ namespace PacMan.Views.Components
         public GhostBlue()
         {
             InitializeComponent();
-            //DataContext = new GhostViewModel();
+            
         }
     }
 }
