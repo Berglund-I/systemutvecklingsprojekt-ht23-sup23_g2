@@ -18,6 +18,8 @@ using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using PacMan.Views.Components;
+using PacMan.ViewModels.Ghosts;
+using PacMan.Models;
 
 namespace PacMan.Views
 {

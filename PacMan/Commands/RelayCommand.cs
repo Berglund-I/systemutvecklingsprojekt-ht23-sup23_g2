@@ -11,7 +11,7 @@ namespace PacMan.Commands
     {
         private readonly Action<object> _excecute;
         private readonly Predicate<object> _canExecute;
-        
+
 
         public event EventHandler? CanExecuteChanged
         {

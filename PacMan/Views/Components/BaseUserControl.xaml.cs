@@ -1,5 +1,4 @@
-﻿using PacMan.ViewModels.Ghosts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,16 +16,15 @@ using System.Windows.Shapes;
 namespace PacMan.Views.Components
 {
     /// <summary>
-    /// Interaction logic for GhostBlue.xaml
+    /// Interaction logic for BaseUserControl.xaml
     /// </summary>
-    public partial class GhostBlue : BaseUserControl
+    public partial class BaseUserControl : UserControl
     {
-
-        public GhostBlue()
+        public double XPosition { get; set; }
+        public double YPosition { get; set; }
+        public BaseUserControl()
         {
-            InitializeComponent();
-            XPosition = 100;
-            YPosition = 300;
+           
         }
     }
 }
