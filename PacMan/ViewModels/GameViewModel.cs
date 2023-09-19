@@ -49,6 +49,7 @@ namespace PacMan.ViewModels
         {
             
             MovementDirection = Movement.Down;
+            
         }
 
         private void UpPressed()
