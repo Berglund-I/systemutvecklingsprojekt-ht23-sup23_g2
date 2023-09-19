@@ -38,13 +38,12 @@ namespace PacMan.ViewModels
         public ICommand DownPressedCommand { get; set; }
 
         public double BlueGhostX { get; set; } = -100;
-        public double BlueGhostY { get; set; } 
+        public double BlueGhostY { get; set; }
         
         public ICommand BlueGhostAiCommand { get;}
         public BaseUserControl CurrentUserControl { get; set; }
 
 
-        //private const int _mapSize = 20;
         public bool blueGhostCollision = false;
         int movementSpeed = 10;
         private readonly DispatcherTimer timer = new DispatcherTimer();
