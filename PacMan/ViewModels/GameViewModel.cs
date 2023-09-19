@@ -11,6 +11,7 @@ using PacMan.Commands;  // Importing namespace for RelayCommand
 using PacMan.Views;
 using PacMan.ViewModels.Ghosts;
 using PacMan.ViewModels;
+using PacMan.Views.Entities;
 
 namespace PacMan.ViewModels
 {
@@ -24,8 +25,8 @@ namespace PacMan.ViewModels
         public int GhostSize { get; set; }
         public int McSize { get; set; }
         public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
-
         private const int _mapSize = 20;
+       
 
         public GameViewModel()
         {
@@ -33,6 +34,7 @@ namespace PacMan.ViewModels
             GhostSize = Ghosts.GhostSize;
             CreateGameMap();
         }
+
         /// <summary>
         /// Generates a grid in GameView of _mapSize size
         /// </summary>
@@ -48,6 +50,13 @@ namespace PacMan.ViewModels
                 }
             }
 
+
         }
+
+
     }
 }
+   
+        
+
+      
