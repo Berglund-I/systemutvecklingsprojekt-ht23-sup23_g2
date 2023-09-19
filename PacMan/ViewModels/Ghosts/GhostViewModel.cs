@@ -16,6 +16,7 @@ namespace PacMan.ViewModels.Ghosts
         public bool CollisionDetected { get; set; }
         public Movement MovementDirection { get; set; } = Movement.Left;
         public int MovementSpeed { get; set; } = 10;
+        
         public GhostViewModel()
         {
             
