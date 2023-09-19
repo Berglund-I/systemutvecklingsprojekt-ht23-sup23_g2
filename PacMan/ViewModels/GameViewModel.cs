@@ -36,6 +36,8 @@ namespace PacMan.ViewModels
         public ICommand RightPressedCommand { get; set; }
         public ICommand UpPressedCommand { get; set; }
         public ICommand DownPressedCommand { get; set; }
+        public double MainCharacterX { get; set; }
+        public double MainCharacterY { get; set; }
 
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
@@ -71,23 +73,10 @@ namespace PacMan.ViewModels
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
-            switch (MovementDirection)
-            {
-                case Movement.Up:
-                    MainCharacter.YCoordinate -= movementSpeed;
-                    break;
-                case Movement.Down:
-                    MainCharacter.YCoordinate += movementSpeed;
-                    break;
-                case Movement.Left:
-                    MainCharacter.XCoordinate -= movementSpeed;
-                    break;
-                case Movement.Right:
-                    MainCharacter.XCoordinate += movementSpeed;
-                    break;
-                default:
-                    break;
-            }
+            CurrentUserControl = MainCharacter;
+            MainCharacterX = MainCharacter.XPosition;
+            MainCharacterY = MainCharacter.YPosition;
+            MoveContentControl(MovementDirection);
         }
 
         private void DownPressed()
