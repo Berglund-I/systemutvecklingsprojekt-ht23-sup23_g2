@@ -45,7 +45,7 @@
                 </Rectangle>
             </StackPanel>
 
-            <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" KeyDown="GameCanvas_KeyDown">
+            <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                 <Canvas.InputBindings>
                     <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
                     <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>

@@ -31,7 +31,8 @@ namespace PacMan.Views
         Movement RandomMovmentDirection;
         Movement MovementDirection;
         int timerSpeed = 100;
-        GameViewModel gameViewModel = new GameViewModel();
+        private GameViewModel? gameViewModel = new();
+
 
         public GameView()
         {
@@ -99,8 +100,16 @@ namespace PacMan.Views
             //if (mcMovement == true)
             //{
             //}
-            MovementDirection = gameViewModel.McMovement();
+            //MovementDirection = _gameViewModel.MovementDirection;
+            MovementDirection = GetMovementDirection();
+            //return gameViewModel.MovementDirection; 
             MoveContentControl(TheMainCharacter, movementSpeed, MovementDirection);
+            
+        }
+
+        private Movement GetMovementDirection()
+        {
+            return gameViewModel.MovementDirection;
         }
 
         #endregion
@@ -276,9 +285,6 @@ namespace PacMan.Views
         }
         #endregion
 
-        private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
+        
     }
 }

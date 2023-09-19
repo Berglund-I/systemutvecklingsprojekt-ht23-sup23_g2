@@ -9,20 +9,41 @@ namespace PacMan.Commands
 {
     internal class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
+        private readonly Action<object> _excecute;
+        private readonly Predicate<object> _canExecute;
+        
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public RelayCommand(Action<object> execute, Predicate<object> predicate)
+        {
+            _excecute = execute;
+            _canExecute = predicate;
+        }
 
         public RelayCommand(Action<object> execute)
         {
-            _execute = execute;
+            _excecute = execute;
+            _canExecute = x => true;
         }
 
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object parameter) => true;
-
-        public void Execute(object parameter)
+        public bool CanExecute(object? parameter)
         {
-            _execute(parameter);
+            return _canExecute(parameter);
+        }
+
+        public void Execute(object? parameter)
+        {
+            _excecute(parameter);
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

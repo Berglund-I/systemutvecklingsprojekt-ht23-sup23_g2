@@ -25,12 +25,13 @@ namespace PacMan.ViewModels
         public GhostBlue GhostBlue2 { get; set; } = new GhostBlue();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
-        public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
-        public Movement MovementDirection;
+        //public ObservableCollection<GameMapPiece>? GameMap { get; private set; }
+        public Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
         public ICommand RightPressedCommand { get; set; }
         public ICommand UpPressedCommand { get; set; }
         public ICommand DownPressedCommand { get; set; }
+        
 
         //private const int _mapSize = 20;
 
@@ -38,14 +39,15 @@ namespace PacMan.ViewModels
         {
             McSize = MainCharacterViewModel.McSize;
             GhostSize = Ghosts.GhostSize;
-            LeftPressedCommand = new RelayCommand(x => LeftPressed());
-            RightPressedCommand = new RelayCommand(x => RightPressed());
-            UpPressedCommand = new RelayCommand(x => UpPressed());
-            DownPressedCommand = new RelayCommand(x => DownPressed());
-            //CreateGameMap();
+            LeftPressedCommand = new RelayCommand(arg => LeftPressed());
+            RightPressedCommand = new RelayCommand(arg => RightPressed());
+            UpPressedCommand = new RelayCommand(arg => UpPressed());
+            DownPressedCommand = new RelayCommand(arg => DownPressed());
+            MovementDirection = Movement.Down;
         }
         private void DownPressed()
         {
+            
             MovementDirection = Movement.Down;
         }
 
@@ -64,10 +66,10 @@ namespace PacMan.ViewModels
             MovementDirection = Movement.Left;
 
         }
-        public Movement McMovement()
-        {
-            return MovementDirection;
-        }
+        //public Movement McMovement()
+        //{
+        //    return MovementDirection;
+        //}
 
         /// <summary>
         /// Generates a grid in GameView of _mapSize size
