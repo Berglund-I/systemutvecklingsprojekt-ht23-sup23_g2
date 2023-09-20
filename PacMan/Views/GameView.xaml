@@ -55,6 +55,8 @@
                     <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
                     <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
                 </Canvas.InputBindings>
+
+                    <Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 
                 <!--<Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
@@ -90,49 +92,49 @@
                     <local:GoldCoin x:Name="coin7" Width="10" Height="10" Canvas.Left="650" Canvas.Top="25" />
                     <local:GoldCoin x:Name="coin8" Width="10" Height="10" Canvas.Left="760" Canvas.Top="25" />
 
-                    <local:GoldCoin x:Name="coin9"  Width="10" Height="10" Canvas.Left="10" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin10" Width="10" Height="10" Canvas.Left="100" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin11" Width="10" Height="10" Canvas.Left="210" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin12" Width="10" Height="10" Canvas.Left="320" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin13" Width="10" Height="10" Canvas.Left="430" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin14" Width="10" Height="10" Canvas.Left="540" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin15" Width="10" Height="10" Canvas.Left="650" Canvas.Top="125" />
-                    <local:GoldCoin x:Name="coin16" Width="10" Height="10" Canvas.Left="760" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin9"  Width="10" Height="10" Canvas.Left="10" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin10" Width="10" Height="10" Canvas.Left="100" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin11" Width="10" Height="10" Canvas.Left="210" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin12" Width="10" Height="10" Canvas.Left="320" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin13" Width="10" Height="10" Canvas.Left="430" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin14" Width="10" Height="10" Canvas.Left="540" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin15" Width="10" Height="10" Canvas.Left="650" Canvas.Top="125" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin16" Width="10" Height="10" Canvas.Left="760" Canvas.Top="125" />
 
-                    <local:GoldCoin x:Name="coin17" Width="10" Height="10" Canvas.Left="10" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin18" Width="10" Height="10" Canvas.Left="100" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin19" Width="10" Height="10" Canvas.Left="210" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin20" Width="10" Height="10" Canvas.Left="320" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin21" Width="10" Height="10" Canvas.Left="430" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin22" Width="10" Height="10" Canvas.Left="540" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin23" Width="10" Height="10" Canvas.Left="650" Canvas.Top="225" />
-                    <local:GoldCoin x:Name="coin24" Width="10" Height="10" Canvas.Left="760" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin17" Width="10" Height="10" Canvas.Left="10" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin18" Width="10" Height="10" Canvas.Left="100" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin19" Width="10" Height="10" Canvas.Left="210" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin20" Width="10" Height="10" Canvas.Left="320" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin21" Width="10" Height="10" Canvas.Left="430" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin22" Width="10" Height="10" Canvas.Left="540" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin23" Width="10" Height="10" Canvas.Left="650" Canvas.Top="225" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin24" Width="10" Height="10" Canvas.Left="760" Canvas.Top="225" />
 
-                    <local:GoldCoin x:Name="coin25" Width="10" Height="10" Canvas.Left="10" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin26" Width="10" Height="10" Canvas.Left="100" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin27" Width="10" Height="10" Canvas.Left="210" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin28" Width="10" Height="10" Canvas.Left="320" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin29" Width="10" Height="10" Canvas.Left="430" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin30" Width="10" Height="10" Canvas.Left="540" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin31" Width="10" Height="10" Canvas.Left="650" Canvas.Top="325" />
-                    <local:GoldCoin x:Name="coin32" Width="10" Height="10" Canvas.Left="760" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin25" Width="10" Height="10" Canvas.Left="10" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin26" Width="10" Height="10" Canvas.Left="100" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin27" Width="10" Height="10" Canvas.Left="210" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin28" Width="10" Height="10" Canvas.Left="320" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin29" Width="10" Height="10" Canvas.Left="430" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin30" Width="10" Height="10" Canvas.Left="540" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin31" Width="10" Height="10" Canvas.Left="650" Canvas.Top="325" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin32" Width="10" Height="10" Canvas.Left="760" Canvas.Top="325" />
 
-                    <local:GoldCoin x:Name="coin33" Width="10" Height="10" Canvas.Left="10" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin34" Width="10" Height="10" Canvas.Left="100" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin35" Width="10" Height="10" Canvas.Left="210" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin36" Width="10" Height="10" Canvas.Left="320" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin37" Width="10" Height="10" Canvas.Left="430" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin38" Width="10" Height="10" Canvas.Left="540" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin39" Width="10" Height="10" Canvas.Left="650" Canvas.Top="425" />
-                    <local:GoldCoin x:Name="coin40" Width="10" Height="10" Canvas.Left="760" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin33" Width="10" Height="10" Canvas.Left="10" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin34" Width="10" Height="10" Canvas.Left="100" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin35" Width="10" Height="10" Canvas.Left="210" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin36" Width="10" Height="10" Canvas.Left="320" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin37" Width="10" Height="10" Canvas.Left="430" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin38" Width="10" Height="10" Canvas.Left="540" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin39" Width="10" Height="10" Canvas.Left="650" Canvas.Top="425" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin40" Width="10" Height="10" Canvas.Left="760" Canvas.Top="425" />
 
-                    <local:GoldCoin x:Name="coin41" Width="10" Height="10" Canvas.Left="10" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin42" Width="10" Height="10" Canvas.Left="100" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin43" Width="10" Height="10" Canvas.Left="210" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin44" Width="10" Height="10" Canvas.Left="320" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin45" Width="10" Height="10" Canvas.Left="540" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin46" Width="10" Height="10" Canvas.Left="650" Canvas.Top="525" />
-                    <local:GoldCoin x:Name="coin47" Width="10" Height="10" Canvas.Left="760" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin41" Width="10" Height="10" Canvas.Left="10" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin42" Width="10" Height="10" Canvas.Left="100" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin43" Width="10" Height="10" Canvas.Left="210" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin44" Width="10" Height="10" Canvas.Left="320" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin45" Width="10" Height="10" Canvas.Left="540" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin46" Width="10" Height="10" Canvas.Left="650" Canvas.Top="525" />
+                    <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin47" Width="10" Height="10" Canvas.Left="760" Canvas.Top="525" />
                     <!--#endregion-->
 
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>

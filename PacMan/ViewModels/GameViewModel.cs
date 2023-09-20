@@ -52,6 +52,7 @@ namespace PacMan.ViewModels
         int timerSpeed = 100;
 
         public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
+        
 
         public GameViewModel()
         {
@@ -73,7 +74,6 @@ namespace PacMan.ViewModels
             timer.Start();
 
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
-            
         }
 
        private void CreateObstaclesList()
