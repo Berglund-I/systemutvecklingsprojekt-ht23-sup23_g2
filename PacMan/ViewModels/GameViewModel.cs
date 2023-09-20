@@ -50,7 +50,7 @@ namespace PacMan.ViewModels
         int timerSpeed = 100;
 
         public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
-
+        
 
         public GameViewModel()
         {

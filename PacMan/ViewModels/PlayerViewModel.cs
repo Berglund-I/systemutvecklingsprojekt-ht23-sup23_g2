@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacMan.Views.Entities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,9 +11,13 @@ namespace PacMan.ViewModels
     internal abstract class PlayerViewModel : BaseViewModel
     {
         /// <summary>
-        /// Count of the total amount of score in the game
+        /// Count of the total amount of possible score in the game
         /// </summary>
-        public ObservableCollection<GoldCoinViewModel> TotalScore { get; private set; } = new ObservableCollection<GoldCoinViewModel>();
+
+        //public ObservableCollection<GoldCoinViewModel> TotalScore { get; private set; } = new ObservableCollection<GoldCoinViewModel>();
+
+
+        public int PlayerEarnedScore { get; set; }
 
         public int PlayerLives { get; set; } = 4;
          
