@@ -16,7 +16,7 @@ using PacMan.Models;
 using PacMan.Enums;
 using System.Windows.Threading;
 using System.Threading;
-using System.Drawing;
+//using System.Drawing;
 using PacMan.Views.Entities;
 
 namespace PacMan.ViewModels
@@ -47,9 +47,9 @@ namespace PacMan.ViewModels
 
 
         public bool blueGhostCollision = false;
-        int movementSpeed = 2;
+        int movementSpeed = 10;
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        int timerSpeed = 20;
+        int timerSpeed = 100;
 
         public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
 
@@ -98,16 +98,16 @@ namespace PacMan.ViewModels
             switch (MovementDirection)
             {
                 case Movement.Up:
-                    MainCharacter.YCoordinate -= movementSpeed;
+                    MainCharacter.YPosition -= movementSpeed;
                     break;
                 case Movement.Down:
-                    MainCharacter.YCoordinate += movementSpeed;
+                    MainCharacter.YPosition += movementSpeed;
                     break;
                 case Movement.Left:
-                    MainCharacter.XCoordinate -= movementSpeed;
+                    MainCharacter.XPosition -= movementSpeed;
                     break;
                 case Movement.Right:
-                    MainCharacter.XCoordinate += movementSpeed;
+                    MainCharacter.XPosition += movementSpeed;
                     break;
                 default:
                     break;
@@ -135,12 +135,14 @@ namespace PacMan.ViewModels
         }
         private void GhostMovementTimer(object sender, EventArgs e)
         {
-            //Movement aiTest = GhostBlueAi();
             BlueGhostX = GhostBlueView.XPosition;
             BlueGhostY = GhostBlueView.YPosition;
+            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacter.XPosition, MainCharacter.XPosition), blueGhostCollision);
+            BlueGhostVM.Ai(AiPackage);
+            
 
             CurrentUserControl = GhostBlueView;
-            MoveContentControl(Movement.Right);
+            MoveContentControl(BlueGhostVM.MovementDirection);
         }
 
         private void MoveContentControl(Movement movementDirection)
@@ -201,7 +203,7 @@ namespace PacMan.ViewModels
         {
             double nextX = CurrentUserControl.XPosition;
             double nextY = CurrentUserControl.YPosition;
-            switch (movementDirection)
+            switch (movementDirection)  // Predicts the next step of the selected UserControl
             {
                 case Movement.Left:
                     nextX = CurrentUserControl.XPosition - movementSpeed;
@@ -217,13 +219,9 @@ namespace PacMan.ViewModels
                     break;
             }
             
-            foreach (var obstacle in Obstacles)
+            foreach (var obstacle in Obstacles) //Checks if the UserControl colides with any of the obstacles and moves it accordingly 
             {
-                //if (CurrentUserControl.XPosition < obstacle.XPosition + obstacle.Width &&
-                //    CurrentUserControl.XPosition + CurrentUserControl.ActualWidth > obstacle.XPosition &&
-                //    CurrentUserControl.YPosition < obstacle.YPosition + obstacle.Height &&
-                //    CurrentUserControl.YPosition + CurrentUserControl.ActualHeight > obstacle.YPosition)
-                //{
+
                 if (nextX < obstacle.XPosition + obstacle.Width &&
                     nextX + CurrentUserControl.ActualWidth > obstacle.XPosition &&
                     nextY < obstacle.YPosition + obstacle.Height &&

@@ -22,8 +22,8 @@ namespace PacMan.Views.Components
     /// </summary>
     public partial class MainCharacter : UserControl
     {
-        public double YCoordinate;
-        public double XCoordinate;
+        public double YPosition = 260;
+        public double XPosition = 300;
         public int Size;
         public MainCharacter()
         {
