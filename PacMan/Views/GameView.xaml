@@ -70,6 +70,7 @@
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />
                 
+                    
                 <!--#region Coins-->
                     <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin1" Width="10" Height="10" Canvas.Left="10" Canvas.Top="25" />
                     <local:GoldCoin Score="{Binding GoldCoins}" x:Name="coin2" Width="10" Height="10" Canvas.Left="100" Canvas.Top="25" />
