@@ -56,7 +56,7 @@
                     <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
                 </Canvas.InputBindings>
                 
-                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
+                <!--<Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467"  />
@@ -68,9 +68,19 @@
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  />
-                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />
-                
-                <!--#region Coins-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />-->
+                    <ItemsControl ItemsSource="{Binding Obstacles}" Grid.Row="1">
+                        <!-- Define the data template to display each obstacle -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas Grid.Row="1">
+                                    <Rectangle Width="{Binding Width}" Height="{Binding Height}" Stroke="GreenYellow" StrokeThickness="3" Canvas.Top="{Binding YPosition}" Canvas.Left="{Binding XPosition}"/>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!--#region Coins-->
                     <local:GoldCoin x:Name="coin1" Width="10" Height="10" Canvas.Left="10" Canvas.Top="25" />
                     <local:GoldCoin x:Name="coin2" Width="10" Height="10" Canvas.Left="100" Canvas.Top="25" />
                     <local:GoldCoin x:Name="coin3" Width="10" Height="10" Canvas.Left="210" Canvas.Top="25" />

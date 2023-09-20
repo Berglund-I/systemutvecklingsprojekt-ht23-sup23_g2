@@ -43,11 +43,13 @@ namespace PacMan.ViewModels
         public ICommand BlueGhostAiCommand { get;}
         public BaseUserControl CurrentUserControl { get; set; }
 
+        public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
+
 
         public bool blueGhostCollision = false;
-        int movementSpeed = 10;
+        int movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        int timerSpeed = 100;
+        int timerSpeed = 20;
 
         public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
 
@@ -63,6 +65,8 @@ namespace PacMan.ViewModels
             DownPressedCommand = new RelayCommand(x => DownPressed());
             MovementDirection = Movement.Down;
 
+            CreateObstaclesList();
+
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
             timer.Tick += MainCharacterMovementTimer;
@@ -72,7 +76,22 @@ namespace PacMan.ViewModels
             
         }
 
-       
+       private void CreateObstaclesList()
+        {
+            Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 339 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 467 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 596, YPosition = 467 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 596, YPosition = 339 });
+            Obstacles.Add(new Obstacles { Height = 187, Width = 20, XPosition = 142, YPosition = 155 });
+            Obstacles.Add(new Obstacles { Height = 187, Width = 20, XPosition = 700, YPosition = 155 });
+            Obstacles.Add(new Obstacles { Height = 109, Width = 20, XPosition = 613, YPosition = 178 });
+            Obstacles.Add(new Obstacles { Height = 109, Width = 20, XPosition = 231, YPosition = 178 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 142, YPosition = 485 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 700, YPosition = 485 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 76, XPosition = 395, YPosition = 487 });
+        }
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
@@ -180,75 +199,55 @@ namespace PacMan.ViewModels
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
-            //switch (movementDirection)
-            //{
-            //    case Movement.Up:
-            //        Rect contentControlRectUp = new Rect(Canvas.GetLeft(contentControl), Canvas.GetTop(contentControl) - movementSpeed, contentControl.Width, contentControl.Height); // A rectangle with positions of the predicted move from the contentControll
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+            double nextX = CurrentUserControl.XPosition;
+            double nextY = CurrentUserControl.YPosition;
+            switch (movementDirection)
+            {
+                case Movement.Left:
+                    nextX = CurrentUserControl.XPosition - movementSpeed;
+                    break;
+                case Movement.Right:
+                    nextX = CurrentUserControl.XPosition + movementSpeed;
+                    break;
+                case Movement.Up:
+                    nextY = CurrentUserControl.YPosition - movementSpeed;
+                    break;
+                case Movement.Down:
+                    nextY = CurrentUserControl.YPosition + movementSpeed;
+                    break;
+            }
+            
+            foreach (var obstacle in Obstacles)
+            {
+                //if (CurrentUserControl.XPosition < obstacle.XPosition + obstacle.Width &&
+                //    CurrentUserControl.XPosition + CurrentUserControl.ActualWidth > obstacle.XPosition &&
+                //    CurrentUserControl.YPosition < obstacle.YPosition + obstacle.Height &&
+                //    CurrentUserControl.YPosition + CurrentUserControl.ActualHeight > obstacle.YPosition)
+                //{
+                if (nextX < obstacle.XPosition + obstacle.Width &&
+                    nextX + CurrentUserControl.ActualWidth > obstacle.XPosition &&
+                    nextY < obstacle.YPosition + obstacle.Height &&
+                    nextY + CurrentUserControl.ActualHeight > obstacle.YPosition)
+                {
+                    switch (movementDirection)
+                    {
+                        case Movement.Left:
+                            CurrentUserControl.XPosition = obstacle.XPosition + obstacle.Width;
+                            break;
+                        case Movement.Right:
+                            CurrentUserControl.XPosition = obstacle.XPosition - CurrentUserControl.ActualWidth; 
+                            break;
+                        case Movement.Up:
+                            CurrentUserControl.YPosition = obstacle.YPosition + obstacle.Height; 
+                            break;
+                        case Movement.Down:
+                            CurrentUserControl.YPosition = obstacle.YPosition + CurrentUserControl.ActualHeight;
+                            break;
 
-            //                if (contentControlRectUp.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetTop(contentControl, Canvas.GetTop(x) + x.Height + 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-            //    case Movement.Down:
-            //        Rect contentControlRectDown = new Rect(Canvas.GetLeft(contentControl), Canvas.GetTop(contentControl) + movementSpeed, contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectDown.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetTop(contentControl, Canvas.GetTop(x) - contentControl.Height - 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-            //    case Movement.Left:
-            //        Rect contentControlRectLeft = new Rect(Canvas.GetLeft(contentControl) - movementSpeed, Canvas.GetTop(contentControl), contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectLeft.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetLeft(contentControl, Canvas.GetLeft(x) + x.Width + 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-
-            //    case Movement.Right:
-            //        Rect contentControlRectRight = new Rect(Canvas.GetLeft(contentControl) + movementSpeed, Canvas.GetTop(contentControl), contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectRight.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetLeft(contentControl, Canvas.GetLeft(x) - contentControl.Width - 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-
-            //}
+                    }
+                    return true; // Collision detected
+                }
+            }
             return false;
         }
 

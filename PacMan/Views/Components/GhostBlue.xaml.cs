@@ -26,7 +26,7 @@ namespace PacMan.Views.Components
         {
             InitializeComponent();
             XPosition = 100;
-            YPosition = 300;
+            YPosition = 250;
         }
     }
 }
