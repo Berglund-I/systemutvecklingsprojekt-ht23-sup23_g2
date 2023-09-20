@@ -139,37 +139,37 @@ namespace PacMan.ViewModels
                 case Movement.Up:
                     if (BorderColisionUp(currentPositionY)) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.YPosition = 0;//Canvas.SetTop(contentControl, 0);
+                        CurrentUserControl.YPosition = 0;
                     }
                     else if (WallCollision(  movementDirection)) { }
-                    else { CurrentUserControl.YPosition -= movementSpeed;/*Canvas.SetTop(contentControl, currentPositionY - movementSpeed);*/ }
+                    else { CurrentUserControl.YPosition -= movementSpeed; }
                     break;
                 case Movement.Down:
-                    if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight /*+ contentControl.Height*/)) // If collision is detected with the border of the GameView
+                    if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight )) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;//Canvas.SetTop(contentControl, GameViewHeight - contentControl.Height);
+                        CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.YPosition += movementSpeed;/*Canvas.SetTop(contentControl, currentPositionY + movementSpeed);*/ }
+                    else { CurrentUserControl.YPosition += movementSpeed; }
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX)) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.XPosition = 0;//Canvas.SetLeft(contentControl, 0);
+                        CurrentUserControl.XPosition = 0;
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition -= movementSpeed;/*Canvas.SetLeft(contentControl, currentPositionX - movementSpeed);*/ }
+                    else { CurrentUserControl.XPosition -= movementSpeed; }
                     break;
 
                 case Movement.Right:
-                    if (CollisionRight(currentPositionX + CurrentUserControl.ActualWidth/* + contentControl.Width*/)) // If no collision is detected with the border of the GameView
+                    if (CollisionRight(currentPositionX + CurrentUserControl.ActualWidth)) // If no collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;//Canvas.SetLeft(contentControl, GameViewWidth - contentControl.Width);
+                        CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition += movementSpeed;/*Canvas.SetLeft(contentControl, currentPositionX + movementSpeed);*/ }
+                    else { CurrentUserControl.XPosition += movementSpeed; }
                     break;
 
 
