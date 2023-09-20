@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PacMan.Views"
+             xmlns:local="clr-namespace:PacMan.Views.Entities"
              xmlns:vm ="clr-namespace:PacMan.ViewModels"
              xmlns:components="clr-namespace:PacMan.Views.Components"
              xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.Views.GameView"
              d:DataContext="{d:DesignInstance {x:Type vm:GameViewModel}}"
              mc:Ignorable="d" Height="700" Width="848">
+    
 
     <Border
         Background="Black"
@@ -22,67 +23,119 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Background="Black" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Rectangle x:Name="Life4" Width="36" Height="30" Margin="5" Visibility="Visible">
+                <Rectangle x:Name="Life4" Width="32" Height="30" Margin="2" Visibility="Visible">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform" />
                     </Rectangle.Fill>
                 </Rectangle>
-                <Rectangle x:Name="Life3" Width="30" Height="30" Margin="5" Visibility="Visible">
+                <Rectangle x:Name="Life3" Width="30" Height="30" Visibility="Visible">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Rectangle x:Name="Life2" Width="30" Height="30" Margin="5" Visibility="Visible">
+                <Rectangle x:Name="Life2" Width="30" Height="30" Margin="2" Visibility="Visible">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Views/Heart.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Rectangle x:Name="Life1" Width="30" Height="30" Margin="5" Visibility="Visible">
+                <Rectangle x:Name="Life1" Width="30" Height="30" Margin="2" Visibility="Visible">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Views/Heart.png"/>
                     </Rectangle.Fill>
                 </Rectangle>
             </StackPanel>
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
-        BorderThickness="3"
-        CornerRadius="5">
-                <Canvas  x:Name="GameCanvas" ClipToBounds="True" Focusable="True" KeyDown="GameCanvas_KeyDown" Grid.Row="1" HorizontalAlignment="Center" Width="850">
-                <!--<ItemsControl Width="auto" Height="auto" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" RenderTransformOrigin="0.491,0.491" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid  MinHeight="500" MinWidth="500"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>-->
+            BorderThickness="3"
+            CornerRadius="5">
 
-                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
-                <!--Margin="100,72,100,452"-->
+                <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
+                <Canvas.InputBindings>
+                    <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
+                    <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
+                    <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
+                    <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
+                </Canvas.InputBindings>
+                
+                <!--<Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
-                <!--Margin="188,142,188,382"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  />
-                <!--Margin="598,309,56,215"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="467"  />
-                <!--Margin="72,309,582,215"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="467"  />
-                <!--Margin="147,425,507,99"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="596" Canvas.Top="339"  />
-                <!--Margin="488,425,166,99"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="142" Canvas.Top="155"  />
-                <!--Margin="72,142,686,215"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="187" Width="20" Canvas.Left="700" Canvas.Top="155"  />
-                <!--Margin="702,142,56,215"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="613" Canvas.Top="178"  />
-                <!--Margin="592,425,166,10"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  />
-                <!-- RenderTransformOrigin="-1.85,0.546" Margin="147,425,611,10"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  />
-                <!--Margin="189,142,569,320"-->
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  />
-                <!--Margin="572,142,186,320"-->
-                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />
-                <!--Margin="338,452,364,10"-->
+                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />-->
+                    <ItemsControl ItemsSource="{Binding Obstacles}" Grid.Row="1">
+                        <!-- Define the data template to display each obstacle -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas Grid.Row="1">
+                                    <Rectangle Width="{Binding Width}" Height="{Binding Height}" Stroke="GreenYellow" StrokeThickness="3" Canvas.Top="{Binding YPosition}" Canvas.Left="{Binding XPosition}"/>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-                <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="260" Canvas.Top="20"/>
+                    <!--#region Coins-->
+                    <local:GoldCoin x:Name="coin1" Width="10" Height="10" Canvas.Left="10" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin2" Width="10" Height="10" Canvas.Left="100" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin3" Width="10" Height="10" Canvas.Left="210" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin4" Width="10" Height="10" Canvas.Left="320" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin5" Width="10" Height="10" Canvas.Left="430" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin6" Width="10" Height="10" Canvas.Left="540" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin7" Width="10" Height="10" Canvas.Left="650" Canvas.Top="25" />
+                    <local:GoldCoin x:Name="coin8" Width="10" Height="10" Canvas.Left="760" Canvas.Top="25" />
+
+                    <local:GoldCoin x:Name="coin9"  Width="10" Height="10" Canvas.Left="10" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin10" Width="10" Height="10" Canvas.Left="100" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin11" Width="10" Height="10" Canvas.Left="210" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin12" Width="10" Height="10" Canvas.Left="320" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin13" Width="10" Height="10" Canvas.Left="430" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin14" Width="10" Height="10" Canvas.Left="540" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin15" Width="10" Height="10" Canvas.Left="650" Canvas.Top="125" />
+                    <local:GoldCoin x:Name="coin16" Width="10" Height="10" Canvas.Left="760" Canvas.Top="125" />
+
+                    <local:GoldCoin x:Name="coin17" Width="10" Height="10" Canvas.Left="10" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin18" Width="10" Height="10" Canvas.Left="100" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin19" Width="10" Height="10" Canvas.Left="210" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin20" Width="10" Height="10" Canvas.Left="320" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin21" Width="10" Height="10" Canvas.Left="430" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin22" Width="10" Height="10" Canvas.Left="540" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin23" Width="10" Height="10" Canvas.Left="650" Canvas.Top="225" />
+                    <local:GoldCoin x:Name="coin24" Width="10" Height="10" Canvas.Left="760" Canvas.Top="225" />
+
+                    <local:GoldCoin x:Name="coin25" Width="10" Height="10" Canvas.Left="10" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin26" Width="10" Height="10" Canvas.Left="100" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin27" Width="10" Height="10" Canvas.Left="210" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin28" Width="10" Height="10" Canvas.Left="320" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin29" Width="10" Height="10" Canvas.Left="430" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin30" Width="10" Height="10" Canvas.Left="540" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin31" Width="10" Height="10" Canvas.Left="650" Canvas.Top="325" />
+                    <local:GoldCoin x:Name="coin32" Width="10" Height="10" Canvas.Left="760" Canvas.Top="325" />
+
+                    <local:GoldCoin x:Name="coin33" Width="10" Height="10" Canvas.Left="10" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin34" Width="10" Height="10" Canvas.Left="100" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin35" Width="10" Height="10" Canvas.Left="210" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin36" Width="10" Height="10" Canvas.Left="320" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin37" Width="10" Height="10" Canvas.Left="430" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin38" Width="10" Height="10" Canvas.Left="540" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin39" Width="10" Height="10" Canvas.Left="650" Canvas.Top="425" />
+                    <local:GoldCoin x:Name="coin40" Width="10" Height="10" Canvas.Left="760" Canvas.Top="425" />
+
+                    <local:GoldCoin x:Name="coin41" Width="10" Height="10" Canvas.Left="10" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin42" Width="10" Height="10" Canvas.Left="100" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin43" Width="10" Height="10" Canvas.Left="210" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin44" Width="10" Height="10" Canvas.Left="320" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin45" Width="10" Height="10" Canvas.Left="540" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin46" Width="10" Height="10" Canvas.Left="650" Canvas.Top="525" />
+                    <local:GoldCoin x:Name="coin47" Width="10" Height="10" Canvas.Left="760" Canvas.Top="525" />
+                    <!--#endregion-->
+
+                    <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
                 <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
 
 

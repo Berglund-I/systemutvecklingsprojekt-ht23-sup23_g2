@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,10 +22,13 @@ namespace PacMan.Views.Components
     /// </summary>
     public partial class MainCharacter : UserControl
     {
+        public double YPosition = 260;
+        public double XPosition = 300;
+        public int Size;
         public MainCharacter()
         {
             InitializeComponent();
-            DataContext = new MainCharacterViewModel();
+            Size = 40;
         }
     }
 }

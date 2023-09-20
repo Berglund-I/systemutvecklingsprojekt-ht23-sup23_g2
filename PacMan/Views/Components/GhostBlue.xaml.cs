@@ -19,12 +19,14 @@ namespace PacMan.Views.Components
     /// <summary>
     /// Interaction logic for GhostBlue.xaml
     /// </summary>
-    public partial class GhostBlue : UserControl
+    public partial class GhostBlue : BaseUserControl
     {
+
         public GhostBlue()
         {
             InitializeComponent();
-            
+            XPosition = 100;
+            YPosition = 250;
         }
     }
 }

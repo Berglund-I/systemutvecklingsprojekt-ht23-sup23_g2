@@ -11,7 +11,7 @@ namespace PacMan.ViewModels
     class GoldCoinViewModel : BaseViewModel
     {
 
-        public int CoinSize { get; set; } = 20;
+        public int CoinSize { get; set; } = 10;
         public GoldCoinViewModel() 
         {
             

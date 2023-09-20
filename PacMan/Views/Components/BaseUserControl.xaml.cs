@@ -1,5 +1,4 @@
-﻿using PacMan.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,24 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PacMan.Views.Entities
+namespace PacMan.Views.Components
 {
     /// <summary>
-    /// Interaction logic for Coins.xaml
+    /// Interaction logic for BaseUserControl.xaml
     /// </summary>
-    public partial class GoldCoin : Coin
+    public partial class BaseUserControl : UserControl
     {
-        public int Y { get; internal set; }
-        public int X { get; internal set; }
-        /// <summary>
-        /// Score for normal coins
-        /// </summary>
-        public GoldCoin()
+        public double XPosition { get; set; }
+        public double YPosition { get; set; }
+        public BaseUserControl()
         {
-            InitializeComponent();
-            Score = 1;
+           
         }
-
-        
     }
 }
