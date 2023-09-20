@@ -51,6 +51,7 @@ namespace PacMan.ViewModels
 
         public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
 
+
         public GameViewModel()
         {
             BlueGhostVM = new BlueGhostViewModel();
@@ -69,10 +70,9 @@ namespace PacMan.ViewModels
             timer.Start();
 
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
-            
         }
 
-       
+
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
