@@ -45,7 +45,7 @@
                 </Rectangle>
             </StackPanel>
 
-            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="GreenYellow" Foreground="Black" Width="50" Height="40" Margin="770,0,0,0"/>
+            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
 
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
             BorderThickness="3"

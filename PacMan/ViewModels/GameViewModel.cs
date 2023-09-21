@@ -32,7 +32,9 @@ namespace PacMan.ViewModels
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
+
         public int PlayerEarnedScore { get; set; } = 3;
+
         public static Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
         public ICommand RightPressedCommand { get; set; }
