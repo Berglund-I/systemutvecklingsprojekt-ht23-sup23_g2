@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PacMan.ViewModels
 {
-    internal abstract class PlayerViewModel : BaseViewModel
+    internal class PlayerViewModel : BaseViewModel
     {
         /// <summary>
         /// Count of the total amount of possible score in the game

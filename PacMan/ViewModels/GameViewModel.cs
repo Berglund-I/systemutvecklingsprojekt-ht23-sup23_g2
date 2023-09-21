@@ -29,8 +29,10 @@ namespace PacMan.ViewModels
         public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
+        public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
+        public int PlayerEarnedScore { get; set; } = 3;
         public static Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
         public ICommand RightPressedCommand { get; set; }
@@ -72,7 +74,10 @@ namespace PacMan.ViewModels
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
 
-
+        private void MainCharacterEarnPoint() 
+        {
+            PlayerEarnedScore = 3;
+        }
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
