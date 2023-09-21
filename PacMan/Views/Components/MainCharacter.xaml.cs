@@ -20,7 +20,7 @@ namespace PacMan.Views.Components
     /// <summary>
     /// Interaction logic for MainCharacter.xaml
     /// </summary>
-    public partial class MainCharacter : UserControl
+    public partial class MainCharacter : BaseUserControl
     {
         public double YPosition = 260;
         public double XPosition = 300;

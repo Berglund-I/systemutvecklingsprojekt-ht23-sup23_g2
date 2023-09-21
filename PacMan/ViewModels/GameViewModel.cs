@@ -96,23 +96,10 @@ namespace PacMan.ViewModels
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
-            switch (MovementDirection)
-            {
-                case Movement.Up:
-                    MainCharacter.YPosition -= movementSpeed;
-                    break;
-                case Movement.Down:
-                    MainCharacter.YPosition += movementSpeed;
-                    break;
-                case Movement.Left:
-                    MainCharacter.XPosition -= movementSpeed;
-                    break;
-                case Movement.Right:
-                    MainCharacter.XPosition += movementSpeed;
-                    break;
-                default:
-                    break;
-            }
+            CurrentUserControl = MainCharacter;
+            MainCharacterX = MainCharacter.XPosition;
+            MainCharacterY = MainCharacter.YPosition;
+            MoveContentControl(MovementDirection);
         }
 
         private void DownPressed()
