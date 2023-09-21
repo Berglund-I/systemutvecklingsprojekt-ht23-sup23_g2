@@ -77,7 +77,7 @@ namespace PacMan.ViewModels
         }
 
        private void CreateObstaclesList()
-        {
+       {
             Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 339 });
@@ -91,7 +91,7 @@ namespace PacMan.ViewModels
             Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 142, YPosition = 485 });
             Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 700, YPosition = 485 });
             Obstacles.Add(new Obstacles { Height = 82, Width = 76, XPosition = 395, YPosition = 487 });
-        }
+       }
 
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
@@ -241,7 +241,6 @@ namespace PacMan.ViewModels
                         case Movement.Down:
                             CurrentUserControl.YPosition = obstacle.YPosition + CurrentUserControl.ActualHeight;
                             break;
-
                     }
                     return true; // Collision detected
                 }
