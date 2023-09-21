@@ -22,8 +22,6 @@ namespace PacMan.Views.Components
     /// </summary>
     public partial class MainCharacter : BaseUserControl
     {
-        public double YPosition = 260;
-        public double XPosition = 300;
         public int Size;
         public MainCharacter()
         {
