@@ -137,11 +137,11 @@
                     <!--#endregion-->
 
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
-                <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="260" Canvas.Top="300"/>
+                    <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
 
 
 
-            </Canvas>
+                </Canvas>
             </Border>
         </Grid>
     </Border>
