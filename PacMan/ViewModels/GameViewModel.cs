@@ -128,6 +128,11 @@ namespace PacMan.ViewModels
         {
             MovementDirection = Movement.Right;
         }
+        private void LeftPressed()
+        {
+            MovementDirection = Movement.Left;
+
+        }
 
         public Movement GetBlueGhostMovementDirection()
         {
@@ -286,10 +291,5 @@ namespace PacMan.ViewModels
         }
         #endregion
 
-        private void LeftPressed()
-        {
-            MovementDirection = Movement.Left;
-
-        }
     }
 }
