@@ -130,7 +130,7 @@ namespace PacMan.ViewModels
         {
             BlueGhostX = GhostBlueView.XPosition;
             BlueGhostY = GhostBlueView.YPosition;
-            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacter.XPosition, MainCharacter.XPosition), blueGhostCollision);
+            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), blueGhostCollision);
             BlueGhostVM.Ai(AiPackage);
             
 
@@ -143,10 +143,7 @@ namespace PacMan.ViewModels
             //Point ContentControlPosition = contentControl.TransformToAncestor(this).Transform(new Point(0, 0));
             double currentPositionX = CurrentUserControl.XPosition;
             double currentPositionY = CurrentUserControl.YPosition;
-            if (CurrentUserControl == GhostBlueView)
-            {
-                blueGhostCollision = true;
-            }
+            if (CurrentUserControl == GhostBlueView){ blueGhostCollision = true; }
             //GameViewModel currentGhost = (GhostViewModel)contentControl.Content;
             switch (movementDirection)
             {
@@ -156,7 +153,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.YPosition = 0;
                     }
                     else if (WallCollision(  movementDirection)) { }
-                    else { CurrentUserControl.YPosition -= movementSpeed; }
+                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
                 case Movement.Down:
                     if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight )) // If collision is detected with the border of the GameView
@@ -164,7 +161,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.YPosition += movementSpeed; }
+                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX)) // If collision is detected with the border of the GameView
@@ -173,7 +170,7 @@ namespace PacMan.ViewModels
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition -= movementSpeed; }
+                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
 
                 case Movement.Right:
@@ -183,7 +180,7 @@ namespace PacMan.ViewModels
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition += movementSpeed; }
+                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
 
 
@@ -232,7 +229,7 @@ namespace PacMan.ViewModels
                             CurrentUserControl.YPosition = obstacle.YPosition + obstacle.Height; 
                             break;
                         case Movement.Down:
-                            CurrentUserControl.YPosition = obstacle.YPosition + CurrentUserControl.ActualHeight;
+                            CurrentUserControl.YPosition = obstacle.YPosition - CurrentUserControl.ActualHeight;
                             break;
                     }
                     return true; // Collision detected
