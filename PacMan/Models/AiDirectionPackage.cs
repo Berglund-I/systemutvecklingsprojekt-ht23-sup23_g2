@@ -9,7 +9,6 @@ namespace PacMan.Models
 {
     internal class AiDirectionPackage
     {
-        //public Point GhostLastPosition { get; set; }
         public Point GhostCurrentPosition { get; set; }
         public Point McCurrentPosition { get; set; }
         public bool GhostCollision { get; set; }
