@@ -23,6 +23,7 @@ namespace PacMan.Views.Entities
     {
         public int Y { get; internal set; }
         public int X { get; internal set; }
+        
         /// <summary>
         /// Score for normal coins
         /// </summary>

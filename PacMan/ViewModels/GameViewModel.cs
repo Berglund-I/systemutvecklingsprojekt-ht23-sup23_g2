@@ -54,6 +54,9 @@ namespace PacMan.ViewModels
 
         public GameViewModel()
         {
+            
+            AddCoinsFromXaml();
+
             BlueGhostVM = new BlueGhostViewModel();
             GhostSize = Ghosts.GhostSize;
 
@@ -93,7 +96,10 @@ namespace PacMan.ViewModels
                 default:
                     break;
             }
+
+
         }
+
 
         private void DownPressed()
         {
