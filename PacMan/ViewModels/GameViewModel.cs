@@ -36,7 +36,8 @@ namespace PacMan.ViewModels
         public ICommand RightPressedCommand { get; set; }
         public ICommand UpPressedCommand { get; set; }
         public ICommand DownPressedCommand { get; set; }
-
+        public double MainCharacterX { get; set; }
+        public double MainCharacterY { get; set; }
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
         
