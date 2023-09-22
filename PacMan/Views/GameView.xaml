@@ -23,26 +23,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Background="Black" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Rectangle x:Name="Life4" Width="32" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life3" Width="30" Height="30" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life2" Width="30" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life1" Width="30" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png"/>
-                    </Rectangle.Fill>
-                </Rectangle>
+                <components:MainCharacter/>
             </StackPanel>
 
             <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
