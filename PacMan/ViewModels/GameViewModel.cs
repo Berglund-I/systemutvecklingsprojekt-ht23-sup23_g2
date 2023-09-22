@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using System.Threading;
 //using System.Drawing;
 using PacMan.Views.Entities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PacMan.ViewModels
 {
@@ -49,6 +50,7 @@ namespace PacMan.ViewModels
         public BaseUserControl CurrentUserControl { get; set; }
 
         public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
+        public ObservableCollection<GoldCoinViewModel> GoldCoins { get; } = new ObservableCollection<GoldCoinViewModel>();
 
 
         public bool blueGhostCollision = false;
@@ -56,13 +58,17 @@ namespace PacMan.ViewModels
         private readonly DispatcherTimer timer = new DispatcherTimer();
         int timerSpeed = 100;
 
-        public ObservableCollection<GoldCoin> GoldCoins { get; set; } = new ObservableCollection<GoldCoin>(); //ida
-        
+
+        //private ObservableCollection<GoldCoin> _goldcoins = new ObservableCollection<GoldCoin>();
+        //public ObservableCollection<GoldCoin> Goldcoins
+        //{
+        //    get { return _goldcoins; }
+        //    set { _goldcoins = value; }
+        //}
+
 
         public GameViewModel()
         {
-            
-            AddCoinsFromXaml();
 
             BlueGhostVM = new BlueGhostViewModel();
             GhostSize = Ghosts.GhostSize;
@@ -75,6 +81,7 @@ namespace PacMan.ViewModels
             MovementDirection = Movement.Down;
 
             CreateObstaclesList();
+            CreateCoinsList();
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
@@ -101,12 +108,68 @@ namespace PacMan.ViewModels
             Obstacles.Add(new Obstacles { Height = 82, Width = 76, XPosition = 395, YPosition = 487 });
        }
 
+        private void CreateCoinsList()
+        {
+ 
+            int ypos = 25;
+            for (int i = 0; i < 7; i++)
+            {
+                int xpos = 10;
+                
+                GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
+                xpos = 100;
+
+                for (int k = 0; k < 10; k++)
+                {
+                    if(!(xpos == 430 && ypos == 525))
+                    {
+                        GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
+
+                    }
+                    xpos += 110;
+
+                }
+
+                ypos += 100;
+
+
+            }
+        }
+
         private void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
             CurrentUserControl = MainCharacter;
             MainCharacterX = MainCharacter.XPosition;
             MainCharacterY = MainCharacter.YPosition;
             MoveContentControl(MovementDirection);
+
+            foreach(var goldcoin in GoldCoins)
+            {
+                if(IsCollision(MainCharacter, goldcoin))
+                {
+                    goldcoin.GoldCoinVisibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private bool IsCollision(MainCharacter mainCharacter, GoldCoinViewModel goldCoin)
+        {
+            
+            double mainCharacterLeft = mainCharacter.XPosition;
+            double mainCharacterTop = mainCharacter.YPosition;
+            double mainCharacterRight = mainCharacterLeft + mainCharacter.ActualWidth;
+            double mainCharacterBottom = mainCharacterTop + mainCharacter.ActualHeight;
+
+            double goldCoinLeft = goldCoin.XPosition;
+            double goldCoinTop = goldCoin.YPosition;
+            double goldCoinRight = goldCoinLeft + goldCoin.Width;
+            double goldCoinBottom = goldCoinTop + goldCoin.Height;
+
+            // Look if there is a collision between mainCharacter and goldCoin.
+            bool collisionDetected = !(mainCharacterRight < goldCoinLeft || mainCharacterLeft > goldCoinRight ||
+                                       mainCharacterBottom < goldCoinTop || mainCharacterTop > goldCoinBottom);
+
+            return collisionDetected;
         }
 
 
