@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using System.Threading;
 //using System.Drawing;
 using PacMan.Views.Entities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PacMan.ViewModels
 {
@@ -136,7 +137,7 @@ namespace PacMan.ViewModels
             BlueGhostY = GhostBlueView.YPosition;
             AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), blueGhostCollision);
             BlueGhostVM.Ai(AiPackage);
-            
+            testCollision();
 
             CurrentUserControl = GhostBlueView;
             MoveContentControl(BlueGhostVM.MovementDirection);
@@ -191,7 +192,16 @@ namespace PacMan.ViewModels
             }
         }
 
-
+        private void testCollision()
+        {
+            if (BlueGhostX < MainCharacterX + MainCharacter.ActualWidth &&
+                    BlueGhostX + GhostBlueView.ActualWidth > MainCharacterX &&
+                    BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
+                    BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
+            {
+                // Put the function for pacman losing life here
+            }
+        }
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
