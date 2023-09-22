@@ -195,7 +195,7 @@ namespace PacMan.ViewModels
                     BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
                     BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
             {
-                MessageBox.Show("funkar");
+                // Put the function for pacman losing life here
             }
         }
         #region collision controls
