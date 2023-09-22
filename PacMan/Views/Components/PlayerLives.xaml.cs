@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacMan.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,24 @@ namespace PacMan.Views.Components
     /// </summary>
     public partial class PlayerLives : UserControl
     {
+            int numberOfLives;
         public PlayerLives()
         {
             InitializeComponent();
+
+            var myPanel = new StackPanel();
+            myPanel.Margin = new Thickness(10);
+
+            var myRectangle = new Rectangle();
+            myRectangle.Name = "myRectangle";
+            this.RegisterName(myRectangle.Name, myRectangle);
+            myRectangle.Width = 100;
+            myRectangle.Height = 100;
+            myRectangle.Fill = Brushes.Blue;
+            myPanel.Children.Add(myRectangle);
+            this.Content = myPanel;
+            
         }
+
     }
 }
