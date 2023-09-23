@@ -1,4 +1,6 @@
 ﻿using PacMan.ViewModels;
+using PacMan.Views.Components;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +23,17 @@ namespace PacMan.Views.Entities
     /// </summary>
     public partial class GoldCoin : Coin
     {
-        public int Y { get; internal set; }
-        public int X { get; internal set; }
+        //public int Width { get; set; }
+        //public int Height { get; set; }
+        public int YPosition { get; set; }
+        public int XPosition { get; set; }
+
+
+
         /// <summary>
         /// Score for normal coins
         /// </summary>
+        
         public GoldCoin()
         {
             InitializeComponent();
