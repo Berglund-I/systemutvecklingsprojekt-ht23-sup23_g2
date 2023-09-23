@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:PacMan.Views.Entities"
              xmlns:vm ="clr-namespace:PacMan.ViewModels"
              xmlns:components="clr-namespace:PacMan.Views.Components"
+             xmlns:views="clr-namespace:PacMan.Views"
              xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.Views.GameView"
              d:DataContext="{d:DesignInstance {x:Type vm:GameViewModel}}"
              mc:Ignorable="d" Height="700" Width="848">
-    
+
 
     <Border
         Background="Black"
@@ -22,9 +23,20 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Background="Black" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <components:MainCharacter/>
-            </StackPanel>
+            <ItemsControl ItemsSource ="{Binding PlayerLives}" Grid.Row="0" Width="172" HorizontalAlignment="Left" Margin="0,5,0,7" Background="Black" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <components:PlayerLife/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
 
             <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
 
@@ -33,14 +45,14 @@
             CornerRadius="5">
 
                 <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
-                <Canvas.InputBindings>
-                    <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
-                    <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
-                    <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
-                    <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
-                </Canvas.InputBindings>
+                    <Canvas.InputBindings>
+                        <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
+                        <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
+                        <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
+                        <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
+                    </Canvas.InputBindings>
 
-                <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
+                    <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  />
@@ -65,7 +77,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                 <!--#region coins-->
+                    <!--#region coins-->
                     <ItemsControl ItemsSource="{Binding GoldCoins}" Grid.Row="1">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

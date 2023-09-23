@@ -33,8 +33,10 @@ namespace PacMan.ViewModels
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
+        
 
         public int PlayerEarnedScore { get; set; } = 3;
+        public int CurrentPLayerLives { get; set; }
 
         public static Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
@@ -51,6 +53,7 @@ namespace PacMan.ViewModels
 
         public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
         public ObservableCollection<GoldCoinViewModel> GoldCoins { get; } = new ObservableCollection<GoldCoinViewModel>();
+        public ObservableCollection<PlayerLifeModel> PlayerLives { get; } = new ObservableCollection<PlayerLifeModel>();
 
 
         public bool blueGhostCollision = false;
@@ -74,6 +77,7 @@ namespace PacMan.ViewModels
             GhostSize = Ghosts.GhostSize;
 
             McSize = MainCharacter.Size;
+            CurrentPLayerLives = PlayerVM.PlayerLives;
             LeftPressedCommand = new RelayCommand(x => LeftPressed());
             RightPressedCommand = new RelayCommand(x => RightPressed());
             UpPressedCommand = new RelayCommand(x => UpPressed());
@@ -82,16 +86,29 @@ namespace PacMan.ViewModels
 
             CreateObstaclesList();
             CreateCoinsList();
+            CreatePLayerLivesList();
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
             timer.Tick += MainCharacterMovementTimer;
             timer.Start();
+            
 
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
 
-       private void CreateObstaclesList()
+        private void CreatePLayerLivesList()
+        {
+            PlayerLives.Clear();
+            string name;
+            for (int i = 0; i < CurrentPLayerLives; i++)
+            {
+                name = $"Life{i}";
+                PlayerLives.Add(new PlayerLifeModel(name));
+            }
+        }
+
+        private void CreateObstaclesList()
        {
             Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
@@ -266,6 +283,9 @@ namespace PacMan.ViewModels
                     BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
             {
                 // Put the function for pacman losing life here
+                timer.Stop();
+                CurrentPLayerLives --;
+                CreatePLayerLivesList();
             }
         }
         #region collision controls
