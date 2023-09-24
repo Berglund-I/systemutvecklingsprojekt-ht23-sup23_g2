@@ -1,6 +1,4 @@
 ﻿using PacMan.ViewModels;
-using PacMan.Views.Components;
-using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,30 +14,22 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PacMan.Views.Entities
+namespace PacMan.Views.Components
 {
     /// <summary>
-    /// Interaction logic for Coins.xaml
+    /// Interaction logic for PlayerLife.xaml
     /// </summary>
-    public partial class GoldCoin : Coin
+    public partial class PlayerLife : UserControl
     {
-        //public int Width { get; set; }
-        //public int Height { get; set; }
-        public int YPosition { get; set; }
-        public int XPosition { get; set; }
-
-
-
-        /// <summary>
-        /// Score for normal coins
-        /// </summary>
-        
-        public GoldCoin()
+        string lifeName;
+        public PlayerLife()
         {
             InitializeComponent();
-            Score = 1;
+        }
+        public PlayerLife(string name)
+        {
+            lifeName = name;
         }
 
-        
     }
 }

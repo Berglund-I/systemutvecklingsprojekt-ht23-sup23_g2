@@ -20,6 +20,10 @@ namespace PacMan.ViewModels.Ghosts
         {
             
         }
+        /// <summary>
+        /// Logic for the ghost to follow the main character
+        /// </summary>
+        /// <param name="data"></param>
         public void Ai(AiDirectionPackage data)
         {
 

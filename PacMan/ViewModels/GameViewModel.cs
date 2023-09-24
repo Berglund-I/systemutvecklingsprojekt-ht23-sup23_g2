@@ -16,8 +16,9 @@ using PacMan.Models;
 using PacMan.Enums;
 using System.Windows.Threading;
 using System.Threading;
-using System.Drawing;
+//using System.Drawing;
 using PacMan.Views.Entities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PacMan.ViewModels
 {
@@ -29,8 +30,14 @@ namespace PacMan.ViewModels
         public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
+        public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public int GhostSize { get; set; }
         public int McSize { get; set; }
+        
+
+        public int PlayerEarnedScore { get; set; } = 3;
+        public int CurrentPLayerLives { get; set; }
+
         public static Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
         public ICommand RightPressedCommand { get; set; }
@@ -38,46 +45,153 @@ namespace PacMan.ViewModels
         public ICommand DownPressedCommand { get; set; }
         public double MainCharacterX { get; set; }
         public double MainCharacterY { get; set; }
-
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
         
         public ICommand BlueGhostAiCommand { get;}
         public BaseUserControl CurrentUserControl { get; set; }
 
+        public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
+        public ObservableCollection<GoldCoinViewModel> GoldCoins { get; } = new ObservableCollection<GoldCoinViewModel>();
+        public ObservableCollection<PlayerLifeModel> PlayerLives { get; } = new ObservableCollection<PlayerLifeModel>();
+
 
         public bool blueGhostCollision = false;
-        int movementSpeed = 10;
+        int movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        int timerSpeed = 100;
+        int timerSpeed = 10;
+
+
+        //private ObservableCollection<GoldCoin> _goldcoins = new ObservableCollection<GoldCoin>();
+        //public ObservableCollection<GoldCoin> Goldcoins
+        //{
+        //    get { return _goldcoins; }
+        //    set { _goldcoins = value; }
+        //}
+
 
         public GameViewModel()
         {
+
             BlueGhostVM = new BlueGhostViewModel();
             GhostSize = Ghosts.GhostSize;
 
             McSize = MainCharacter.Size;
+            CurrentPLayerLives = PlayerVM.PlayerLives;
             LeftPressedCommand = new RelayCommand(x => LeftPressed());
             RightPressedCommand = new RelayCommand(x => RightPressed());
             UpPressedCommand = new RelayCommand(x => UpPressed());
             DownPressedCommand = new RelayCommand(x => DownPressed());
             MovementDirection = Movement.Down;
 
+            CreateObstaclesList();
+            CreateCoinsList();
+            CreatePLayerLivesList();
+
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
             timer.Tick += MainCharacterMovementTimer;
             timer.Start();
+            
 
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
 
-        private void MainCharacterMovementTimer(object? sender, EventArgs e)
+        private void CreatePLayerLivesList()
+        {
+            PlayerLives.Clear();
+            string name;
+            for (int i = 0; i < CurrentPLayerLives; i++)
+            {
+                name = $"Life{i}";
+                PlayerLives.Add(new PlayerLifeModel(name));
+            }
+        }
+
+        private void CreateObstaclesList()
+       {
+            Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 339 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 467 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 596, YPosition = 467 });
+            Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 596, YPosition = 339 });
+            Obstacles.Add(new Obstacles { Height = 187, Width = 20, XPosition = 142, YPosition = 155 });
+            Obstacles.Add(new Obstacles { Height = 187, Width = 20, XPosition = 700, YPosition = 155 });
+            Obstacles.Add(new Obstacles { Height = 109, Width = 20, XPosition = 613, YPosition = 178 });
+            Obstacles.Add(new Obstacles { Height = 109, Width = 20, XPosition = 231, YPosition = 178 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 142, YPosition = 485 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 20, XPosition = 700, YPosition = 485 });
+            Obstacles.Add(new Obstacles { Height = 82, Width = 76, XPosition = 395, YPosition = 487 });
+       }
+
+        private void CreateCoinsList()
+        {
+ 
+            int ypos = 25;
+            for (int i = 0; i < 7; i++)
+            {
+                int xpos = 10;
+                
+                GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
+                xpos = 100;
+
+                for (int k = 0; k < 10; k++)
+                {
+                    if(!(xpos == 430 && ypos == 525))
+                    {
+                        GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
+
+                    }
+                    xpos += 110;
+
+                }
+
+                ypos += 100;
+
+
+            }
+        }
+
+        public void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
             CurrentUserControl = MainCharacter;
             MainCharacterX = MainCharacter.XPosition;
             MainCharacterY = MainCharacter.YPosition;
             MoveContentControl(MovementDirection);
+
+            foreach(var goldcoin in GoldCoins)
+            {
+                if(IsCollision(MainCharacter, goldcoin))
+                {
+                    goldcoin.GoldCoinVisibility = Visibility.Collapsed;
+                    GoldCoins.Remove(goldcoin);
+                    PlayerEarnedScore++;
+                    break;
+                }
+            }
         }
+
+        private bool IsCollision(MainCharacter mainCharacter, GoldCoinViewModel goldCoin)
+        {
+            
+            double mainCharacterLeft = mainCharacter.XPosition;
+            double mainCharacterTop = mainCharacter.YPosition;
+            double mainCharacterRight = mainCharacterLeft + mainCharacter.ActualWidth;
+            double mainCharacterBottom = mainCharacterTop + mainCharacter.ActualHeight;
+
+            double goldCoinLeft = goldCoin.XPosition;
+            double goldCoinTop = goldCoin.YPosition;
+            double goldCoinRight = goldCoinLeft + goldCoin.Width;
+            double goldCoinBottom = goldCoinTop + goldCoin.Height;
+
+            // Look if there is a collision between mainCharacter and goldCoin.
+            bool collisionDetected = !(mainCharacterRight < goldCoinLeft || mainCharacterLeft > goldCoinRight ||
+                                       mainCharacterBottom < goldCoinTop || mainCharacterTop > goldCoinBottom);
+
+            return collisionDetected;
+        }
+
 
         private void DownPressed()
         {
@@ -93,6 +207,11 @@ namespace PacMan.ViewModels
         {
             MovementDirection = Movement.Right;
         }
+        private void LeftPressed()
+        {
+            MovementDirection = Movement.Left;
+
+        }
 
         public Movement GetBlueGhostMovementDirection()
         {
@@ -100,12 +219,14 @@ namespace PacMan.ViewModels
         }
         private void GhostMovementTimer(object sender, EventArgs e)
         {
-            //Movement aiTest = GhostBlueAi();
             BlueGhostX = GhostBlueView.XPosition;
             BlueGhostY = GhostBlueView.YPosition;
+            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), blueGhostCollision);
+            BlueGhostVM.Ai(AiPackage);
+            GhostAndMcCollision();
 
             CurrentUserControl = GhostBlueView;
-            MoveContentControl(Movement.Right);
+            MoveContentControl(BlueGhostVM.MovementDirection);
         }
 
         private void MoveContentControl(Movement movementDirection)
@@ -113,126 +234,111 @@ namespace PacMan.ViewModels
             //Point ContentControlPosition = contentControl.TransformToAncestor(this).Transform(new Point(0, 0));
             double currentPositionX = CurrentUserControl.XPosition;
             double currentPositionY = CurrentUserControl.YPosition;
-            if (CurrentUserControl == GhostBlueView)
-            {
-                blueGhostCollision = true;
-            }
+            if (CurrentUserControl == GhostBlueView){ blueGhostCollision = true; }
             //GameViewModel currentGhost = (GhostViewModel)contentControl.Content;
             switch (movementDirection)
             {
                 case Movement.Up:
                     if (BorderColisionUp(currentPositionY)) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.YPosition = 0;//Canvas.SetTop(contentControl, 0);
+                        CurrentUserControl.YPosition = 0;
                     }
                     else if (WallCollision(  movementDirection)) { }
-                    else { CurrentUserControl.YPosition -= movementSpeed;/*Canvas.SetTop(contentControl, currentPositionY - movementSpeed);*/ }
+                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
                 case Movement.Down:
-                    if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight /*+ contentControl.Height*/)) // If collision is detected with the border of the GameView
+                    if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight )) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;//Canvas.SetTop(contentControl, GameViewHeight - contentControl.Height);
+                        CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.YPosition += movementSpeed;/*Canvas.SetTop(contentControl, currentPositionY + movementSpeed);*/ }
+                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX)) // If collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.XPosition = 0;//Canvas.SetLeft(contentControl, 0);
+                        CurrentUserControl.XPosition = 0;
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition -= movementSpeed;/*Canvas.SetLeft(contentControl, currentPositionX - movementSpeed);*/ }
+                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
 
                 case Movement.Right:
-                    if (CollisionRight(currentPositionX + CurrentUserControl.ActualWidth/* + contentControl.Width*/)) // If no collision is detected with the border of the GameView
+                    if (CollisionRight(currentPositionX + CurrentUserControl.ActualWidth)) // If no collision is detected with the border of the GameView
                     {
-                        CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;//Canvas.SetLeft(contentControl, GameViewWidth - contentControl.Width);
+                        CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition += movementSpeed;/*Canvas.SetLeft(contentControl, currentPositionX + movementSpeed);*/ }
+                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
                     break;
 
 
             }
         }
 
-
+        private void GhostAndMcCollision()
+        {
+            if (BlueGhostX < MainCharacterX + MainCharacter.ActualWidth &&
+                    BlueGhostX + GhostBlueView.ActualWidth > MainCharacterX &&
+                    BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
+                    BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
+            {
+                // Put the function for pacman losing life here
+                // Not complete yet.
+                //timer.Stop(); // Stops the game time.
+                CurrentPLayerLives --;
+                CreatePLayerLivesList();
+            }
+        }
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
-            //switch (movementDirection)
-            //{
-            //    case Movement.Up:
-            //        Rect contentControlRectUp = new Rect(Canvas.GetLeft(contentControl), Canvas.GetTop(contentControl) - movementSpeed, contentControl.Width, contentControl.Height); // A rectangle with positions of the predicted move from the contentControll
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+            double nextX = CurrentUserControl.XPosition;
+            double nextY = CurrentUserControl.YPosition;
+            switch (movementDirection)  // Predicts the next step of the selected UserControl
+            {
+                case Movement.Left:
+                    nextX = CurrentUserControl.XPosition - movementSpeed;
+                    break;
+                case Movement.Right:
+                    nextX = CurrentUserControl.XPosition + movementSpeed;
+                    break;
+                case Movement.Up:
+                    nextY = CurrentUserControl.YPosition - movementSpeed;
+                    break;
+                case Movement.Down:
+                    nextY = CurrentUserControl.YPosition + movementSpeed;
+                    break;
+            }
+            
+            foreach (var obstacle in Obstacles) //Checks if the UserControl colides with any of the obstacles and moves it accordingly 
+            {
 
-            //                if (contentControlRectUp.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetTop(contentControl, Canvas.GetTop(x) + x.Height + 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-            //    case Movement.Down:
-            //        Rect contentControlRectDown = new Rect(Canvas.GetLeft(contentControl), Canvas.GetTop(contentControl) + movementSpeed, contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectDown.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetTop(contentControl, Canvas.GetTop(x) - contentControl.Height - 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-            //    case Movement.Left:
-            //        Rect contentControlRectLeft = new Rect(Canvas.GetLeft(contentControl) - movementSpeed, Canvas.GetTop(contentControl), contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectLeft.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetLeft(contentControl, Canvas.GetLeft(x) + x.Width + 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-
-            //    case Movement.Right:
-            //        Rect contentControlRectRight = new Rect(Canvas.GetLeft(contentControl) + movementSpeed, Canvas.GetTop(contentControl), contentControl.Width, contentControl.Height);
-            //        foreach (var x in GameCanvas.Children.OfType<Rectangle>())
-            //        {
-            //            if ((string)x.Tag == "wall")
-            //            {
-            //                Rect wallRect = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-
-            //                if (contentControlRectRight.IntersectsWith(wallRect))
-            //                {
-            //                    Canvas.SetLeft(contentControl, Canvas.GetLeft(x) - contentControl.Width - 1);
-            //                    return true;
-            //                }
-            //            }
-            //        }
-            //        break;
-
-            //}
+                if (nextX < obstacle.XPosition + obstacle.Width &&
+                    nextX + CurrentUserControl.ActualWidth > obstacle.XPosition &&
+                    nextY < obstacle.YPosition + obstacle.Height &&
+                    nextY + CurrentUserControl.ActualHeight > obstacle.YPosition)
+                {
+                    switch (movementDirection)
+                    {
+                        case Movement.Left:
+                            CurrentUserControl.XPosition = obstacle.XPosition + obstacle.Width;
+                            break;
+                        case Movement.Right:
+                            CurrentUserControl.XPosition = obstacle.XPosition - CurrentUserControl.ActualWidth; 
+                            break;
+                        case Movement.Up:
+                            CurrentUserControl.YPosition = obstacle.YPosition + obstacle.Height; 
+                            break;
+                        case Movement.Down:
+                            CurrentUserControl.YPosition = obstacle.YPosition - CurrentUserControl.ActualHeight;
+                            break;
+                    }
+                    return true; // Collision detected
+                }
+            }
             return false;
         }
 
@@ -274,10 +380,5 @@ namespace PacMan.ViewModels
         }
         #endregion
 
-        private void LeftPressed()
-        {
-            MovementDirection = Movement.Left;
-
-        }
     }
 }

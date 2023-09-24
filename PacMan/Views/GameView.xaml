@@ -6,10 +6,11 @@
              xmlns:local="clr-namespace:PacMan.Views.Entities"
              xmlns:vm ="clr-namespace:PacMan.ViewModels"
              xmlns:components="clr-namespace:PacMan.Views.Components"
+             xmlns:views="clr-namespace:PacMan.Views"
              xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.Views.GameView"
              d:DataContext="{d:DesignInstance {x:Type vm:GameViewModel}}"
              mc:Ignorable="d" Height="700" Width="848">
-    
+
 
     <Border
         Background="Black"
@@ -22,40 +23,36 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Background="Black" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Rectangle x:Name="Life4" Width="32" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life3" Width="30" Height="30" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png" Stretch="Uniform"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life2" Width="30" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Rectangle x:Name="Life1" Width="30" Height="30" Margin="2" Visibility="Visible">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Views/Heart.png"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-            </StackPanel>
+            <ItemsControl ItemsSource ="{Binding PlayerLives}" Grid.Row="0" Width="172" HorizontalAlignment="Left" Margin="0,5,0,7" Background="Black" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <components:PlayerLife/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+
+
+            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
+
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
             BorderThickness="3"
             CornerRadius="5">
 
                 <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
-                <Canvas.InputBindings>
-                    <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
-                    <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
-                    <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
-                    <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
-                </Canvas.InputBindings>
-                
+                    <Canvas.InputBindings>
+                        <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
+                        <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
+                        <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
+                        <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
+                    </Canvas.InputBindings>
+
+                    <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="124" Canvas.Left="142" Canvas.Top="339"  />
@@ -68,14 +65,39 @@
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="109" Width="20" Canvas.Left="231" Canvas.Top="178"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="142" Canvas.Top="485"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="20" Canvas.Left="700" Canvas.Top="485"  />
-                <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />
+                    <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="82" Width="76" Canvas.Left="395" Canvas.Top="487"  />-->
+                    <ItemsControl ItemsSource="{Binding Obstacles}" Grid.Row="1">
+                        <!-- Define the data template to display each obstacle -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas Grid.Row="1">
+                                    <Rectangle Width="{Binding Width}" Height="{Binding Height}" Stroke="GreenYellow" StrokeThickness="3" Canvas.Top="{Binding YPosition}" Canvas.Left="{Binding XPosition}"/>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
 
-                <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
-                <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
+                    <!--#region coins-->
+                    <ItemsControl ItemsSource="{Binding GoldCoins}" Grid.Row="1">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Canvas Grid.Row="1">
+                                    <Ellipse Width="10" Height="10" Stroke="Gold" StrokeThickness="5" Canvas.Top="{Binding YPosition}" Canvas.Left="{Binding XPosition}" Visibility="{Binding GoldCoinVisibility}"/>
+                                </Canvas>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!--#endregion-->
 
 
 
-            </Canvas>
+                    <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
+                    <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
+
+
+
+                </Canvas>
             </Border>
         </Grid>
     </Border>

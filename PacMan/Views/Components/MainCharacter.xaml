@@ -9,8 +9,11 @@
              x:Name="PlayableCharacter"
              d:DesignHeight="50" d:DesignWidth="50">
     <Grid>
-        <Ellipse Fill="Yellow" Height="30" Width="30"/>
-        <Ellipse HorizontalAlignment="Left" Height="10" Width="10" Margin="27,15,0,0" Fill="Black" Stroke="Black" VerticalAlignment="Top" RenderTransformOrigin="0.066,0.612"/>
+        <Ellipse Height="30" Width="30">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="/Views/PacManFirst.png"/>
+            </Ellipse.Fill>
+        </Ellipse>
     </Grid>
 
 </local:BaseUserControl>
