@@ -46,10 +46,10 @@
 
                 <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                     <Canvas.InputBindings>
-                        <KeyBinding Key="Left" Command="{Binding LeftPressedCommand}"/>
-                        <KeyBinding Key="Right" Command="{Binding RightPressedCommand}"/>
-                        <KeyBinding Key="Up" Command="{Binding UpPressedCommand}"/>
-                        <KeyBinding Key="Down" Command="{Binding DownPressedCommand}"/>
+                        <KeyBinding Key="Left" Command="{Binding MainCharacter.LeftPressedCommand}"/>
+                        <KeyBinding Key="Right" Command="{Binding MainCharacter.RightPressedCommand}"/>
+                        <KeyBinding Key="Up" Command="{Binding MainCharacter.UpPressedCommand}"/>
+                        <KeyBinding Key="Down" Command="{Binding MainCharacter.DownPressedCommand}"/>
                     </Canvas.InputBindings>
 
                     <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />

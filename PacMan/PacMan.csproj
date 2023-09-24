@@ -23,8 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\Heart.png" />
     <None Remove="Views\PacManFirst.png" />
+    <None Remove="Views\PacManFirstDown.png" />
+    <None Remove="Views\PacManFirstLeft.png" />
+    <None Remove="Views\PacManFirstUp.png" />
+    <None Remove="Views\PacManSecond.png" />
+    <None Remove="Views\PacManSecondDown.png" />
+    <None Remove="Views\PacManSecondLeft.png" />
+    <None Remove="Views\PacManSecondUp.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,9 +42,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Heart.png" />
     <Resource Include="Views\PacManFirst.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManFirstDown.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManFirstLeft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManFirstUp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManSecond.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManSecondDown.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManSecondLeft.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\PacManSecondUp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

@@ -19,6 +19,8 @@ using System.Threading;
 //using System.Drawing;
 using PacMan.Views.Entities;
 using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PacMan.ViewModels
 {
@@ -32,17 +34,15 @@ namespace PacMan.ViewModels
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public int GhostSize { get; set; }
+
         public int McSize { get; set; }
-        
+        private bool isImage1 = true;
 
         public int PlayerEarnedScore { get; set; } = 3;
         public int CurrentPLayerLives { get; set; }
 
         public static Movement MovementDirection { get; set; }
-        public ICommand LeftPressedCommand { get; set; }
-        public ICommand RightPressedCommand { get; set; }
-        public ICommand UpPressedCommand { get; set; }
-        public ICommand DownPressedCommand { get; set; }
+        
         public double MainCharacterX { get; set; }
         public double MainCharacterY { get; set; }
         public double BlueGhostX { get; set; } = -100;
@@ -60,6 +60,7 @@ namespace PacMan.ViewModels
         int movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
         int timerSpeed = 10;
+        int timerImageInterval = 0; // Counter that set how often a part of code in MCmovement method is run. 
 
 
         //private ObservableCollection<GoldCoin> _goldcoins = new ObservableCollection<GoldCoin>();
@@ -78,10 +79,7 @@ namespace PacMan.ViewModels
 
             McSize = MainCharacter.Size;
             CurrentPLayerLives = PlayerVM.PlayerLives;
-            LeftPressedCommand = new RelayCommand(x => LeftPressed());
-            RightPressedCommand = new RelayCommand(x => RightPressed());
-            UpPressedCommand = new RelayCommand(x => UpPressed());
-            DownPressedCommand = new RelayCommand(x => DownPressed());
+            
             MovementDirection = Movement.Down;
 
             CreateObstaclesList();
@@ -158,6 +156,21 @@ namespace PacMan.ViewModels
             CurrentUserControl = MainCharacter;
             MainCharacterX = MainCharacter.XPosition;
             MainCharacterY = MainCharacter.YPosition;
+            MovementDirection = MainCharacter.movement;
+            if (timerImageInterval == 15) // Swaps between two images that is set by the MC direction.   
+            {
+                if (isImage1)
+                {
+                    MainCharacter.MainCharacterImage.Source = new BitmapImage(new Uri($"{MainCharacter.firstCurrentImage}"));
+                }
+                else
+                {
+                    MainCharacter.MainCharacterImage.Source = new BitmapImage(new Uri($"{MainCharacter.secondCurrentImage}"));
+                }
+                isImage1 = !isImage1;
+                timerImageInterval = 0;
+            }
+            timerImageInterval++;
             MoveContentControl(MovementDirection);
 
             foreach(var goldcoin in GoldCoins)
@@ -193,25 +206,7 @@ namespace PacMan.ViewModels
         }
 
 
-        private void DownPressed()
-        {
-            MovementDirection = Movement.Down;
-        }
-
-        private void UpPressed()
-        {
-            MovementDirection = Movement.Up;
-        }
-
-        private void RightPressed()
-        {
-            MovementDirection = Movement.Right;
-        }
-        private void LeftPressed()
-        {
-            MovementDirection = Movement.Left;
-
-        }
+       
 
         public Movement GetBlueGhostMovementDirection()
         {

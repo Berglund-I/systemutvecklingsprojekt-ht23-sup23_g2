@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacMan.Enums
 {
-    internal enum Movement
+    public enum Movement
     {
         Up,
         Down,

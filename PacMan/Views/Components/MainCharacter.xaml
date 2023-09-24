@@ -9,11 +9,9 @@
              x:Name="PlayableCharacter"
              d:DesignHeight="50" d:DesignWidth="50">
     <Grid>
-        <Ellipse Height="30" Width="30">
-            <Ellipse.Fill>
-                <ImageBrush ImageSource="/Views/PacManFirst.png"/>
-            </Ellipse.Fill>
-        </Ellipse>
+        <Ellipse Fill="Transparent"/>
+        <Image x:Name="MainCharacterImage" Width="30" Height="30" HorizontalAlignment="center" VerticalAlignment="Center"/>
+
     </Grid>
 
 </local:BaseUserControl>
