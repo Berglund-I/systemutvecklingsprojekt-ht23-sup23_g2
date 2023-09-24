@@ -35,7 +35,7 @@ namespace PacMan.ViewModels
         public int McSize { get; set; }
         
 
-        public int PlayerEarnedScore { get; set; } = 3;
+        public int PlayerEarnedScore { get; set; }
         public int CurrentPLayerLives { get; set; }
 
         public static Movement MovementDirection { get; set; }
