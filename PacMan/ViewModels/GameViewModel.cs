@@ -283,7 +283,8 @@ namespace PacMan.ViewModels
                     BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
             {
                 // Put the function for pacman losing life here
-                timer.Stop();
+                // Not complete yet.
+                //timer.Stop(); // Stops the game time.
                 CurrentPLayerLives --;
                 CreatePLayerLivesList();
             }
