@@ -34,7 +34,7 @@ namespace PacMan.ViewModels
         public int GhostSize { get; set; }
         public int McSize { get; set; }
 
-        public int PlayerEarnedScore { get; set; } = 3;
+        public int PlayerEarnedScore { get; set; } = 0;
 
         public static Movement MovementDirection { get; set; }
         public ICommand LeftPressedCommand { get; set; }
@@ -54,9 +54,9 @@ namespace PacMan.ViewModels
 
 
         public bool blueGhostCollision = false;
-        int movementSpeed = 10;
+        int movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
-        int timerSpeed = 100;
+        int timerSpeed = 10;
 
 
         //private ObservableCollection<GoldCoin> _goldcoins = new ObservableCollection<GoldCoin>();
@@ -136,7 +136,7 @@ namespace PacMan.ViewModels
             }
         }
 
-        private void MainCharacterMovementTimer(object? sender, EventArgs e)
+        public void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
             CurrentUserControl = MainCharacter;
             MainCharacterX = MainCharacter.XPosition;
@@ -148,6 +148,9 @@ namespace PacMan.ViewModels
                 if(IsCollision(MainCharacter, goldcoin))
                 {
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
+                    GoldCoins.Remove(goldcoin);
+                    PlayerEarnedScore++;
+                    break;
                 }
             }
         }
