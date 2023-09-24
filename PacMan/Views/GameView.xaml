@@ -40,10 +40,12 @@
 
             <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
 
+
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
             BorderThickness="3"
             CornerRadius="5">
 
+                
                 <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                     <Canvas.InputBindings>
                         <KeyBinding Key="Left" Command="{Binding MainCharacter.LeftPressedCommand}"/>
@@ -51,6 +53,9 @@
                         <KeyBinding Key="Up" Command="{Binding MainCharacter.UpPressedCommand}"/>
                         <KeyBinding Key="Down" Command="{Binding MainCharacter.DownPressedCommand}"/>
                     </Canvas.InputBindings>
+
+
+
 
                     <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
@@ -90,11 +95,11 @@
 
                     <!--#endregion-->
 
+                    <ContentControl Content="{Binding WinWindow}" Height="120" Width="302" Canvas.Left="274" Canvas.Top="267" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="{Binding WinScreenVisibility}"/>
 
-
+                    <!--<components:WinScreen Content="{Binding WinWindow}" Canvas.Left="276" Canvas.Top="273" Visibility="{Binding WinVisible}"/>-->
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
-
 
 
                 </Canvas>

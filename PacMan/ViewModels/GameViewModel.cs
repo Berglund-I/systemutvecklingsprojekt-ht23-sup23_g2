@@ -21,6 +21,8 @@ using PacMan.Views.Entities;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Diagnostics.Eventing.Reader;
+using System.Windows.Automation;
 
 namespace PacMan.ViewModels
 {
@@ -33,10 +35,14 @@ namespace PacMan.ViewModels
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
+        public WinScreen WinWindow { get; set; } = new WinScreen();
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
         private bool isImage1 = true;
+
+
+        public Visibility WinScreenVisibility { get; set; } = Visibility.Collapsed;
 
         public int PlayerEarnedScore { get; set; }
         public int CurrentPLayerLives { get; set; }
@@ -180,10 +186,18 @@ namespace PacMan.ViewModels
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
-                    break;
+                    
+                break;
                 }
             }
+            if (PlayerEarnedScore == 55)
+            {
+
+                WinScreenVisibility = Visibility.Visible;
+            }
         }
+
+ 
 
         private bool IsCollision(MainCharacter mainCharacter, GoldCoinViewModel goldCoin)
         {

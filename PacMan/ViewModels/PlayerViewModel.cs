@@ -20,6 +20,7 @@ namespace PacMan.ViewModels
         public int PlayerEarnedScore { get; set; }
 
         public int PlayerLives { get; set; } = 4;
+
          
     }
 }
