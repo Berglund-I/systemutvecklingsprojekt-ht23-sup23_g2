@@ -97,7 +97,6 @@
 
                     <ContentControl Content="{Binding WinWindow}" Height="120" Width="302" Canvas.Left="274" Canvas.Top="267" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="{Binding WinScreenVisibility}"/>
 
-                    <!--<components:WinScreen Content="{Binding WinWindow}" Canvas.Left="276" Canvas.Top="273" Visibility="{Binding WinVisible}"/>-->
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
 
