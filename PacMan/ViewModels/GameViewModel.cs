@@ -43,7 +43,6 @@ namespace PacMan.ViewModels
 
 
         public Visibility WinScreenVisibility { get; set; } = Visibility.Collapsed;
-
         public int PlayerEarnedScore { get; set; }
         public int CurrentPLayerLives { get; set; }
 
