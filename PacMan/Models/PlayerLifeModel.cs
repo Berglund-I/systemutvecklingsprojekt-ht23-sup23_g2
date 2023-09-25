@@ -9,11 +9,9 @@ namespace PacMan.Models
 {
     class PlayerLifeModel : BaseViewModel
     {
-        public string name { get; set; }
 
-        public PlayerLifeModel(string Name)
+        public PlayerLifeModel()
         {
-            name = Name;
         }
 
     }

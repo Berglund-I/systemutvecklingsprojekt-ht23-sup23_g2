@@ -22,6 +22,8 @@ namespace PacMan.Views.Components
     {
         public double XPosition { get; set; }
         public double YPosition { get; set; }
+        public double xStartPosition { get; set; }
+        public double yStartPosition { get; set; }
         public BaseUserControl()
         {
            

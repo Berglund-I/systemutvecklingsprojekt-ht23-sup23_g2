@@ -25,8 +25,8 @@ namespace PacMan.Views.Components
         public GhostBlue()
         {
             InitializeComponent();
-            XPosition = 800;
-            YPosition = 600;
+            xStartPosition = 800;
+            yStartPosition = 600;
         }
     }
 }

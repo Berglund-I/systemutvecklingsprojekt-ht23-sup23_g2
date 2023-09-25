@@ -32,8 +32,6 @@ namespace PacMan.Views.Components
         public ICommand RightPressedCommand { get; set; }
         public ICommand UpPressedCommand { get; set; }
         public ICommand DownPressedCommand { get; set; }
-        private double rotationAngle = 0; 
-        private double scaleX = 1;
         public string firstCurrentImage;
         public string secondCurrentImage;
 
@@ -41,8 +39,8 @@ namespace PacMan.Views.Components
         {
             InitializeComponent();
             Size = 40;
-            XPosition = 200;
-            YPosition = 400;
+            xStartPosition = 0;
+            yStartPosition = 0;
             LeftPressedCommand = new RelayCommand(x => LeftPressed());
             RightPressedCommand = new RelayCommand(x => RightPressed());
             UpPressedCommand = new RelayCommand(x => UpPressed());

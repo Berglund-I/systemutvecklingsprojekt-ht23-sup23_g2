@@ -35,14 +35,15 @@ namespace PacMan.ViewModels
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
-        public WinScreen WinWindow { get; set; } = new WinScreen();
+        public UserControl EndScreen { get; set; } = new UserControl();
+        public LoseScreen LoseScreen { get; set; } = new LoseScreen();
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
         private bool isImage1 = true;
 
 
-        public Visibility WinScreenVisibility { get; set; } = Visibility.Collapsed;
+        public Visibility EndScreenVisibility { get; set; } = Visibility.Collapsed;
         public int PlayerEarnedScore { get; set; }
         public int CurrentPLayerLives { get; set; }
 
@@ -65,15 +66,9 @@ namespace PacMan.ViewModels
         int movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
         int timerSpeed = 10;
-        int timerImageInterval = 0; // Counter that set how often a part of code in MCmovement method is run. 
+        int timerImageInterval = 0; // Counter that set how often image part of code in MCmovement method is run. 
 
 
-        //private ObservableCollection<GoldCoin> _goldcoins = new ObservableCollection<GoldCoin>();
-        //public ObservableCollection<GoldCoin> Goldcoins
-        //{
-        //    get { return _goldcoins; }
-        //    set { _goldcoins = value; }
-        //}
 
 
         public GameViewModel()
@@ -90,6 +85,7 @@ namespace PacMan.ViewModels
             CreateObstaclesList();
             CreateCoinsList();
             CreatePLayerLivesList();
+            PlaceOutCharacters();
 
             timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
             timer.Tick += GhostMovementTimer;
@@ -103,11 +99,9 @@ namespace PacMan.ViewModels
         private void CreatePLayerLivesList()
         {
             PlayerLives.Clear();
-            string name;
             for (int i = 0; i < CurrentPLayerLives; i++)
             {
-                name = $"Life{i}";
-                PlayerLives.Add(new PlayerLifeModel(name));
+                PlayerLives.Add(new PlayerLifeModel());
             }
         }
 
@@ -156,6 +150,14 @@ namespace PacMan.ViewModels
             }
         }
 
+        private void PlaceOutCharacters()
+        {
+            MainCharacter.XPosition = MainCharacter.xStartPosition;
+            MainCharacter.YPosition = MainCharacter.yStartPosition;
+            GhostBlueView.YPosition = GhostBlueView.yStartPosition;
+            GhostBlueView.XPosition = GhostBlueView.xStartPosition;
+        }
+
         public void MainCharacterMovementTimer(object? sender, EventArgs e)
         {
             CurrentUserControl = MainCharacter;
@@ -191,12 +193,10 @@ namespace PacMan.ViewModels
             }
             if (PlayerEarnedScore == 55)
             {
-
-                WinScreenVisibility = Visibility.Visible;
+                EndScreen = new WinScreen();
+                EndScreenVisibility = Visibility.Visible;
             }
         }
-
- 
 
         private bool IsCollision(MainCharacter mainCharacter, GoldCoinViewModel goldCoin)
         {
@@ -217,9 +217,6 @@ namespace PacMan.ViewModels
 
             return collisionDetected;
         }
-
-
-       
 
         public Movement GetBlueGhostMovementDirection()
         {
@@ -293,13 +290,28 @@ namespace PacMan.ViewModels
                     BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
                     BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
             {
-                // Put the function for pacman losing life here
-                // Not complete yet.
-                //timer.Stop(); // Stops the game time.
-                CurrentPLayerLives --;
+                timer.Stop();
+                LoseALife();
                 CreatePLayerLivesList();
             }
         }
+
+        private void LoseALife()
+        {
+            if (CurrentPLayerLives != 0)
+            {
+                CurrentPLayerLives--;
+                PlaceOutCharacters();
+                timer.Start();
+            }
+            else
+            {
+                EndScreen = LoseScreen;
+                LoseScreen.StartAnimation();
+                EndScreenVisibility = Visibility.Visible;
+            }
+        }
+
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
