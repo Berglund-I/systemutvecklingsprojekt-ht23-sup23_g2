@@ -11,6 +11,6 @@ namespace PacMan.ViewModels
     internal class PlayerViewModel : BaseViewModel
     {
         public int PlayerEarnedScore { get; set; }
-        public int PlayerLives { get; set; } = 0;
+        public int PlayerLives { get; set; } = 2;
     }
 }
