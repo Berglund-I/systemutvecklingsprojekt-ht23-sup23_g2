@@ -63,7 +63,7 @@ namespace PacMan.ViewModels
 
 
         public bool blueGhostCollision = false;
-        int movementSpeed = 2;
+        double movementSpeed = 2;
         private readonly DispatcherTimer timer = new DispatcherTimer();
         int timerSpeed = 10;
         int timerImageInterval = 0; // Counter that set how often image part of code in MCmovement method is run. 
@@ -187,8 +187,9 @@ namespace PacMan.ViewModels
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
-                    
-                break;
+                    //movementSpeed += 0.1; // Ta bort kommentar för att öka svårighetsgraden
+
+                    break;
                 }
             }
             if (PlayerEarnedScore == 55)
