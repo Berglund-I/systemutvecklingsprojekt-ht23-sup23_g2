@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Media;
 
 namespace PacMan.ViewModels
 {
@@ -14,10 +15,13 @@ namespace PacMan.ViewModels
     {
         //public BaseViewModel CurrentViewModel { get; set; } = new GameViewModel(); Probably isnt needed
         private UserControl _currentView;
+        SoundPlayer _backGroundMusic = new SoundPlayer(Properties.Resources.BackGroundMusic);
 
         public MainViewModel()
         {
             StartGameCommand = new RelayCommand(StartGame);
+            _backGroundMusic.Play();
+
         }
 
         public UserControl CurrentView

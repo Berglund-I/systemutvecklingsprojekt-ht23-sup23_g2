@@ -196,6 +196,7 @@ namespace PacMan.ViewModels
             {
                 EndScreen = new WinScreen();
                 EndScreenVisibility = Visibility.Visible;
+                timer.Stop();
             }
         }
 

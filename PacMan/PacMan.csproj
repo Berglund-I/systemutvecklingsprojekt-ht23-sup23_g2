@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\BackGroundMusic.wav" />
+    <None Remove="Sounds\BackGroundMusic.wav" />
     <None Remove="Views\Images\0.png" />
     <None Remove="Views\Images\1.png" />
     <None Remove="Views\Images\2.png" />
@@ -38,6 +40,15 @@
     <None Remove="Views\PacManSecondDown.png" />
     <None Remove="Views\PacManSecondLeft.png" />
     <None Remove="Views\PacManSecondUp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\BackGroundMusic.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\BackGroundMusic.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -104,6 +115,21 @@
     <Resource Include="Views\PacManSecondUp.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
