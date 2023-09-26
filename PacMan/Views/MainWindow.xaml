@@ -8,23 +8,27 @@
         xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.MainWindow"
         mc:Ignorable="d"
         d:DataContext ="{d:DesignInstance {x:Type vm:MainViewModel}}"
-        Title="MainWindow" Height="800" Width="1200">
-    <Grid Margin="8,0,-8,0">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Views/PacManBackground.jpg"/>
-        </Grid.Background>
-        <ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding CurrentView}" />
+        Height="800" Width="1200" WindowState="Maximized" WindowStartupLocation="CenterScreen" Icon="/Views/PacManFirst.png" HorizontalAlignment="Center" VerticalAlignment="Center" Title="Pacman" FontSize="18" FontFamily="SimSun" WindowStyle="ThreeDBorderWindow"  >
+    <Window.Background>
+        <ImageBrush ImageSource="/Views/PacManBackground.jpg"/>
+    </Window.Background>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="397*"/>
+        </Grid.ColumnDefinitions>
+        <ContentControl x:Name="MainContent" Content="{Binding CurrentView}" Grid.ColumnSpan="2" />
 
-        <Button Content="Start Game" Grid.Column="1" Grid.Row="1"  
-                HorizontalAlignment="Left" Margin="230,576,0,0" VerticalAlignment="Top" 
-                Command="{Binding StartGameCommand}" CommandParameter="{Binding Text, ElementName=NameTextBox}" Height="64" Width="170" FontFamily="OCR A Extended">
+        <Button Content="Start Game"  
+                HorizontalAlignment="Left" Margin="221,578,0,0" VerticalAlignment="Top" 
+                Command="{Binding StartGameCommand}" CommandParameter="{Binding Text, ElementName=NameTextBox}" Height="64" Width="170" FontFamily="OCR A Extended" Grid.Column="1">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock HorizontalAlignment="Left" Margin="141,506,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="28" Width="76" Grid.Column="1" Grid.Row="1" FontFamily="OCR A Extended" FontSize="22" RenderTransformOrigin="0.5,0.5" Foreground="#FF00CAFF">
+        <TextBlock HorizontalAlignment="Left" Margin="134,523,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="28" Width="76" FontFamily="OCR A Extended" FontSize="22" RenderTransformOrigin="0.468,1.553" Foreground="#FF00CAFF" Grid.Column="1">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -34,7 +38,7 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="235,503,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" Grid.Column="1" Height="34" Grid.Row="1"/>
+        <TextBox x:Name="NameTextBox" HorizontalAlignment="Left" Margin="227,520,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="34" Grid.Column="1" FontSize="26" FontFamily="Impact"/>
 
     </Grid>
 </Window>
