@@ -13,28 +13,6 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Views/PacManBackground.jpg"/>
         </Grid.Background>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <!--<Grid Grid.Row="1" Grid.Column="1" Background="LightGray">
-           
-            <TextBlock FontSize="50" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="BacMan" VerticalAlignment="Top" Height="73" Width="222"/>
-            <TextBlock HorizontalAlignment="Left" Margin="361,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="39"/>
-            <TextBox HorizontalAlignment="Left" Margin="405,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86"/>
-            
-            <TextBlock FontSize="50" HorizontalAlignment="Center" Margin="0,70,0,0" TextWrapping="Wrap" Text="BacMan" VerticalAlignment="Top" Height="73" Width="222"/>
-            <TextBlock HorizontalAlignment="Left" Margin="361,165,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Height="19" Width="39"/>
-            <TextBox HorizontalAlignment="Left" Margin="405,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="86"/>
-
-
-        </Grid>-->
         <ContentControl x:Name="MainContent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding CurrentView}" />
 
         <Button Content="Start Game" Grid.Column="1" Grid.Row="1"  
