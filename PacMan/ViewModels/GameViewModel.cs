@@ -187,7 +187,7 @@ namespace PacMan.ViewModels
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
-                    //movementSpeed += 0.1; // Ta bort kommentar för att öka svårighetsgraden
+                   /* movementSpeed += 0.1;*/ // Ta bort kommentar för att öka svårighetsgraden
 
                     break;
                 }
