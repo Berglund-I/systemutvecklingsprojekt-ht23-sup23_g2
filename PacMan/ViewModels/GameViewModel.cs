@@ -23,6 +23,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Automation;
+using System.Media;
 
 namespace PacMan.ViewModels
 {
@@ -37,6 +38,8 @@ namespace PacMan.ViewModels
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
+        SoundPlayer ScoreSoundEffect { get; set; } = new SoundPlayer(Properties.Resources.ScoreSound);
+
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
@@ -199,7 +202,8 @@ namespace PacMan.ViewModels
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
-                   /* movementSpeed += 0.1;*/ // Ta bort kommentar för att öka svårighetsgraden
+                    ScoreSoundEffect.Play();
+                    //movementSpeed += 0.1; // Ta bort kommentar för att öka svårighetsgraden
 
                     break;
                 }
