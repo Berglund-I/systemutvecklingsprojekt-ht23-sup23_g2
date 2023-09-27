@@ -47,6 +47,8 @@ namespace PacMan.Views.Components
             DownPressedCommand = new RelayCommand(x => DownPressed());
             firstCurrentImage= "pack://application:,,,/PacMan;component/Views/PacManFirst.png";
             secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecond.png";
+
+            Occupation = Occupation.Pacman;
         }
 
         private void DownPressed()

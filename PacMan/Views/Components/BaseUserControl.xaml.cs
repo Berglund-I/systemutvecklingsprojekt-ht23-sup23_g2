@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PacMan.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,12 @@ namespace PacMan.Views.Components
         public double YPosition { get; set; }
         public double xStartPosition { get; set; }
         public double yStartPosition { get; set; }
+        public bool CollisionCheck { get; set; } = false;
+        public bool ShouldCollideWithWalls { get; set; } = true;
+        public Occupation Occupation { get; set; } = Occupation.Ghost;
         public BaseUserControl()
         {
-           
+            
         }
     }
 }

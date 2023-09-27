@@ -31,9 +31,11 @@ namespace PacMan.ViewModels
         public int GameViewWidth { get; set; } = 848;
         public int GameViewHeight { get; set; } = 700-40;
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
-        public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
+        public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
+        public GhostGreen GhostGreenView { get; set; } = new GhostGreen();
+        public GreenGhostViewModel GreenGhostVM { get; set; } = new GreenGhostViewModel();
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
@@ -53,7 +55,9 @@ namespace PacMan.ViewModels
         public double MainCharacterY { get; set; }
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
-        
+        public double GreenGhostX { get; set; } = 100;
+        public double GreenGhostY { get; set; }
+
         public ICommand BlueGhostAiCommand { get;}
         public BaseUserControl CurrentUserControl { get; set; }
 
@@ -156,6 +160,8 @@ namespace PacMan.ViewModels
             MainCharacter.YPosition = MainCharacter.yStartPosition;
             GhostBlueView.YPosition = GhostBlueView.yStartPosition;
             GhostBlueView.XPosition = GhostBlueView.xStartPosition;
+            GhostGreenView.YPosition = GhostGreenView.yStartPosition;
+            GhostGreenView.XPosition = GhostGreenView.xStartPosition;
         }
 
         public void MainCharacterMovementTimer(object? sender, EventArgs e)
@@ -223,25 +229,40 @@ namespace PacMan.ViewModels
         {
             return BlueGhostVM.MovementDirection;
         }
+        int GreenGhostCounter = 0;
         private void GhostMovementTimer(object sender, EventArgs e)
         {
             BlueGhostX = GhostBlueView.XPosition;
             BlueGhostY = GhostBlueView.YPosition;
-            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), blueGhostCollision);
-            BlueGhostVM.Ai(AiPackage);
-            GhostAndMcCollision();
+            GreenGhostX = GhostGreenView.XPosition;
+            GreenGhostY = GhostGreenView.YPosition;
 
             CurrentUserControl = GhostBlueView;
+            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
+            BlueGhostVM.Ai(AiPackage);
             MoveContentControl(BlueGhostVM.MovementDirection);
+
+            if (GreenGhostCounter == 3) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
+            { 
+                AiPackage = new AiDirectionPackage(new Point(GreenGhostX, GreenGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
+                CurrentUserControl = GhostGreenView;
+                GreenGhostVM.Ai(AiPackage);
+                MoveContentControl(GreenGhostVM.MovementDirection);
+                GreenGhostCounter = 0;
+            }
+            else
+            {
+                GreenGhostCounter++;
+            }
         }
 
         private void MoveContentControl(Movement movementDirection)
         {
-            //Point ContentControlPosition = contentControl.TransformToAncestor(this).Transform(new Point(0, 0));
+            
             double currentPositionX = CurrentUserControl.XPosition;
             double currentPositionY = CurrentUserControl.YPosition;
-            if (CurrentUserControl == GhostBlueView){ blueGhostCollision = true; }
-            //GameViewModel currentGhost = (GhostViewModel)contentControl.Content;
+            if (CurrentUserControl.Occupation == Occupation.Ghost){ CurrentUserControl.CollisionCheck = true; }
+            
             switch (movementDirection)
             {
                 case Movement.Up:
@@ -250,7 +271,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.YPosition = 0;
                     }
                     else if (WallCollision(  movementDirection)) { }
-                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Down:
                     if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight )) // If collision is detected with the border of the GameView
@@ -258,7 +279,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX)) // If collision is detected with the border of the GameView
@@ -267,7 +288,7 @@ namespace PacMan.ViewModels
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 
                 case Movement.Right:
@@ -277,19 +298,21 @@ namespace PacMan.ViewModels
 
                     }
                     else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 
 
             }
+            GhostAndMcCollision();
         }
 
         private void GhostAndMcCollision()
         {
-            if (BlueGhostX < MainCharacterX + MainCharacter.ActualWidth &&
-                    BlueGhostX + GhostBlueView.ActualWidth > MainCharacterX &&
-                    BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
-                    BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
+            if (CurrentUserControl.XPosition < MainCharacterX + MainCharacter.ActualWidth &&
+                    CurrentUserControl.XPosition + CurrentUserControl.ActualWidth > MainCharacterX &&
+                    CurrentUserControl.YPosition < MainCharacterY + MainCharacter.ActualHeight &&
+                    CurrentUserControl.YPosition + CurrentUserControl.ActualHeight > MainCharacterY
+                    && CurrentUserControl.Occupation == Occupation.Ghost)
             {
                 timer.Stop();
                 LoseALife();
@@ -316,6 +339,7 @@ namespace PacMan.ViewModels
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
+            if (CurrentUserControl.ShouldCollideWithWalls == false) { return false; }
             double nextX = CurrentUserControl.XPosition;
             double nextY = CurrentUserControl.YPosition;
             switch (movementDirection)  // Predicts the next step of the selected UserControl
