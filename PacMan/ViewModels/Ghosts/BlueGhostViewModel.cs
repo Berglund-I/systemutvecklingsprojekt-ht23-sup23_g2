@@ -58,7 +58,7 @@ namespace PacMan.ViewModels.Ghosts
                     }
                 }
             }
-            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > MovementSpeed)
+            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > 25)
             {
                 if (McCurrentPosition.X > GhostCurrentPosition.X)
                 {
