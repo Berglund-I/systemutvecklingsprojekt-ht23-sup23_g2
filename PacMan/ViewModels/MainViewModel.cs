@@ -60,6 +60,8 @@ namespace PacMan.ViewModels
         {
 
             string playerName = parameter as string;
+            GameViewModel gameViewModel = new GameViewModel();
+            gameViewModel.PlayerName = playerName;
 
             _backGroundMusic.Stop();
 
