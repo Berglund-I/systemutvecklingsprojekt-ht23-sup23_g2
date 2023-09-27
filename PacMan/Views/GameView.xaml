@@ -37,8 +37,11 @@
             </ItemsControl>
 
 
-
-            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="14" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="770,0,0,0"/>
+            <Label x:Name="labelScore" Content="Score:" Foreground="GreenYellow" Background="Transparent" Width="80" Height="30" Margin="680,0,0,0" />
+            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="18" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="760,0,0,0"/>
+            <Label x:Name="player" Content="Player:" Foreground="GreenYellow" Background="Transparent" Width="100" Height="30" Margin="300,0,0,0" />
+            <Label x:Name="labelPlayerName" Content="{Binding PlayerName}" Foreground="GreenYellow" FontSize="18" FontWeight="Bold" Background="Transparent" Width="100" Height="30" Margin="440,0,0,0"/>
+            
 
 
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"

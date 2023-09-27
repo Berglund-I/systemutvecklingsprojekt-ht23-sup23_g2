@@ -75,7 +75,19 @@ namespace PacMan.ViewModels
         int timerSpeed = 10;
         int timerImageInterval = 0; // Counter that set how often image part of code in MCmovement method is run. 
 
+        private string playerName;
 
+        public string PlayerName
+        {
+            get { return playerName; }
+            set
+            {
+                if (playerName != value)
+                {
+                    playerName = value;
+                }
+            }
+        }
 
 
         public GameViewModel()

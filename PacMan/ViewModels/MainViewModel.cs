@@ -60,13 +60,15 @@ namespace PacMan.ViewModels
         {
 
             string playerName = parameter as string;
+            GameViewModel gameViewModel = new GameViewModel();
+            gameViewModel.PlayerName = playerName;
 
             _backGroundMusic.Stop();
 
 
             // Creating a new instance of din GameView eller GameControl UserControl
             GameView gameView = new GameView(); // Om du använder GameView
-                                                // ELLER
+            gameView.DataContext = gameViewModel;                                   // ELLER
                                                 // GameControl gameControl = new GameControl(); // Om du använder GameControl
 
             // Byt hela innehållet i MainWindow till GameView eller GameControl
