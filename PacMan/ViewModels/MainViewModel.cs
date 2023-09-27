@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Media;
+using System.Windows.Media;
 
 namespace PacMan.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
-        //public BaseViewModel CurrentViewModel { get; set; } = new GameViewModel(); Probably isnt needed
         private UserControl _currentView;
         SoundPlayer _backGroundMusic = new SoundPlayer(Properties.Resources.BackGroundMusic);
 
@@ -21,7 +21,6 @@ namespace PacMan.ViewModels
         {
             StartGameCommand = new RelayCommand(StartGame);
             _backGroundMusic.Play();
-
         }
 
         public UserControl CurrentView
@@ -43,7 +42,10 @@ namespace PacMan.ViewModels
 
         private void StartGame(object parameter)
         {
+
             string playerName = parameter as string;
+
+            _backGroundMusic.Stop();
 
 
             // Creating a new instance of din GameView eller GameControl UserControl

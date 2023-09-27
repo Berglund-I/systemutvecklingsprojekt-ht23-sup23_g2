@@ -68,5 +68,14 @@ namespace PacMan.Properties {
                 return ResourceManager.GetStream("BackGroundMusic", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream ScoreSound {
+            get {
+                return ResourceManager.GetStream("ScoreSound", resourceCulture);
+            }
+        }
     }
 }

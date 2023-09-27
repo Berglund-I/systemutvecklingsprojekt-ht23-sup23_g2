@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <None Remove="Resources\BackGroundMusic.wav" />
-    <None Remove="Sounds\BackGroundMusic.wav" />
+    <None Remove="Resources\ScoreSound.wav" />
     <None Remove="Views\Images\0.png" />
     <None Remove="Views\Images\1.png" />
     <None Remove="Views\Images\2.png" />
@@ -46,7 +46,7 @@
     <Content Include="Resources\BackGroundMusic.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Sounds\BackGroundMusic.wav">
+    <Content Include="Resources\ScoreSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
