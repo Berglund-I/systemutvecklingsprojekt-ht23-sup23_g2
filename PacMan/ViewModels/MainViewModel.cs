@@ -16,6 +16,7 @@ namespace PacMan.ViewModels
         //public BaseViewModel CurrentViewModel { get; set; } = new GameViewModel(); Probably isnt needed
         private UserControl _currentView;
         SoundPlayer _backGroundMusic = new SoundPlayer(Properties.Resources.BackGroundMusic);
+       
 
         public MainViewModel()
         {
@@ -45,10 +46,13 @@ namespace PacMan.ViewModels
         {
             string playerName = parameter as string;
 
+            GameViewModel gameViewModel = new GameViewModel();
+            gameViewModel.PlayerName = playerName;
+            
 
             // Creating a new instance of din GameView eller GameControl UserControl
             GameView gameView = new GameView(); // Om du använder GameView
-                                                // ELLER
+            gameView.DataContext = gameViewModel;                                   // ELLER
                                                 // GameControl gameControl = new GameControl(); // Om du använder GameControl
 
             // Byt hela innehållet i MainWindow till GameView eller GameControl

@@ -26,7 +26,7 @@ namespace PacMan
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-            NameTextBox.Focus();
+            textBoxPlayerName.Focus();
         }
 
     }
