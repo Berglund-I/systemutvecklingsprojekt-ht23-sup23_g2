@@ -20,7 +20,7 @@ namespace PacMan.ViewModels.Ghosts
 
             
  
-                if (Math.Abs(McCurrentPosition.Y - GhostCurrentPosition.Y) > 150)
+                if (Math.Abs(McCurrentPosition.Y - GhostCurrentPosition.Y) > 120)
                 {
                     if (McCurrentPosition.Y > GhostCurrentPosition.Y)
                     {
