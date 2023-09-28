@@ -35,21 +35,35 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Restart" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Center" Width="85" Background="Black" Foreground="GreenYellow" FontSize="16" Margin="657,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="26"  VerticalAlignment="Center" FontSize="16" Foreground="GreenYellow" Background="Black" Margin="747,0,10,0" Width="85">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
 
-            <Label x:Name="labelScore" Content="Score:" Foreground="GreenYellow" Background="Transparent" Width="80" Height="30" Margin="680,0,0,0" />
-            <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="18" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="760,0,0,0"/>
-            <Label x:Name="player" Content="Player:" Foreground="GreenYellow" Background="Transparent" Width="100" Height="30" Margin="300,0,0,0" />
-            <Label x:Name="labelPlayerName" Content="{Binding PlayerName}" Foreground="GreenYellow" FontSize="18" FontWeight="Bold" Background="Transparent" Width="100" Height="30" Margin="440,0,0,0"/>
-            
+            <Label x:Name="labelScore" Grid.Row="0" Content="Score:" Foreground="GreenYellow" Background="Transparent" Width="80" Height="30" Margin="372,5,390,5" />
+            <Label Name="Score" Grid.Row="0" Content="{Binding PlayerEarnedScore}"  FontSize="18" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="427,5,365,5"/>
+            <Label x:Name="player" Grid.Row="0" Content="Player:" Foreground="GreenYellow" Background="Transparent" Width="100" Height="30" Margin="212,5,530,5" />
+            <Label x:Name="labelPlayerName" Grid.Row="0"  Content="{Binding PlayerName}" Foreground="GreenYellow" FontSize="18" FontWeight="Bold" Background="Transparent" Width="100" Height="30" Margin="282,5,460,5"/>
+
 
 
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
             BorderThickness="3"
-            CornerRadius="5">
+            CornerRadius="5" HorizontalAlignment="Left" Width="842">
 
-                
-                <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
+
+                <Canvas  x:Name="GameCanvas"  ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                     <Canvas.InputBindings>
                         <KeyBinding Key="Left" Command="{Binding MainCharacter.LeftPressedCommand}"/>
                         <KeyBinding Key="Right" Command="{Binding MainCharacter.RightPressedCommand}"/>
@@ -98,15 +112,31 @@
 
                     <!--#endregion-->
 
-                    <ContentControl Content="{Binding EndScreen}" Height="120" Width="302" Canvas.Left="274" Canvas.Top="267" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="{Binding EndScreenVisibility}"/>
+                    <ContentControl Content="{Binding EndScreen}" Height="300" Width="400" Canvas.Left="225" Canvas.Top="44" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding EndScreenVisibility}"/>
 
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
+                    <ContentControl x:Name="TheGreenGhost" Content="{Binding GhostGreenView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding GreenGhostX}" Canvas.Top="{Binding GreenGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
+
+                    <ListBox x:Name="highscoreList" Background="Black" Foreground="GreenYellow" BorderBrush="GreenYellow" BorderThickness="3" ItemsSource="{Binding PlayerSave}" Height="282" Width="232" Canvas.Left="309" Canvas.Top="344" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding PlayerSaveVisibility}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name:"/>
+                                    <TextBlock Text="{Binding PlayerNameSave}"/>
+                                    <TextBlock Text="   Points:"/>
+                                    <TextBlock Text="{Binding PlayerFinalScore}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
 
                 </Canvas>
             </Border>
         </Grid>
+
     </Border>
 
 </UserControl>
+    

@@ -13,7 +13,7 @@ namespace PacMan.Models
         public Point McCurrentPosition { get; set; }
         public bool GhostCollision { get; set; }
         /// <summary>
-        /// 
+        /// An object for all the neccesary info for the ghosts ai to work
         /// </summary>
         /// <param name="ghostCurrentPosition"></param>
         /// <param name="mcCurrentPosition"></param>

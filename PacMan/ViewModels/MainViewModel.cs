@@ -14,7 +14,7 @@ namespace PacMan.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
-        private UserControl _currentView;
+        //private UserControl _currentView;
         SoundPlayer _backGroundMusic = new SoundPlayer(Properties.Resources.BackGroundMusic);
         public RelayCommand StartGameCommand { get; private set; }
         public RelayCommand MuteMusicCommand { get; private set; }
@@ -44,17 +44,17 @@ namespace PacMan.ViewModels
             }
         }
 
-        public UserControl CurrentView
-        {
-            get { return _currentView; }
-            set
-            {
-                if (_currentView != value)
-                {
-                    _currentView = value;
-                }
-            }
-        }
+        //public UserControl CurrentView
+        //{
+        //    get { return _currentView; }
+        //    set
+        //    {
+        //        if (_currentView != value)
+        //        {
+        //            _currentView = value;
+        //        }
+        //    }
+        //}
 
         private void StartGame(object parameter)
         {

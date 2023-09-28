@@ -13,8 +13,6 @@ namespace PacMan.ViewModels.Ghosts
     internal class BlueGhostViewModel : GhostViewModel
     {
         public Point GhostLastPosition { get; set; } = new Point(0,0);
-        //public Movement MovementDirection { get; set; }
-
         bool blueGhostAlternator = false;
         public BlueGhostViewModel()
         {
@@ -58,7 +56,7 @@ namespace PacMan.ViewModels.Ghosts
                     }
                 }
             }
-            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > MovementSpeed)
+            else if (blueGhostCollision == false && Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X) > 25) // Moves left or right if its not colliding with anything or within 25units of the playeer in the X axis
             {
                 if (McCurrentPosition.X > GhostCurrentPosition.X)
                 {
@@ -81,7 +79,7 @@ namespace PacMan.ViewModels.Ghosts
                 }
             }
             GhostLastPosition = data.GhostCurrentPosition;
-            //MessageBox.Show($"spöket är påväg {MovementDirection}");
+
         }
     }
 }

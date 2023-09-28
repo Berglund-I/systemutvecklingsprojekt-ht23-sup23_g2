@@ -24,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Automation;
 using System.Media;
+using System.Reflection.Metadata.Ecma335;
 
 namespace PacMan.ViewModels
 {
@@ -31,15 +32,26 @@ namespace PacMan.ViewModels
     {
         public int GameViewWidth { get; set; } = 848;
         public int GameViewHeight { get; set; } = 700-40;
+        public Player Player { get; set; } = new Player();
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
-        public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
+        public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
         public BlueGhostViewModel BlueGhostVM { get; set; } = new BlueGhostViewModel();
+        public GhostGreen GhostGreenView { get; set; } = new GhostGreen();
+        public GreenGhostViewModel GreenGhostVM { get; set; } = new GreenGhostViewModel();
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
-        SoundPlayer ScoreSoundEffect { get; set; } = new SoundPlayer(Properties.Resources.ScoreSound);
+        public Visibility PlayerSaveVisibility { get; set; } = Visibility.Collapsed;
 
+        #region Music/Soundeffects
+        SoundPlayer ScoreSoundEffect = new SoundPlayer(Properties.Resources.ScoreSound);
+        SoundPlayer GameOverSoundEffect = new SoundPlayer(Properties.Resources.GameOver);
+        SoundPlayer VictoryMusic = new SoundPlayer(Properties.Resources.VictoryMusic);
+        SoundPlayer LoseALifeSoundEffect = new SoundPlayer(Properties.Resources.LoseALife);
+        SoundPlayer GameOverMusic = new SoundPlayer(Properties.Resources.GameOverMusic);
+        #endregion
+      
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
@@ -47,7 +59,9 @@ namespace PacMan.ViewModels
 
 
         public Visibility EndScreenVisibility { get; set; } = Visibility.Collapsed;
+        public string PlayerNameSave { get; set; }
         public int PlayerEarnedScore { get; set; }
+        public int PlayerFinalScore { get; set; }
         public int CurrentPLayerLives { get; set; }
 
         public static Movement MovementDirection { get; set; }
@@ -56,13 +70,19 @@ namespace PacMan.ViewModels
         public double MainCharacterY { get; set; }
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
-        
-        public ICommand BlueGhostAiCommand { get;}
+        public double GreenGhostX { get; set; } = -100;
+        public double GreenGhostY { get; set; }
+
+        public ICommand BlueGhostAiCommand { get;} 
+        public ICommand PlayAgainCommand { get; set; } 
+        public ICommand MainMenuCommand { get; set; }
+
         public BaseUserControl CurrentUserControl { get; set; }
 
         public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
         public ObservableCollection<GoldCoinViewModel> GoldCoins { get; } = new ObservableCollection<GoldCoinViewModel>();
         public ObservableCollection<PlayerLifeModel> PlayerLives { get; } = new ObservableCollection<PlayerLifeModel>();
+        public ObservableCollection<Player> PlayerSave { get; set; } = new ObservableCollection<Player>();
 
 
         public bool blueGhostCollision = false;
@@ -88,28 +108,45 @@ namespace PacMan.ViewModels
 
         public GameViewModel()
         {
-
+            BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
+            PlayAgainCommand = new RelayCommand(x => RestartGame());
+            MainMenuCommand = new RelayCommand(x => RestartApplication());
             BlueGhostVM = new BlueGhostViewModel();
-            GhostSize = Ghosts.GhostSize;
-
             McSize = MainCharacter.Size;
+            GhostSize = Ghosts.GhostSize;
+            SetUpGame();
+        }
+        private void SetUpGame()
+        {
             CurrentPLayerLives = PlayerVM.PlayerLives;
-            
-            MovementDirection = Movement.Down;
-
+            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
+            timer.Tick += GhostMovementTimer;
+            timer.Tick += MainCharacterMovementTimer;
             CreateObstaclesList();
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
-
-            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            timer.Tick += GhostMovementTimer;
-            timer.Tick += MainCharacterMovementTimer;
             timer.Start();
-            
-
-            BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
+
+        private void RestartGame() // Resets some parameters to start and starts the game. 
+        {
+            CurrentPLayerLives = PlayerVM.PlayerLives;
+            EndScreenVisibility = Visibility.Hidden;
+            PlayerSaveVisibility = Visibility.Hidden;
+            PlayerEarnedScore = 0;
+            CreateCoinsList();
+            CreatePLayerLivesList();
+            PlaceOutCharacters();
+            timer.Start();
+        }
+
+        private static void RestartApplication() // Shuts down and restarts the application
+        {
+            System.Diagnostics.Process.Start(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            App.Current.Shutdown();
+        }
+
 
         private void CreatePLayerLivesList()
         {
@@ -122,6 +159,7 @@ namespace PacMan.ViewModels
 
         private void CreateObstaclesList()
        {
+            Obstacles.Clear();
             Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 339 });
@@ -139,7 +177,7 @@ namespace PacMan.ViewModels
 
         private void CreateCoinsList()
         {
-            //The first y-coordinate in each x iteration has an y-value of 25
+            GoldCoins.Clear();
             int ypos = 25;
 
             // Going through how many times the y-axis should be generated
@@ -177,6 +215,8 @@ namespace PacMan.ViewModels
             MainCharacter.YPosition = MainCharacter.yStartPosition;
             GhostBlueView.YPosition = GhostBlueView.yStartPosition;
             GhostBlueView.XPosition = GhostBlueView.xStartPosition;
+            GhostGreenView.YPosition = GhostGreenView.yStartPosition;
+            GhostGreenView.XPosition = GhostGreenView.xStartPosition;
         }
 
         public void MainCharacterMovementTimer(object? sender, EventArgs e)
@@ -219,6 +259,7 @@ namespace PacMan.ViewModels
                 EndScreen = new WinScreen();
                 EndScreenVisibility = Visibility.Visible;
                 timer.Stop();
+                VictoryMusic.Play();
             }
         }
 
@@ -246,25 +287,48 @@ namespace PacMan.ViewModels
         {
             return BlueGhostVM.MovementDirection;
         }
+        int GreenGhostCounter = 0; // Used to make the green ghost slower than the others
+        /// <summary>
+        /// Timer for the Ghosts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GhostMovementTimer(object sender, EventArgs e)
         {
             BlueGhostX = GhostBlueView.XPosition;
             BlueGhostY = GhostBlueView.YPosition;
-            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), blueGhostCollision);
-            BlueGhostVM.Ai(AiPackage);
-            GhostAndMcCollision();
+            GreenGhostX = GhostGreenView.XPosition;
+            GreenGhostY = GhostGreenView.YPosition;
 
             CurrentUserControl = GhostBlueView;
+            AiDirectionPackage AiPackage = new AiDirectionPackage(new Point(BlueGhostX, BlueGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
+            BlueGhostVM.Ai(AiPackage);
             MoveContentControl(BlueGhostVM.MovementDirection);
-        }
 
+            if (GreenGhostCounter == 2) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
+            { 
+                AiPackage = new AiDirectionPackage(new Point(GreenGhostX, GreenGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
+                CurrentUserControl = GhostGreenView;
+                GreenGhostVM.Ai(AiPackage);
+                MoveContentControl(GreenGhostVM.MovementDirection);
+                GreenGhostCounter = 0;
+            }
+            else
+            {
+                GreenGhostCounter++;
+            }
+        }
+        /// <summary>
+        /// Moves a content controll in the specified direction
+        /// </summary>
+        /// <param name="movementDirection"></param>
         private void MoveContentControl(Movement movementDirection)
         {
-            //Point ContentControlPosition = contentControl.TransformToAncestor(this).Transform(new Point(0, 0));
+            
             double currentPositionX = CurrentUserControl.XPosition;
             double currentPositionY = CurrentUserControl.YPosition;
-            if (CurrentUserControl == GhostBlueView){ blueGhostCollision = true; }
-            //GameViewModel currentGhost = (GhostViewModel)contentControl.Content;
+            if (CurrentUserControl.Occupation == Occupation.Ghost){ CurrentUserControl.CollisionCheck = true; }
+            
             switch (movementDirection)
             {
                 case Movement.Up:
@@ -272,16 +336,16 @@ namespace PacMan.ViewModels
                     {
                         CurrentUserControl.YPosition = 0;
                     }
-                    else if (WallCollision(  movementDirection)) { }
-                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else if (WallCollision(  movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
+                    else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Down:
                     if (CollisionDown(currentPositionY + CurrentUserControl.ActualHeight )) // If collision is detected with the border of the GameView
                     {
                         CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
-                    else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
+                    else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Left:
                     if (CollisionLeft(currentPositionX)) // If collision is detected with the border of the GameView
@@ -289,8 +353,8 @@ namespace PacMan.ViewModels
                         CurrentUserControl.XPosition = 0;
 
                     }
-                    else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
+                    else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 
                 case Movement.Right:
@@ -299,24 +363,27 @@ namespace PacMan.ViewModels
                         CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;
 
                     }
-                    else if (WallCollision( movementDirection)) { }
-                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl == GhostBlueView) { blueGhostCollision = false; } }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
+                    else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 
 
             }
+            GhostAndMcCollision();
         }
-
+        /// <summary>
+        /// Checks if the current ghost has collided with the main character
+        /// </summary>
         private void GhostAndMcCollision()
         {
-            if (BlueGhostX < MainCharacterX + MainCharacter.ActualWidth &&
-                    BlueGhostX + GhostBlueView.ActualWidth > MainCharacterX &&
-                    BlueGhostY < MainCharacterY + MainCharacter.ActualHeight &&
-                    BlueGhostY + GhostBlueView.ActualHeight > MainCharacterY)
+            if (CurrentUserControl.XPosition < MainCharacterX + MainCharacter.ActualWidth &&
+                    CurrentUserControl.XPosition + CurrentUserControl.ActualWidth > MainCharacterX &&
+                    CurrentUserControl.YPosition < MainCharacterY + MainCharacter.ActualHeight &&
+                    CurrentUserControl.YPosition + CurrentUserControl.ActualHeight > MainCharacterY
+                    && CurrentUserControl.Occupation == Occupation.Ghost)
             {
                 timer.Stop();
                 LoseALife();
-                CreatePLayerLivesList();
             }
         }
 
@@ -324,21 +391,33 @@ namespace PacMan.ViewModels
         {
             if (CurrentPLayerLives != 0)
             {
+                LoseALifeSoundEffect.PlaySync();
                 CurrentPLayerLives--;
+                CreatePLayerLivesList();
                 PlaceOutCharacters();
                 timer.Start();
             }
             else
             {
+                SaveGame();
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
+                LoseALifeSoundEffect.PlaySync();
+                GameOverSoundEffect.PlaySync();
+                GameOverMusic.Play();
             }
         }
-
+        public void SaveGame()
+        {
+            PlayerSave.Add(new Player() { PlayerNameSave = PlayerName, PlayerFinalScore = PlayerEarnedScore });
+            
+            PlayerSaveVisibility = Visibility.Visible;
+        }
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
+            if (CurrentUserControl.ShouldCollideWithWalls == false) { return false; }
             double nextX = CurrentUserControl.XPosition;
             double nextY = CurrentUserControl.YPosition;
             switch (movementDirection)  // Predicts the next step of the selected UserControl

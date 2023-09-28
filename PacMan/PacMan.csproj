@@ -20,7 +20,11 @@
 
   <ItemGroup>
     <None Remove="Resources\BackGroundMusic.wav" />
+    <None Remove="Resources\GameOver.wav" />
+    <None Remove="Resources\GameOverMusic.wav" />
+    <None Remove="Resources\LoseALife.wav" />
     <None Remove="Resources\ScoreSound.wav" />
+    <None Remove="Resources\VictoryMusic.wav" />
     <None Remove="Views\Images\0.png" />
     <None Remove="Views\Images\1.png" />
     <None Remove="Views\Images\2.png" />
@@ -48,7 +52,19 @@
     <Content Include="Resources\BackGroundMusic.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\GameOver.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\GameOverMusic.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\LoseALife.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\ScoreSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\VictoryMusic.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -98,29 +114,29 @@
     <Resource Include="Views\Images\UnMuted.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManBackground.jpg" />
-    <Resource Include="Views\PacManFirst.png">
+    <Resource Include="Views\Images\PacManBackground.jpg" />
+    <Resource Include="Views\Images\PacManFirst.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManFirstDown.png">
+    <Resource Include="Views\Images\PacManFirstDown.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManFirstLeft.png">
+    <Resource Include="Views\Images\PacManFirstLeft.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManFirstUp.png">
+    <Resource Include="Views\Images\PacManFirstUp.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManSecond.png">
+    <Resource Include="Views\Images\PacManSecond.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManSecondDown.png">
+    <Resource Include="Views\Images\PacManSecondDown.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManSecondLeft.png">
+    <Resource Include="Views\Images\PacManSecondLeft.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Views\PacManSecondUp.png">
+    <Resource Include="Views\Images\PacManSecondUp.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
