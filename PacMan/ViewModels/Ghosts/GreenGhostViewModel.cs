@@ -17,10 +17,13 @@ namespace PacMan.ViewModels.Ghosts
 
             Point McCurrentPosition = data.McCurrentPosition;
             Point GhostCurrentPosition = data.GhostCurrentPosition;
+            double absoluteDifferenceY = Math.Abs(McCurrentPosition.Y - GhostCurrentPosition.Y);
+            double absoluteDifferenceX = Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X);
 
-            
- 
-                if (Math.Abs(McCurrentPosition.Y - GhostCurrentPosition.Y) > 120)
+
+
+
+                if (absoluteDifferenceX < absoluteDifferenceY)
                 {
                     if (McCurrentPosition.Y > GhostCurrentPosition.Y)
                     {
