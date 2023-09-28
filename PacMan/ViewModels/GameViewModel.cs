@@ -139,16 +139,22 @@ namespace PacMan.ViewModels
 
         private void CreateCoinsList()
         {
- 
+            //The first y-coordinate in each x iteration has an y-value of 25
             int ypos = 25;
-            for (int i = 0; i < 7; i++)
+
+            // Going through how many times the y-axis should be generated
+            for (int i = 0; i < 7; i++) 
             {
+                //The first x-coordinate in each y iteration has an x-value of 10.
                 int xpos = 10;
-                
+
+                //Adding x and y coordinates to the coin.
                 GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
+
+                //Changing the x-value to 100, as that's what the other x coordinates will have.
                 xpos = 100;
 
-                for (int k = 0; k < 10; k++)
+                for (int j = 0; j < 10; j++)
                 {
                     if(!(xpos == 430 && ypos == 525))
                     {
