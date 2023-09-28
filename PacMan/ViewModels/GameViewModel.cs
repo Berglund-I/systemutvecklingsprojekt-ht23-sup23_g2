@@ -110,7 +110,7 @@ namespace PacMan.ViewModels
         {
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
             PlayAgainCommand = new RelayCommand(x => RestartGame());
-            MainMenuCommand = new RelayCommand(x => BackToMainMenu());
+            MainMenuCommand = new RelayCommand(x => RestartApplication());
             BlueGhostVM = new BlueGhostViewModel();
             McSize = MainCharacter.Size;
             GhostSize = Ghosts.GhostSize;
@@ -142,8 +142,10 @@ namespace PacMan.ViewModels
             timer.Start();
         }
 
-        private void BackToMainMenu()
+        private void RestartApplication()
         {
+            System.Diagnostics.Process.Start(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            App.Current.Shutdown();
         }
 
 
