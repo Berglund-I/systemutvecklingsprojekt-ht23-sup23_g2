@@ -121,7 +121,19 @@
   <data name="BackGroundMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BackGroundMusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="GameOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameOver.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GameOverMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GameOverMusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LoseALife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LoseALife.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ScoreSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ScoreSound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="VictoryMusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VictoryMusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

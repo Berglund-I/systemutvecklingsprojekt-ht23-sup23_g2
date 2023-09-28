@@ -42,10 +42,16 @@ namespace PacMan.ViewModels
         public PlayerViewModel PlayerVM { get; set; } = new PlayerViewModel();
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
-        SoundPlayer ScoreSoundEffect { get; set; } = new SoundPlayer(Properties.Resources.ScoreSound);
         public Visibility PlayerSaveVisibility { get; set; } = Visibility.Collapsed;
 
-
+        #region Music/Soundeffects
+        SoundPlayer ScoreSoundEffect = new SoundPlayer(Properties.Resources.ScoreSound);
+        SoundPlayer GameOverSoundEffect = new SoundPlayer(Properties.Resources.GameOver);
+        SoundPlayer VictoryMusic = new SoundPlayer(Properties.Resources.VictoryMusic);
+        SoundPlayer LoseALifeSoundEffect = new SoundPlayer(Properties.Resources.LoseALife);
+        SoundPlayer GameOverMusic = new SoundPlayer(Properties.Resources.GameOverMusic);
+        #endregion
+      
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
@@ -226,6 +232,7 @@ namespace PacMan.ViewModels
                 EndScreen = new WinScreen();
                 EndScreenVisibility = Visibility.Visible;
                 timer.Stop();
+                VictoryMusic.Play();
             }
         }
 
@@ -348,16 +355,20 @@ namespace PacMan.ViewModels
         {
             if (CurrentPLayerLives != 0)
             {
+                LoseALifeSoundEffect.PlaySync();
                 CurrentPLayerLives--;
                 PlaceOutCharacters();
                 timer.Start();
             }
             else
             {
+                LoseALifeSoundEffect.PlaySync();
                 SaveGame();
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
+                GameOverSoundEffect.PlaySync();
+                GameOverMusic.Play();
             }
         }
         public void SaveGame()
