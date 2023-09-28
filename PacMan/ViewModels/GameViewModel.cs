@@ -281,7 +281,12 @@ namespace PacMan.ViewModels
         {
             return BlueGhostVM.MovementDirection;
         }
-        int GreenGhostCounter = 0;
+        int GreenGhostCounter = 0; // Used to make the green ghost slower than the others
+        /// <summary>
+        /// Timer for the Ghosts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GhostMovementTimer(object sender, EventArgs e)
         {
             BlueGhostX = GhostBlueView.XPosition;
@@ -294,7 +299,7 @@ namespace PacMan.ViewModels
             BlueGhostVM.Ai(AiPackage);
             MoveContentControl(BlueGhostVM.MovementDirection);
 
-            if (GreenGhostCounter == 3) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
+            if (GreenGhostCounter == 2) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
             { 
                 AiPackage = new AiDirectionPackage(new Point(GreenGhostX, GreenGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
                 CurrentUserControl = GhostGreenView;
@@ -307,7 +312,10 @@ namespace PacMan.ViewModels
                 GreenGhostCounter++;
             }
         }
-
+        /// <summary>
+        /// Moves a content controll in the specified direction
+        /// </summary>
+        /// <param name="movementDirection"></param>
         private void MoveContentControl(Movement movementDirection)
         {
             
@@ -357,7 +365,9 @@ namespace PacMan.ViewModels
             }
             GhostAndMcCollision();
         }
-
+        /// <summary>
+        /// Checks if the current ghost has collided with the main character
+        /// </summary>
         private void GhostAndMcCollision()
         {
             if (CurrentUserControl.XPosition < MainCharacterX + MainCharacter.ActualWidth &&
