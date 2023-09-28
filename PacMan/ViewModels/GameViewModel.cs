@@ -436,6 +436,7 @@ namespace PacMan.ViewModels
                     foreach (var player in loadedData)
                     {
                         PlayerSave.Add(player);
+
                     }
                 }
             }
