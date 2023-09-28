@@ -70,7 +70,7 @@ namespace PacMan.ViewModels
         public double MainCharacterY { get; set; }
         public double BlueGhostX { get; set; } = -100;
         public double BlueGhostY { get; set; }
-        public double GreenGhostX { get; set; } = 100;
+        public double GreenGhostX { get; set; } = -100;
         public double GreenGhostY { get; set; }
 
         public ICommand BlueGhostAiCommand { get;} 
@@ -330,7 +330,7 @@ namespace PacMan.ViewModels
                     {
                         CurrentUserControl.YPosition = 0;
                     }
-                    else if (WallCollision(  movementDirection)) { }
+                    else if (WallCollision(  movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
                     else { CurrentUserControl.YPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Down:
@@ -338,7 +338,7 @@ namespace PacMan.ViewModels
                     {
                         CurrentUserControl.YPosition = GameViewHeight - CurrentUserControl.ActualHeight;
                     }
-                    else if (WallCollision( movementDirection)) { }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
                     else { CurrentUserControl.YPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
                 case Movement.Left:
@@ -347,7 +347,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.XPosition = 0;
 
                     }
-                    else if (WallCollision( movementDirection)) { }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
                     else { CurrentUserControl.XPosition -= movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 
@@ -357,7 +357,7 @@ namespace PacMan.ViewModels
                         CurrentUserControl.XPosition = GameViewWidth - CurrentUserControl.ActualWidth;
 
                     }
-                    else if (WallCollision( movementDirection)) { }
+                    else if (WallCollision( movementDirection)) { } // Checks if the ContentControl has collided with any of the inside walls and moves it accordingly
                     else { CurrentUserControl.XPosition += movementSpeed; if (CurrentUserControl.Occupation == Occupation.Ghost) { CurrentUserControl.CollisionCheck = false; } }
                     break;
 

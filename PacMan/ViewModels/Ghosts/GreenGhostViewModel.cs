@@ -20,9 +20,7 @@ namespace PacMan.ViewModels.Ghosts
             double absoluteDifferenceY = Math.Abs(McCurrentPosition.Y - GhostCurrentPosition.Y);
             double absoluteDifferenceX = Math.Abs(McCurrentPosition.X - GhostCurrentPosition.X);
 
-
-
-
+            // Ghost calculates what axis it has the least amount of distance to the ghost and moves that way
                 if (absoluteDifferenceX < absoluteDifferenceY)
                 {
                     if (McCurrentPosition.Y > GhostCurrentPosition.Y)
