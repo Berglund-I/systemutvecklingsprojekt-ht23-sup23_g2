@@ -43,7 +43,6 @@ namespace PacMan.ViewModels
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
         SoundPlayer ScoreSoundEffect { get; set; } = new SoundPlayer(Properties.Resources.ScoreSound);
-        public ScoreScreen scoreScreen { get; set; } = new ScoreScreen();
         public Visibility PlayerSaveVisibility { get; set; } = Visibility.Collapsed;
 
 
