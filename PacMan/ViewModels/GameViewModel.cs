@@ -284,7 +284,10 @@ namespace PacMan.ViewModels
                 GreenGhostCounter++;
             }
         }
-
+        /// <summary>
+        /// Moves a content controll in the specified direction
+        /// </summary>
+        /// <param name="movementDirection"></param>
         private void MoveContentControl(Movement movementDirection)
         {
             
@@ -334,7 +337,9 @@ namespace PacMan.ViewModels
             }
             GhostAndMcCollision();
         }
-
+        /// <summary>
+        /// Checks if the current ghost has collided with the main character
+        /// </summary>
         private void GhostAndMcCollision()
         {
             if (CurrentUserControl.XPosition < MainCharacterX + MainCharacter.ActualWidth &&
