@@ -351,10 +351,10 @@ namespace PacMan.ViewModels
                 CurrentPLayerLives--;
                 PlaceOutCharacters();
                 timer.Start();
-                SaveGame();
             }
             else
             {
+                SaveGame();
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
