@@ -35,20 +35,42 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Restart" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Center" Width="85" Background="Black" Foreground="GreenYellow" FontSize="16" Margin="657,0,0,0">
+            <Button x:Name="btnRestart" Command="{Binding PlayAgainCommand}" Focusable="False"  Content="Restart" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Center" Width="85" Background="Black" Foreground="GreenYellow" FontSize="16" Margin="657,0,0,0">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="26"  VerticalAlignment="Center" FontSize="16" Foreground="GreenYellow" Background="Black" Margin="747,0,10,0" Width="85">
+            <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Focusable="False" Content="Main menu" Height="26"  VerticalAlignment="Center" FontSize="16" Foreground="GreenYellow" Background="Black" Margin="747,0,10,0" Width="85">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
             </Button>
+            <ToggleButton x:Name="btnMute" Command="{Binding ControllSoundCommand}" Focusable="False" Width="32" Foreground="#FF14112C" BorderBrush="#FF14112C" HorizontalAlignment="Left" Margin="620,1,0,1">
+                <ToggleButton.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="Background" Value="Black" />
+                    </Style>
+                </ToggleButton.Resources>
+                <Image x:Name="imgMute" Height="28" Width="22" OpacityMask="Black"  >
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=btnMute}" Value="True">
+                                    <Setter Property="Source" Value="/Views/Images/Muted.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsChecked, ElementName=btnMute}" Value="False">
+                                    <Setter Property="Source" Value="/Views/Images/UnMuted.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </ToggleButton>
 
 
             <Label x:Name="labelScore" Grid.Row="0" Content="Score:" Foreground="GreenYellow" Background="Transparent" Width="80" Height="30" Margin="372,5,390,5" />
@@ -70,10 +92,6 @@
                         <KeyBinding Key="Up" Command="{Binding MainCharacter.UpPressedCommand}"/>
                         <KeyBinding Key="Down" Command="{Binding MainCharacter.DownPressedCommand}"/>
                     </Canvas.InputBindings>
-
-
-
-
                     <!--<Rectangle DataContext="{Binding _score}" Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="578" Canvas.Left="142" Canvas.Top="70"  />
                 <Rectangle Tag="wall" Stroke="GreenYellow" StrokeThickness="3" Height="20" Width="402" Canvas.Left="231" Canvas.Top="159" />
@@ -112,8 +130,6 @@
 
                     <!--#endregion-->
 
-                    <ContentControl Content="{Binding EndScreen}" Height="300" Width="400" Canvas.Left="225" Canvas.Top="44" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding EndScreenVisibility}"/>
-
                     <ContentControl x:Name="TheBlueGhost" Content="{Binding GhostBlueView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding BlueGhostX}" Canvas.Top="{Binding BlueGhostY}"/>
                     <ContentControl x:Name="TheGreenGhost" Content="{Binding GhostGreenView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding GreenGhostX}" Canvas.Top="{Binding GreenGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
@@ -130,6 +146,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <ContentControl Content="{Binding EndScreen}" Height="300" Width="400" Canvas.Left="225" Canvas.Top="44" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding EndScreenVisibility}"/>
 
 
                 </Canvas>

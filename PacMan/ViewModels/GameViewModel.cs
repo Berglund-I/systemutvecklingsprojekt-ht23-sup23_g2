@@ -50,8 +50,10 @@ namespace PacMan.ViewModels
         SoundPlayer VictoryMusic = new SoundPlayer(Properties.Resources.VictoryMusic);
         SoundPlayer LoseALifeSoundEffect = new SoundPlayer(Properties.Resources.LoseALife);
         SoundPlayer GameOverMusic = new SoundPlayer(Properties.Resources.GameOverMusic);
+        public bool IsMuted = false;
+        public ICommand ControllSoundCommand { get; set; }
         #endregion
-      
+
         public int GhostSize { get; set; }
 
         public int McSize { get; set; }
@@ -59,6 +61,7 @@ namespace PacMan.ViewModels
 
 
         public Visibility EndScreenVisibility { get; set; } = Visibility.Collapsed;
+        
         public string PlayerNameSave { get; set; }
         public int PlayerEarnedScore { get; set; }
         public int PlayerFinalScore { get; set; }
@@ -111,11 +114,27 @@ namespace PacMan.ViewModels
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
             PlayAgainCommand = new RelayCommand(x => RestartGame());
             MainMenuCommand = new RelayCommand(x => RestartApplication());
+            ControllSoundCommand = new RelayCommand(x => ControllSound());
             BlueGhostVM = new BlueGhostViewModel();
             McSize = MainCharacter.Size;
             GhostSize = Ghosts.GhostSize;
             SetUpGame();
         }
+
+        private void ControllSound()
+        {
+            switch (IsMuted)
+            {
+                case false:
+                    IsMuted = true;
+                    break;
+                case true:
+                    IsMuted = false;
+                    break;
+            }
+           
+        }
+
         private void SetUpGame()
         {
             CurrentPLayerLives = PlayerVM.PlayerLives;
@@ -126,6 +145,7 @@ namespace PacMan.ViewModels
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
+            ControllSound();
             timer.Start();
         }
 
@@ -242,7 +262,10 @@ namespace PacMan.ViewModels
                     goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
-                    ScoreSoundEffect.Play();
+                    if (IsMuted == true)
+                    {
+                        ScoreSoundEffect.Play();
+                    }
                     //movementSpeed += 0.1; // Ta bort kommentar för att öka svårighetsgraden
 
                     break;
@@ -253,7 +276,10 @@ namespace PacMan.ViewModels
                 EndScreen = new WinScreen();
                 EndScreenVisibility = Visibility.Visible;
                 timer.Stop();
-                VictoryMusic.Play();
+                if (IsMuted == false)
+                {
+                    VictoryMusic.Play();
+                }
             }
         }
 
@@ -385,7 +411,10 @@ namespace PacMan.ViewModels
         {
             if (CurrentPLayerLives != 0)
             {
-                LoseALifeSoundEffect.PlaySync();
+                if (IsMuted == false)
+                {
+                    LoseALifeSoundEffect.PlaySync();
+                }
                 CurrentPLayerLives--;
                 CreatePLayerLivesList();
                 PlaceOutCharacters();
@@ -397,9 +426,12 @@ namespace PacMan.ViewModels
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
-                LoseALifeSoundEffect.PlaySync();
-                GameOverSoundEffect.PlaySync();
-                GameOverMusic.Play();
+                if (IsMuted == false)
+                {
+                    LoseALifeSoundEffect.PlaySync();
+                    GameOverSoundEffect.PlaySync();
+                    GameOverMusic.Play();
+                }
             }
         }
         public void SaveGame()

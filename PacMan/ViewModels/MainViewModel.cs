@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Media;
 using System.Windows.Media;
+using System.Threading;
 
 namespace PacMan.ViewModels
 {
@@ -18,7 +19,8 @@ namespace PacMan.ViewModels
         SoundPlayer _backGroundMusic = new SoundPlayer(Properties.Resources.BackGroundMusic);
         public RelayCommand StartGameCommand { get; private set; }
         public RelayCommand MuteMusicCommand { get; private set; }
-        private bool _isPlaying = true;
+        public bool IsMuted = false;
+        public int count = 0;
 
         public MainViewModel()
         {
@@ -31,16 +33,16 @@ namespace PacMan.ViewModels
 
         private void MuteMusic(object obj)
         {
-            
-            if (_isPlaying)
+            switch (IsMuted)
             {
-                _isPlaying = false;
-                _backGroundMusic.Stop();
-            }
-            else 
-            { 
-                _isPlaying = true;
-                _backGroundMusic.Play();
+                case false:
+                    _backGroundMusic.Stop();
+                    IsMuted = true;
+                    break;
+                case true:
+                    _backGroundMusic.Play();
+                    IsMuted= false;
+                    break;
             }
         }
 
