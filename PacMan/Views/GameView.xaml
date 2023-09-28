@@ -35,14 +35,14 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Restart" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Center" Width="80" Background="Black" Foreground="GreenYellow" FontSize="14" Margin="667,0,0,0">
+            <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Restart" HorizontalAlignment="Left" Height="26"  VerticalAlignment="Center" Width="85" Background="Black" Foreground="GreenYellow" FontSize="16" Margin="657,0,0,0">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="26"  VerticalAlignment="Center" FontSize="14" Foreground="GreenYellow" Background="Black" Margin="752,0,10,0">
+            <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="26"  VerticalAlignment="Center" FontSize="16" Foreground="GreenYellow" Background="Black" Margin="747,0,10,0" Width="85">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="5"/>
