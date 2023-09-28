@@ -271,7 +271,7 @@ namespace PacMan.ViewModels
             BlueGhostVM.Ai(AiPackage);
             MoveContentControl(BlueGhostVM.MovementDirection);
 
-            if (GreenGhostCounter == 3) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
+            if (GreenGhostCounter == 2) // Budget solution to make the green ghost move 3 times as slow as the other ghosts
             { 
                 AiPackage = new AiDirectionPackage(new Point(GreenGhostX, GreenGhostY), new Point(MainCharacterX, MainCharacterY), CurrentUserControl.CollisionCheck);
                 CurrentUserControl = GhostGreenView;
