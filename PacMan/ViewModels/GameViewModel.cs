@@ -129,20 +129,19 @@ namespace PacMan.ViewModels
             timer.Start();
         }
 
-        private void RestartGame()
+        private void RestartGame() // Resets some parameters to start and starts the game. 
         {
             CurrentPLayerLives = PlayerVM.PlayerLives;
             EndScreenVisibility = Visibility.Hidden;
             PlayerSaveVisibility = Visibility.Hidden;
             PlayerEarnedScore = 0;
-            CreateObstaclesList();
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
             timer.Start();
         }
 
-        private void RestartApplication()
+        private static void RestartApplication() // Shuts down and restarts the application
         {
             System.Diagnostics.Process.Start(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             App.Current.Shutdown();
