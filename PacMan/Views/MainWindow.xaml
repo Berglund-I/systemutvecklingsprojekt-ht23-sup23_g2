@@ -8,9 +8,9 @@
         xmlns:Entities="clr-namespace:PacMan.Views.Entities" x:Class="PacMan.MainWindow"
         mc:Ignorable="d"
         d:DataContext ="{d:DesignInstance {x:Type vm:MainViewModel}}"
-        Height="800" Width="1200" WindowState="Maximized" WindowStartupLocation="CenterScreen" Icon="/Views/PacManFirst.png" HorizontalAlignment="Center" VerticalAlignment="Center" Title="Pacman" FontSize="18" FontFamily="SimSun"  >
+        Height="800" Width="1200" WindowState="Maximized" WindowStartupLocation="CenterScreen" Icon="/Views/Images/PacManFirst.png" HorizontalAlignment="Center" VerticalAlignment="Center" Title="Pacman" FontSize="18" FontFamily="SimSun"  >
     <Window.Background>
-        <ImageBrush ImageSource="/Views/PacManBackground.jpg"/>
+        <ImageBrush ImageSource="/Views/Images/PacManBackground.jpg"/>
     </Window.Background>
 
     <Grid >

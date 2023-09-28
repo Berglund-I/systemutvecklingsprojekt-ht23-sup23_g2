@@ -45,8 +45,8 @@ namespace PacMan.Views.Components
             RightPressedCommand = new RelayCommand(x => RightPressed());
             UpPressedCommand = new RelayCommand(x => UpPressed());
             DownPressedCommand = new RelayCommand(x => DownPressed());
-            firstCurrentImage= "pack://application:,,,/PacMan;component/Views/PacManFirst.png";
-            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecond.png";
+            firstCurrentImage= "pack://application:,,,/PacMan;component/Views/Images/PacManFirst.png";
+            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManSecond.png";
 
             Occupation = Occupation.Pacman;
         }
@@ -54,34 +54,28 @@ namespace PacMan.Views.Components
         private void DownPressed()
         {
             movement = Movement.Down;
-            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManFirstDown.png";
-            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecondDown.png";
-
+            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManFirstDown.png";
+            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManSecondDown.png";
         }
 
         private void UpPressed()
         {
             movement = Movement.Up;
-            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManFirstUp.png";
-            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecondUp.png";
-
+            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManFirstUp.png";
+            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManSecondUp.png";
         }
 
         private void RightPressed()
         {
             movement = Movement.Right;
-            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManFirst.png";
-            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecond.png";
-
-
+            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManFirst.png";
+            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManSecond.png";
         }
         private void LeftPressed()
         {
             movement = Movement.Left;
-            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManFirstLeft.png";
-            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/PacManSecondLeft.png";
-
-
+            firstCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManFirstLeft.png";
+            secondCurrentImage = "pack://application:,,,/PacMan;component/Views/Images/PacManSecondLeft.png";
         }
     }
 }

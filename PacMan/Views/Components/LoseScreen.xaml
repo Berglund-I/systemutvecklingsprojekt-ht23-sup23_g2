@@ -4,11 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacMan.Views.Components"
+             xmlns:vm ="clr-namespace:PacMan.ViewModels"
+             xmlns:views ="clr-namespace:PacMan.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="350">
+             d:DataContext ="{d:DesignInstance {x:Type vm:GameViewModel}}"
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <Rectangle  Fill="Black" Stroke="Black" />
-        <Label Content="GAME OVER!" HorizontalAlignment="Left"   VerticalAlignment="Top"  Foreground="Red" FontSize="40" Margin="10,16,0,0" >
+        <Label Content="GAME OVER!"   VerticalAlignment="Top"  Foreground="Red" FontSize="40" Margin="82,21,82,0" >
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -18,11 +21,25 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Image x:Name="deadImage" HorizontalAlignment="Left" Height="75" Margin="250,11,0,0" VerticalAlignment="Top" Width="98" Stretch="Uniform">
+        <Image x:Name="deadImage" Height="92" Margin="136,84,136,0" VerticalAlignment="Top" Stretch="Uniform">
             <Image.OpacityMask>
-                <ImageBrush ImageSource="/Views/PacManFirstUp.png" Stretch="None" />
+                <ImageBrush Stretch="None" />
             </Image.OpacityMask>
 
         </Image>
+        <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Try again" HorizontalAlignment="Left" Height="37" Margin="104,185,0,0" VerticalAlignment="Top" Width="76" Background="#FF8E8E8E" Foreground="Red" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="37" Margin="222,185,104,0" VerticalAlignment="Top" FontSize="14" Foreground="Red" Background="#FF8E8E8E">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </UserControl>

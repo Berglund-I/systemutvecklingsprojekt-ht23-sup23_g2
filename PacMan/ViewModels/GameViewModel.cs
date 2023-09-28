@@ -73,7 +73,10 @@ namespace PacMan.ViewModels
         public double GreenGhostX { get; set; } = 100;
         public double GreenGhostY { get; set; }
 
-        public ICommand BlueGhostAiCommand { get;}
+        public ICommand BlueGhostAiCommand { get;} 
+        public ICommand PlayAgainCommand { get; set; } 
+        public ICommand MainMenuCommand { get; set; }
+
         public BaseUserControl CurrentUserControl { get; set; }
 
         public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
@@ -105,27 +108,40 @@ namespace PacMan.ViewModels
 
         public GameViewModel()
         {
-
+            BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
+            PlayAgainCommand = new RelayCommand(x => SetUpGame());
+            MainMenuCommand = new RelayCommand(x => BackToMainMenu());
             BlueGhostVM = new BlueGhostViewModel();
-            GhostSize = Ghosts.GhostSize;
-
             McSize = MainCharacter.Size;
-            CurrentPLayerLives = PlayerVM.PlayerLives;
-            
+            GhostSize = Ghosts.GhostSize;
+            SetUpGame();
+            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
+            timer.Tick += GhostMovementTimer;
+            timer.Tick += MainCharacterMovementTimer;
+           
+        }
+
+        private void BackToMainMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SetUpGame()
+        {
+            CurrentPLayerLives = 0;
+                //PlayerVM.PlayerLives;
+            EndScreenVisibility = Visibility.Hidden;
+            PlayerSaveVisibility = Visibility.Hidden;
             MovementDirection = Movement.Down;
+            PlayerEarnedScore = 0;
 
             CreateObstaclesList();
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
 
-            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            timer.Tick += GhostMovementTimer;
-            timer.Tick += MainCharacterMovementTimer;
+            timer.Stop();
             timer.Start();
-            
-
-            BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
         }
 
         private void CreatePLayerLivesList()
@@ -139,6 +155,7 @@ namespace PacMan.ViewModels
 
         private void CreateObstaclesList()
        {
+            Obstacles.Clear();
             Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 124, XPosition = 142, YPosition = 339 });
@@ -156,7 +173,7 @@ namespace PacMan.ViewModels
 
         private void CreateCoinsList()
         {
- 
+            GoldCoins.Clear();
             int ypos = 25;
             for (int i = 0; i < 7; i++)
             {
@@ -347,7 +364,6 @@ namespace PacMan.ViewModels
             {
                 timer.Stop();
                 LoseALife();
-                CreatePLayerLivesList();
             }
         }
 
@@ -357,16 +373,17 @@ namespace PacMan.ViewModels
             {
                 LoseALifeSoundEffect.PlaySync();
                 CurrentPLayerLives--;
+                CreatePLayerLivesList();
                 PlaceOutCharacters();
                 timer.Start();
             }
             else
             {
-                LoseALifeSoundEffect.PlaySync();
                 SaveGame();
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
+                LoseALifeSoundEffect.PlaySync();
                 GameOverSoundEffect.PlaySync();
                 GameOverMusic.Play();
             }

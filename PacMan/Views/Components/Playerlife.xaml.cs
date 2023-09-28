@@ -21,14 +21,9 @@ namespace PacMan.Views.Components
     /// </summary>
     public partial class PlayerLife : UserControl
     {
-        string lifeName;
         public PlayerLife()
         {
             InitializeComponent();
-        }
-        public PlayerLife(string name)
-        {
-            lifeName = name;
         }
 
     }
