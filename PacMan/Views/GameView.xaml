@@ -118,10 +118,10 @@
                     <ContentControl x:Name="TheGreenGhost" Content="{Binding GhostGreenView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding GreenGhostX}" Canvas.Top="{Binding GreenGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
 
-                    <ListBox x:Name="highscoreList" Background="Black" Foreground="GreenYellow" BorderBrush="GreenYellow" BorderThickness="3" ItemsSource="{Binding PlayerSave}" Height="282" Width="232" Canvas.Left="309" Canvas.Top="344" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding PlayerSaveVisibility}" >
+                    <ListBox x:Name="highscoreList" Background="Black" Foreground="GreenYellow" BorderBrush="GreenYellow" BorderThickness="3" ItemsSource="{Binding Highscores.xml}" Height="282" Width="232" Canvas.Left="309" Canvas.Top="344" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding PlayerSaveVisibility}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" >
                                     <TextBlock Text="Name:"/>
                                     <TextBlock Text="{Binding PlayerNameSave}"/>
                                     <TextBlock Text="   Points:"/>

@@ -25,6 +25,8 @@ using System.Diagnostics.Eventing.Reader;
 using System.Windows.Automation;
 using System.Media;
 using System.Reflection.Metadata.Ecma335;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace PacMan.ViewModels
 {
@@ -126,6 +128,7 @@ namespace PacMan.ViewModels
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
+            LoadDataFile();
             timer.Start();
         }
 
@@ -407,14 +410,35 @@ namespace PacMan.ViewModels
         public void SaveGame()
         {
             PlayerSave.Add(new Player() { PlayerNameSave = PlayerName, PlayerFinalScore = PlayerEarnedScore });
-            
-            HighScoreList();
+            SaveDataFile();
             PlayerSaveVisibility = Visibility.Visible;
         }
 
-        public void HighScoreList()
-        {
 
+        public void SaveDataFile()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Player>));
+            using (StreamWriter wr = new StreamWriter("Highscores.xml"))
+            {
+                xs.Serialize(wr, PlayerSave);
+            }
+        }
+
+        public void LoadDataFile()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Player>));
+            using (StreamReader rd = new StreamReader("Highscores.xml"))
+            {
+                var loadedData = xs.Deserialize(rd) as ObservableCollection<Player>;
+                if (loadedData != null)
+                {
+                    PlayerSave.Clear();
+                    foreach (var player in loadedData)
+                    {
+                        PlayerSave.Add(player);
+                    }
+                }
+            }
         }
 
         #region collision controls
