@@ -246,7 +246,12 @@ namespace PacMan.ViewModels
         {
             return BlueGhostVM.MovementDirection;
         }
-        int GreenGhostCounter = 0;
+        int GreenGhostCounter = 0; // Used to make the green ghost slower than the others
+        /// <summary>
+        /// Timer for the Ghosts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GhostMovementTimer(object sender, EventArgs e)
         {
             BlueGhostX = GhostBlueView.XPosition;
