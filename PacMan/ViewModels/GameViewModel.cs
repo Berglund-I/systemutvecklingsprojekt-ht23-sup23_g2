@@ -24,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Automation;
 using System.Media;
+using System.Reflection.Metadata.Ecma335;
 
 namespace PacMan.ViewModels
 {
@@ -31,6 +32,7 @@ namespace PacMan.ViewModels
     {
         public int GameViewWidth { get; set; } = 848;
         public int GameViewHeight { get; set; } = 700-40;
+        public Player Player { get; set; } = new Player();
         public MainCharacter MainCharacter { get; set; } = new MainCharacter();
         public GhostViewModel Ghosts { get; set; } = new GhostViewModel();
         public GhostBlue GhostBlueView { get; set; } = new GhostBlue();
@@ -41,6 +43,9 @@ namespace PacMan.ViewModels
         public UserControl EndScreen { get; set; } = new UserControl();
         public LoseScreen LoseScreen { get; set; } = new LoseScreen();
         SoundPlayer ScoreSoundEffect { get; set; } = new SoundPlayer(Properties.Resources.ScoreSound);
+        public ScoreScreen scoreScreen { get; set; } = new ScoreScreen();
+        public Visibility PlayerSaveVisibility { get; set; } = Visibility.Collapsed;
+
 
         public int GhostSize { get; set; }
 
@@ -49,7 +54,9 @@ namespace PacMan.ViewModels
 
 
         public Visibility EndScreenVisibility { get; set; } = Visibility.Collapsed;
+        public string PlayerNameSave { get; set; }
         public int PlayerEarnedScore { get; set; }
+        public int PlayerFinalScore { get; set; }
         public int CurrentPLayerLives { get; set; }
 
         public static Movement MovementDirection { get; set; }
@@ -67,6 +74,7 @@ namespace PacMan.ViewModels
         public ObservableCollection<Obstacles> Obstacles { get; } = new ObservableCollection<Obstacles>();
         public ObservableCollection<GoldCoinViewModel> GoldCoins { get; } = new ObservableCollection<GoldCoinViewModel>();
         public ObservableCollection<PlayerLifeModel> PlayerLives { get; } = new ObservableCollection<PlayerLifeModel>();
+        public ObservableCollection<Player> PlayerSave { get; set; } = new ObservableCollection<Player>();
 
 
         public bool blueGhostCollision = false;
@@ -344,6 +352,7 @@ namespace PacMan.ViewModels
                 CurrentPLayerLives--;
                 PlaceOutCharacters();
                 timer.Start();
+                SaveGame();
             }
             else
             {
@@ -352,7 +361,12 @@ namespace PacMan.ViewModels
                 EndScreenVisibility = Visibility.Visible;
             }
         }
-
+        public void SaveGame()
+        {
+            PlayerSave.Add(new Player() { PlayerNameSave = PlayerName, PlayerFinalScore = PlayerEarnedScore });
+            
+            PlayerSaveVisibility = Visibility.Visible;
+        }
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {

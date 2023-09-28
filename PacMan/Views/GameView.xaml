@@ -41,15 +41,15 @@
             <Label Name="Score" Content="{Binding PlayerEarnedScore}"  FontSize="18" FontWeight="Bold" Background="Transparent" Foreground="GreenYellow" Width="50" Height="30" Margin="760,0,0,0"/>
             <Label x:Name="player" Content="Player:" Foreground="GreenYellow" Background="Transparent" Width="100" Height="30" Margin="300,0,0,0" />
             <Label x:Name="labelPlayerName" Content="{Binding PlayerName}" Foreground="GreenYellow" FontSize="18" FontWeight="Bold" Background="Transparent" Width="100" Height="30" Margin="440,0,0,0"/>
-            
+
 
 
             <Border Background="Transparent" Grid.Row="1" BorderBrush="GreenYellow"
             BorderThickness="3"
-            CornerRadius="5">
+            CornerRadius="5" HorizontalAlignment="Left" Width="842">
 
-                
-                <Canvas  x:Name="GameCanvas" ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
+
+                <Canvas  x:Name="GameCanvas"  ClipToBounds="True"  Focusable="True" Grid.Row="1" HorizontalAlignment="Center" Width="850" >
                     <Canvas.InputBindings>
                         <KeyBinding Key="Left" Command="{Binding MainCharacter.LeftPressedCommand}"/>
                         <KeyBinding Key="Right" Command="{Binding MainCharacter.RightPressedCommand}"/>
@@ -104,10 +104,25 @@
                     <ContentControl x:Name="TheGreenGhost" Content="{Binding GhostGreenView}" Height="{Binding GhostSize}" Width="{Binding GhostSize}" Canvas.Left="{Binding GreenGhostX}" Canvas.Top="{Binding GreenGhostY}"/>
                     <ContentControl x:Name="TheMainCharacter" Content="{Binding MainCharacter}" Height="{Binding McSize}" Width="{Binding McSize}" Canvas.Left="{Binding MainCharacterX}" Canvas.Top="{Binding MainCharacterY}"/>
 
+                    <ListBox x:Name="highscoreList" Background="Black" Foreground="GreenYellow" BorderBrush="GreenYellow" BorderThickness="3" ItemsSource="{Binding PlayerSave}" Height="282" Width="232" Canvas.Left="581" Canvas.Top="183" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="{Binding PlayerSaveVisibility}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name:"/>
+                                    <TextBlock Text="{Binding PlayerNameSave}"/>
+                                    <TextBlock Text="   Points:"/>
+                                    <TextBlock Text="{Binding PlayerFinalScore}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
 
                 </Canvas>
             </Border>
         </Grid>
+
     </Border>
 
 </UserControl>
+    

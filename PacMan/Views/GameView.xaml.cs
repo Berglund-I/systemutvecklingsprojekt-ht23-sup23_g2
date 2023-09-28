@@ -28,6 +28,8 @@ namespace PacMan.Views
     /// </summary>
     public partial class GameView : UserControl
     {
+
+        
         public GameView()
         {
             InitializeComponent();
