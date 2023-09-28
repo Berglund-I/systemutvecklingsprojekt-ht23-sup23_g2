@@ -390,6 +390,8 @@ namespace PacMan.ViewModels
                 CreatePLayerLivesList();
                 PlaceOutCharacters();
                 timer.Start();
+                SaveGame();
+
             }
             else
             {
@@ -406,8 +408,15 @@ namespace PacMan.ViewModels
         {
             PlayerSave.Add(new Player() { PlayerNameSave = PlayerName, PlayerFinalScore = PlayerEarnedScore });
             
+            HighScoreList();
             PlayerSaveVisibility = Visibility.Visible;
         }
+
+        public void HighScoreList()
+        {
+
+        }
+
         #region collision controls
         private bool WallCollision( Movement movementDirection)
         {
