@@ -13,9 +13,7 @@ namespace PacMan.ViewModels.Ghosts
     class GhostViewModel : BaseViewModel
     {
         public int GhostSize { get; set; } = 40;
-        
         public Movement MovementDirection { get; set; } = Movement.Left;
-        //public int MovementSpeed { get; set; } = 10;
         
         public GhostViewModel()
         {
