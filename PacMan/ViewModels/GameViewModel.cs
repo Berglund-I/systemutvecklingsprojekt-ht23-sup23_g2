@@ -276,7 +276,7 @@ namespace PacMan.ViewModels
                 EndScreen = new WinScreen();
                 EndScreenVisibility = Visibility.Visible;
                 timer.Stop();
-                if (IsMuted == false)
+                if (IsMuted == true)
                 {
                     VictoryMusic.Play();
                 }
@@ -411,7 +411,7 @@ namespace PacMan.ViewModels
         {
             if (CurrentPLayerLives != 0)
             {
-                if (IsMuted == false)
+                if (IsMuted == true)
                 {
                     LoseALifeSoundEffect.PlaySync();
                 }
@@ -426,7 +426,7 @@ namespace PacMan.ViewModels
                 EndScreen = LoseScreen;
                 LoseScreen.StartAnimation();
                 EndScreenVisibility = Visibility.Visible;
-                if (IsMuted == false)
+                if (IsMuted == true)
                 {
                     LoseALifeSoundEffect.PlaySync();
                     GameOverSoundEffect.PlaySync();
