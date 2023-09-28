@@ -116,6 +116,18 @@ namespace PacMan.ViewModels
             GhostSize = Ghosts.GhostSize;
             SetUpGame();
         }
+        private void SetUpGame()
+        {
+            CurrentPLayerLives = PlayerVM.PlayerLives;
+            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
+            timer.Tick += GhostMovementTimer;
+            timer.Tick += MainCharacterMovementTimer;
+            CreateObstaclesList();
+            CreateCoinsList();
+            CreatePLayerLivesList();
+            PlaceOutCharacters();
+            timer.Start();
+        }
 
         private void RestartGame()
         {
@@ -134,19 +146,6 @@ namespace PacMan.ViewModels
         {
         }
 
-        private void SetUpGame()
-        {
-            CurrentPLayerLives = 0;
-                //PlayerVM.PlayerLives;
-            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            timer.Tick += GhostMovementTimer;
-            timer.Tick += MainCharacterMovementTimer;
-            CreateObstaclesList();
-            CreateCoinsList();
-            CreatePLayerLivesList();
-            PlaceOutCharacters();
-            timer.Start();
-        }
 
         private void CreatePLayerLivesList()
         {

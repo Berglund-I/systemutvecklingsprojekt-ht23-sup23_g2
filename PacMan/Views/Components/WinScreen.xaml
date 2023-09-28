@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacMan.Views.Components"
+             xmlns:vm ="clr-namespace:PacMan.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DataContext ="{d:DesignInstance {x:Type vm:GameViewModel}}"
+             d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <Rectangle Fill="Black" Stroke="Yellow" StrokeThickness="4" />
-        <Label Foreground="Yellow" Content="You Win!" FontSize="40" Margin="66,19,66,19" RenderTransformOrigin="0.5,0.5">
+        <Label Foreground="Yellow" Content="You Win!" FontSize="48" Margin="102,42,102,185" RenderTransformOrigin="0.5,0.5">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -18,5 +20,12 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
+        <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Play again" HorizontalAlignment="Center" Height="37" Margin="0,160,0,0" VerticalAlignment="Top" Width="76" Background="#FF8E8E8E" Foreground="Red" FontSize="14">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </UserControl>

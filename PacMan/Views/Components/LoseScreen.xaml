@@ -11,7 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="400">
     <Grid>
         <Rectangle  Fill="Black" Stroke="Black" />
-        <Label Content="GAME OVER!"   VerticalAlignment="Top"  Foreground="Red" FontSize="40" Margin="82,21,82,0" >
+        <Label Content="GAME OVER!"   VerticalAlignment="Top"  Foreground="Red" FontSize="40" Margin="77,21,77,0" FontFamily="Segoe UI Semibold" >
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -21,14 +21,14 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Try again" HorizontalAlignment="Left" Height="37" Margin="104,185,0,0" VerticalAlignment="Top" Width="76" Background="#FF8E8E8E" Foreground="Red" FontSize="14">
+        <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Try again" HorizontalAlignment="Left" Height="37" Margin="89,185,0,0" VerticalAlignment="Top" Width="87" Background="#FF8E8E8E" Foreground="Red" FontSize="16" FontFamily="Segoe UI Semibold">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="37" Margin="222,185,104,0" VerticalAlignment="Top" FontSize="14" Foreground="Red" Background="#FF8E8E8E">
+        <Button x:Name="btnMainMenu" Command="{Binding MainMenuCommand}" Content="Main menu" Height="37" Margin="222,185,87,0" VerticalAlignment="Top" FontSize="16" Foreground="Red" Background="#FF8E8E8E" FontFamily="Segoe UI Semibold" Width="87">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>
