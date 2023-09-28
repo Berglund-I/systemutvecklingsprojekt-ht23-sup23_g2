@@ -21,12 +21,6 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Image x:Name="deadImage" Height="92" Margin="136,84,136,0" VerticalAlignment="Top" Stretch="Uniform">
-            <Image.OpacityMask>
-                <ImageBrush Stretch="None" />
-            </Image.OpacityMask>
-
-        </Image>
         <Button x:Name="btnRestart"  Command="{Binding PlayAgainCommand}"  Content="Try again" HorizontalAlignment="Left" Height="37" Margin="104,185,0,0" VerticalAlignment="Top" Width="76" Background="#FF8E8E8E" Foreground="Red" FontSize="14">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -41,5 +35,10 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Image x:Name="deadImage" Height="92" Margin="136,89,136,0" VerticalAlignment="Top" Stretch="Uniform">
+            <Image.OpacityMask>
+                <ImageBrush Stretch="None" ImageSource="/Views/Images/PacManFirstUp.png"/>
+            </Image.OpacityMask>
+        </Image>
     </Grid>
 </UserControl>

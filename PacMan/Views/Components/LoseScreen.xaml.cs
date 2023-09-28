@@ -29,7 +29,6 @@ namespace PacMan.Views.Components
         public LoseScreen()
         {
             InitializeComponent();
-            //DataContext = new GameViewModel();
             images = new ImageSource[11];
             int imageCounter = 0;
             images[0] = new BitmapImage(new Uri("pack://application:,,,/PacMan;component/Views/Images/PacManFirstUp.png"));
@@ -38,19 +37,16 @@ namespace PacMan.Views.Components
                 images[i] = new BitmapImage(new Uri($"pack://application:,,,/PacMan;component/Views/Images/{imageCounter}.png"));
                 imageCounter++;
             }
-            //_deadAnimation = new Storyboard();
             animation.Duration = TimeSpan.FromSeconds(1.5);
-            animation.RepeatBehavior = RepeatBehavior.Forever;
-
             foreach (var image in images)
             {
-                //var keyframe = new DiscreteObjectKeyFrame(image);
                 animation.KeyFrames.Add(new DiscreteObjectKeyFrame(image));
             }
         }
 
         public void StartAnimation()
         {
+            //animation.Duration = TimeSpan.FromSeconds(1.5);
             CurrentImage = 0;
             deadImage.BeginAnimation(Image.SourceProperty, animation);
         }

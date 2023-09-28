@@ -109,38 +109,42 @@ namespace PacMan.ViewModels
         public GameViewModel()
         {
             BlueGhostAiCommand = new RelayCommand(execute: x => BlueGhostVM.Ai((AiDirectionPackage)x));
-            PlayAgainCommand = new RelayCommand(x => SetUpGame());
+            PlayAgainCommand = new RelayCommand(x => RestartGame());
             MainMenuCommand = new RelayCommand(x => BackToMainMenu());
             BlueGhostVM = new BlueGhostViewModel();
             McSize = MainCharacter.Size;
             GhostSize = Ghosts.GhostSize;
             SetUpGame();
-            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
-            timer.Tick += GhostMovementTimer;
-            timer.Tick += MainCharacterMovementTimer;
-           
+        }
+
+        private void RestartGame()
+        {
+            CurrentPLayerLives = PlayerVM.PlayerLives;
+            EndScreenVisibility = Visibility.Hidden;
+            PlayerSaveVisibility = Visibility.Hidden;
+            PlayerEarnedScore = 0;
+            CreateObstaclesList();
+            CreateCoinsList();
+            CreatePLayerLivesList();
+            PlaceOutCharacters();
+            timer.Start();
         }
 
         private void BackToMainMenu()
         {
-            throw new NotImplementedException();
         }
 
         private void SetUpGame()
         {
             CurrentPLayerLives = 0;
                 //PlayerVM.PlayerLives;
-            EndScreenVisibility = Visibility.Hidden;
-            PlayerSaveVisibility = Visibility.Hidden;
-            MovementDirection = Movement.Down;
-            PlayerEarnedScore = 0;
-
+            timer.Interval = TimeSpan.FromMilliseconds(timerSpeed);
+            timer.Tick += GhostMovementTimer;
+            timer.Tick += MainCharacterMovementTimer;
             CreateObstaclesList();
             CreateCoinsList();
             CreatePLayerLivesList();
             PlaceOutCharacters();
-
-            timer.Stop();
             timer.Start();
         }
 
