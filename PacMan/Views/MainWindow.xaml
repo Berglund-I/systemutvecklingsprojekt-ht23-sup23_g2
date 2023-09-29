@@ -40,7 +40,7 @@
         </TextBlock>
         <TextBox x:Name="textBoxPlayerName" HorizontalAlignment="Left" Margin="227,520,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="34" Grid.Column="1" FontSize="26" FontFamily="Impact"/>
         
-        <ToggleButton x:Name="btnMute" Command="{Binding MuteMusicCommand}"  HorizontalAlignment="Left" Margin="10,590,0,0" VerticalAlignment="Top" Height="50" Width="50" Grid.Column="1" Foreground="#FF14112C" BorderBrush="#FF14112C" >
+        <ToggleButton x:Name="btnMute" Command="{Binding MuteMusicCommand}"  HorizontalAlignment="Left" Margin="10,590,0,0" VerticalAlignment="Top" Height="50" Width="50" Grid.Column="1" Foreground="#FF14112C" BorderBrush="#FF14112C" Background="{x:Null}" >
             <ToggleButton.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>

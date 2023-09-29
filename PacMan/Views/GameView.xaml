@@ -49,7 +49,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <ToggleButton x:Name="btnMute" Command="{Binding ControllSoundCommand}" Focusable="False" Width="32" Foreground="#FF14112C" BorderBrush="#FF14112C" HorizontalAlignment="Left" Margin="620,1,0,1">
+            <ToggleButton x:Name="btnMute" Command="{Binding ControllSoundCommand}" Focusable="False" Width="32" Foreground="#FF14112C" BorderBrush="#FF14112C" HorizontalAlignment="Left" Margin="620,1,0,1" Background="{x:Null}">
                 <ToggleButton.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
