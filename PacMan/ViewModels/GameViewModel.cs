@@ -25,6 +25,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Windows.Automation;
 using System.Media;
 using System.Reflection.Metadata.Ecma335;
+using System.Diagnostics.Metrics;
 
 namespace PacMan.ViewModels
 {
@@ -159,6 +160,7 @@ namespace PacMan.ViewModels
 
         private void CreateObstaclesList()
        {
+            //The obstacles are assigned their values to be painted on the GameView
             Obstacles.Clear();
             Obstacles.Add(new Obstacles { Height = 20, Width = 578, XPosition = 142, YPosition = 70 });
             Obstacles.Add(new Obstacles { Height = 20, Width = 402, XPosition = 231, YPosition = 159 });
@@ -178,6 +180,7 @@ namespace PacMan.ViewModels
         private void CreateCoinsList()
         {
             GoldCoins.Clear();
+            //The first y-coordinate in each x iteration has an y-value of 25.
             int ypos = 25;
 
             // Going through how many times the y-axis should be generated
@@ -192,17 +195,20 @@ namespace PacMan.ViewModels
                 //Changing the x-value to 100, as that's what the other x coordinates will have.
                 xpos = 100;
 
-                for (int j = 0; j < 10; j++)
+                //The number of coins along the x-axis.
+                for (int j = 0; j < 10; j++) 
                 {
-                    if(!(xpos == 430 && ypos == 525))
+                    //Checking that the coin is not placed inside an obstacle.
+                    if (!(xpos == 430 && ypos == 525))
                     {
                         GoldCoins.Add(new GoldCoinViewModel { XPosition = xpos, YPosition = ypos });
 
                     }
+                    //After the second x-coordinate, the x-value increases by 110.
                     xpos += 110;
 
                 }
-
+                //After the second y-coordinate, the y-value increases by 100.
                 ypos += 100;
 
 
@@ -245,11 +251,14 @@ namespace PacMan.ViewModels
             {
                 if(IsCollision(MainCharacter, goldcoin))
                 {
-                    goldcoin.GoldCoinVisibility = Visibility.Collapsed;
+                    //If a collision occurs between the coin and the main character,
+                    //then the coin is removed with a sound effect, and the player earns 1 point
+
+                    //goldcoin.GoldCoinVisibility = Visibility.Collapsed;
                     GoldCoins.Remove(goldcoin);
                     PlayerEarnedScore++;
                     ScoreSoundEffect.Play();
-                    //movementSpeed += 0.1; // Ta bort kommentar för att öka svårighetsgraden
+                    //movementSpeed += 0.1; // Removing the comment to increase the difficulty level. 
 
                     break;
                 }
@@ -276,7 +285,7 @@ namespace PacMan.ViewModels
             double goldCoinRight = goldCoinLeft + goldCoin.Width;
             double goldCoinBottom = goldCoinTop + goldCoin.Height;
 
-            // Look if there is a collision between mainCharacter and goldCoin.
+            // Looking if there is a collision between mainCharacter and goldCoin.
             bool collisionDetected = !(mainCharacterRight < goldCoinLeft || mainCharacterLeft > goldCoinRight ||
                                        mainCharacterBottom < goldCoinTop || mainCharacterTop > goldCoinBottom);
 
