@@ -36,5 +36,10 @@ namespace PacMan.Views
             GameCanvas.Focus();
             DataContext = new GameViewModel();
         }
+
+        private void btnMute_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
